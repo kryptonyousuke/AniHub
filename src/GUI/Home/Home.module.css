@@ -1,0 +1,102 @@
+.home {
+    margin-top: 35px;
+}
+
+.windowShadow {
+    height: 0px;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    box-shadow: black 3px 3px 3px 3px 3px;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes appear-from-bottom {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.banner {
+    height: 350px;
+    width: 70vw;
+    margin-left: 15%;
+    object-fit: cover;
+    border-radius: 20px;
+    animation: appear 2s ease-in-out;
+}
+.titlePopularContent {
+    font-weight: bold;
+    text-align: center;
+    margin-block: 20px;
+    font-size: 1.7rem;
+}
+
+.popularContent {
+    max-width: 1000px;
+    display: flex;
+    column-gap: 2vw;
+    row-gap: 2vh;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+.popularContentSection {
+    margin-inline: 20px;
+    border-inline: 1px solid rgba(255, 255, 255, 0.548);
+    border-image: linear-gradient(170deg, #FE5F55 20%, #3185FC) 1;
+    width: fit-content;
+    padding-inline: 20px;
+    margin-inline: auto;
+    opacity: 0;
+    animation: appear-from-bottom 2s forwards ease-in-out, popContentBorderAnim 2s infinite ease-in-out;
+}
+@keyframes popContentBorderAnim {
+    0% {
+        border-image-source: linear-gradient(0deg, #FE5F55 20%, #3185FC);
+    }
+    50% {
+        border-image-source: linear-gradient(180deg, #FE5F55 20%, #3185FC);
+    }
+    100% {
+        border-image-source: linear-gradient(0deg, #FE5F55 20%, #3185FC);
+    }
+}
+.whatIsNew {
+    margin-left: 40px;
+    margin-top: 30px;
+    font-size: 1.7rem;
+}
+.arrowBack, .arrowForward {
+    height: 225px;
+    width: 50px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 2rem;
+    margin-bottom: -225px;
+    transform: translateY(20px);
+    z-index: 3;
+}
+.arrowBack {
+    transform: translate(10px, 20px);
+}
+.arrowForward {
+    transform: translate(calc(100vw - 50px - 10px), 20px);
+}

@@ -1,0 +1,4 @@
+Plugins/
+node_modules/
+dist/
+dist_electron/

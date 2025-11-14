@@ -1,0 +1,33 @@
+import styles from "./SearchedAnime.module.css"
+import { FaArrowRightLong } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
+function SearchedAnime({ animeName, animeID, episodes, plugin, keyVisual }){
+  const navigate = useNavigate();
+  return <div className={styles.searchedAnime} onClick={() => navigate("/animeinfo", {
+                        state: {
+                            isReload: false,
+                            animeName: animeName,
+                            animeID: animeID,
+                            plugin: plugin,
+                            animeData: null
+                        }})}>
+        <img src={keyVisual} className={styles.image} alt="keyVisual"></img>
+        <div className={styles.animeInfo}>
+            <p className={styles.animeName}>{animeName}</p>
+            <p className={styles.animeEpisodesNumber}>{episodes} Episodes</p>
+            <p className={styles.animeSeasonsNumber}>1 Seasons</p>
+            <h3>Watch
+                <svg width="25" height="30" className={styles.arrowIconContainer} viewBox="0 0 24 24">
+                  <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#FE5F55" />
+                      <stop offset="100%" stopColor="#ff00d4" />
+                    </linearGradient>
+                  </defs>
+                  <FaArrowRightLong fill="url(#grad1)" />
+                </svg>
+            </h3>
+        </div>
+    </div>
+}
+export default SearchedAnime;

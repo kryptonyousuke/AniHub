@@ -1,0 +1,56 @@
+.searchedAnime {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 10px;
+    transition: all .13s linear;
+    position: relative;
+}
+.searchedAnime:hover {
+    background-color: rgb(37, 37, 37);
+}
+.image {
+    width: 75px;
+    max-height: 160px;
+    align-items: center;
+    border-radius: 5px;
+}
+.animeInfo > p {
+    display: block;
+    margin-left: 20px;
+}
+.animeName {
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+.animeEpisodesNumber, .animeSeasonsNumber {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.animeInfo > h3 {
+    position: absolute;
+    top: calc(50% - 1.2rem);
+    font-size: 1.3rem;
+    right: 50px;
+    /* color: #FE5F55; */
+    background-image: linear-gradient(172deg, #FE5F55 40%, #ff00d4);
+    background-clip: text;
+    color: transparent;
+    opacity: 0;
+    transition: all .16s ease-in;
+}
+.searchedAnime:hover > .animeInfo > h3 {
+    opacity: 1;
+    right: 30px;
+}
+.arrowIconContainer {
+    transform: translate(3px, 8px);
+    transition: all .16s ease-in;
+    transition-delay: .16s;
+    margin-left: -10px;
+    opacity: .3;
+}
+.searchedAnime:hover .arrowIconContainer {
+    margin-left: 0;
+    opacity: 1;
+}

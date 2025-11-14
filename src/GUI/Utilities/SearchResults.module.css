@@ -1,0 +1,50 @@
+.searchResults {
+    width: 40vw;
+    padding-block: 20px;
+    border-radius: 20px;
+    font-family: monospace;
+    font-weight: 400;
+    font-size: 1rem;
+    background-color: rgb(20, 20, 20);
+    position: fixed;
+    z-index: 10;
+    left: 30vw;
+    top: 130px;
+    border: 2px solid white;
+    opacity: 0;
+    animation: appear-from-bottom .25s forwards ease;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: all .16s ease-in;
+    overflow-y: scroll;
+    max-height: 70vh;
+}
+.searchResults::-webkit-scrollbar {
+    width: 4px;
+    background-color: transparent;
+    height: 20px !important;
+    overflow: hidden;
+}
+.searchResults::-webkit-scrollbar-button {
+    opacity: 0;
+}
+.searchResults::-webkit-scrollbar-thumb {
+    background-color: #fe6055c4;
+    width: 3px;
+    border-radius: 2px;
+}
+.searchResults:focus {
+    opacity: 1;
+}
+@keyframes appear-from-bottom {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

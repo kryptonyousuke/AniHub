@@ -1,0 +1,29 @@
+.episode {
+    position: relative;
+    border-radius: 16px;
+    min-width: 400px;
+    width: 400px;
+    cursor: pointer;
+    transition: all .16s ease-in;
+    overflow: hidden;
+}
+.episode:hover {
+    filter: brightness(.8);
+}
+.image {
+    width: 400px;
+    height: 225px;
+    object-fit: cover;
+    border-radius: 16px;
+}
+.contentTitle {
+    position: absolute;
+    top: 0px;
+    padding-block: 20px;
+    font-family: "Lexend", sans-serif;
+    font-weight: 500;
+    background-color: rgba(0, 0, 0, 0.384);
+    width: 100%;
+    text-indent: 20px;
+    font-size: 1.2rem;
+}

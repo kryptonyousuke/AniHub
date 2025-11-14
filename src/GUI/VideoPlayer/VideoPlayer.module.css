@@ -1,0 +1,200 @@
+.videoPlayerContainer {
+   height: calc(100svh);
+   overflow: hidden;
+}
+.videoPlayer {
+   height: 100vh;
+   width: 100vw; 
+   object-fit: cover;
+}
+.topControls {
+   position: absolute;
+   top: var(--topDistance);
+   display: flex;
+   align-items: center;
+   z-index: 7;
+   padding-left: 20px;
+   padding-top: 15px;
+   width: 100%;
+}
+.topControls > h1 {
+   font-family: "Nunito";
+   font-weight: bold;
+   font-size: 2.3rem;
+}
+.backArrow {
+   font-size: 2rem;
+   stroke-width: 40px;
+   font-weight: bold;
+   cursor: pointer;
+}
+
+.controls {
+   position: absolute;
+   bottom: 0;
+   padding: 10px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   width: 100vw;
+   z-index: 7;
+}
+.controls > * {
+   cursor: pointer;
+}
+.playPause {
+   width: 50px;
+   height: 50px;
+   transform: translateX(6px);
+}
+@keyframes appear {
+   0% {
+      opacity: 0;
+   }
+   100% {
+      opacity: 1;
+   }
+}
+@keyframes appearing {
+   0% {
+      opacity: 0;
+   }
+   50% {
+      opacity: 1;
+   }
+   100% {
+      opacity: 0;
+   }
+}
+.loadingOverlay {
+   width: 100vw;
+   height: calc(100vh);
+   position: fixed;
+   top: 0;
+   left: 0;
+   background-color: rgba(0, 0, 0, 0.7);
+   animation: appear 1s ease-in;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+.anihubIcon {
+   width: 150px;
+   height: 150px;
+   animation: appearing 2.2s ease-in-out infinite;
+}
+.qualitySelector {
+   appearance: none;
+   padding-inline: 5px;
+   background-color: transparent;
+   border: transparent;
+   color: white;
+   cursor: pointer;
+   outline: none;
+   font-weight: bold;
+   font-size: 1.3rem;
+   text-align: center;
+   background-color: rgb(0, 0, 0, .589);
+   padding-block: 14px;
+   padding-inline: 20px 17px;
+   border-radius: 10px;
+   transform: translateX(-10px);
+   border: 3px solid transparent;
+   transition: all .16s ease-in;
+   opacity: .6;
+}
+.qualitySelector:hover {
+   opacity: 1;
+}
+.qualitySelectorValuesContainer {
+   background-color: rgba(0, 0, 0, .3);
+   width: 150px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   position: absolute;
+   right: 10px;
+   padding: 10px;
+   border-radius: 10px;
+   font-size: 1.3rem;
+   bottom: 90px;
+   animation: appear .3s ease-in;
+}
+.qualitySelectorValuesContainer > * {
+   padding: 6px;
+   width: 100%;
+   text-align: center;
+   cursor: pointer;
+   border-radius: 10px;
+   transition: all .16s ease-in-out;
+   font-weight: bold;
+}
+.qualitySelectorValuesContainer > *:hover {
+   background-image: linear-gradient(
+      65deg,
+       #6366f1, #FE5F55,
+      #ff00d4
+   );
+}
+.soundSlider {
+   transition: all .3s ease-in-out;
+   appearance: none;
+   background-color: rgba(0, 0, 0, 0.589);
+   padding: 20px 10px;
+   border-radius: 10px;
+   opacity: .6;
+}
+.soundSlider:hover {
+   opacity: 1;
+}
+.soundSlider::-webkit-slider-runnable-track {
+   background: linear-gradient(to right, #6366f1 0%, #f17863ff var(--vol), #4e4e4eff var(--vol), #4e4e4eff 100%);
+   border-radius: 10px;
+   height: 10px;
+}
+.soundSlider::-webkit-slider-thumb {
+   appearance: none;
+   width: 20px;
+   height: 20px;
+   border-radius: 100%;
+   border: 3px solid #e97c74;
+   background-color: #FE5F55;
+   transform: translateY(-5px);
+}
+.timeSlider {
+   appearance: none;
+   transition: all .3s ease-in-out;
+   height: 30px;
+   width: calc(100vw - 400px);
+   background-color: rgba(0, 0, 0, 0.589);
+   border-radius: 14px;
+   padding-inline: 10px;
+   opacity: .6;
+}
+.timeSlider:hover {
+   opacity: 1;
+}
+.timeSlider::-webkit-slider-runnable-track {
+   border-radius: 20px;
+   background: linear-gradient(to right, #6366f1 0%, #f17863ff var(--progress), #4e4e4eff var(--progress), #4e4e4eff 100%);
+   height: 30%;
+}
+.timeSlider::-webkit-slider-thumb {
+   appearance: none;
+   width: 20px;
+   height: 20px;
+   border-radius: 100%;
+   border: 5px solid #fe605518;
+   background-color: #FE5F55;
+   transform: translateY(-5px);
+}
+.enterFullscreen, .exitFullscreen {
+   width: 50px;
+   height: 50px;
+   cursor: pointer;
+   position: absolute;
+   right: 40px;
+}
+.topControls, .controls {
+   transition: all .3s ease-in-out;
+}

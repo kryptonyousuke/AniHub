@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+  --white: #dddddd;
+}
+
+html, body {
+    height: 100svh;
+    width: 100vw;
+    background-color: black;
+    color: var(--white);
+    user-select: none;
+    font-family: "Nunito", sans-serif;
+}
+body::-webkit-scrollbar {
+  width: 0px;       /* Largura da barra vertical */
+  height: 12px;      /* Altura da barra horizontal */
+}
+
+/* Fundo da barra */
+body::-webkit-scrollbar-track {
+  background: transparent;
+  margin-top: 35px;
+}
+
+/* Cor do “polegar” (a parte que se move) */
+body::-webkit-scrollbar-thumb {
+  background: #022557;
+}
+
+/* Cor do polegar quando hover */
+body::-webkit-scrollbar-thumb:hover {
+  background: #180b0b;
+}
+.body-footer {
+  text-align: center;
+  font-family: monospace;
+  width: 100%;
+  padding-block: 30px;
+}

@@ -1,0 +1,42 @@
+.titleBar {
+    background-color: black;
+    display: flex;
+    justify-content: right;
+    -webkit-app-region: drag;
+    user-select: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 30;
+}
+
+
+.btnWindow {
+    border: solid 0px;
+    width: 45px;
+    height: 35px;
+    cursor: pointer;
+    transition: all .12s linear;
+    -webkit-app-region: no-drag;
+    color: white;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    outline: none;
+}
+.btnMaximize {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+.btnClose > * {
+    transform: translateY(-1px);
+    font-size: 2.2rem;
+}
+.btnMaximize:hover, .btnMinimize:hover {
+    background-color: rgba(255, 255, 255, 0.137);
+}
+.btnClose:hover {
+    background-color: rgb(238, 0, 0);
+}

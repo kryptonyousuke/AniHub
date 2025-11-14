@@ -1,0 +1,46 @@
+.episodesList {
+    background-color: transparent;
+    margin-top: 10px;
+    border-radius: 20px;
+    overflow-y: scroll;
+    position: relative;
+    height: 400px;
+    padding-right: 4px;
+}
+.episodesList::-webkit-scrollbar {
+    width: 2px;
+    background-color: transparent;
+    height: 20px !important;
+    overflow: hidden;
+}
+.episodesList::-webkit-scrollbar-button {
+    opacity: 0;
+}
+.episodesList::-webkit-scrollbar-thumb {
+    background-color: #fe6055c4;
+    border-radius: 2px;
+}
+.episode {
+    height: 80px;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-block: 7px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    padding: 44px 12px;
+    border: 1px solid whitesmoke;
+    transition: all .16s ease-in-out;
+}
+.episode:hover {
+    color: #fe6055;
+    filter: brightness(.85);
+}
+
+.episodeThumbnail {
+    height: 70px;
+    width: 120px;
+    border-radius: 10px;
+    object-fit: cover;
+}
