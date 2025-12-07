@@ -1,5 +1,6 @@
 import styles from "./AnihubHeader.module.css"
 import SearchResults from "./SearchResults";
+import { FaBook } from "react-icons/fa6";
 import { RiSettingsFill } from "react-icons/ri";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +10,7 @@ function AnihubHeader(){
     const [search, setSearch] = useState("");
     const [settingsVisible, setSettingsVisible] = useState(false);
     const [animeList, setAnimeList] = useState([]);
+    const [isMangaMode, setIsMangaMode] = useState(false);
     const searchTimeoutRef = useRef(null);
     const navigate = useNavigate();
     return  <header className={styles.anihubHeader}>
@@ -29,6 +31,12 @@ function AnihubHeader(){
                 setAnimeList(data);
             }, 1500);
         }} />
+        <FaBook className={styles.mangaModeIcon} onClick={()=>{setIsMangaMode(!isMangaMode)}} style={isMangaMode && {
+            backgroundColor: "white",
+            color: "black",
+            fill: "black",
+
+        }}/>
         {
             (search !== "" && animeList.length > 0) &&
             <SearchResults results={animeList} />

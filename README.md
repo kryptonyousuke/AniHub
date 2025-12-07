@@ -8,5 +8,5 @@ top: -110px;
 left: calc(50% - 50px);
 ">
 <p style="margin-top: 120px;">AniHub</p>
-<p>Japanese Culture MUST be available for everyone everywhere.</p>
+<p style="font-size: 1.2rem;">Japanese Culture MUST be available for everyone everywhere.</p>
 </h1>

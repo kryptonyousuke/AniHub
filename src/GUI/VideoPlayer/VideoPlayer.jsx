@@ -127,7 +127,7 @@ function VideoPlayer({ onFullscreenChange }){
             if (player.current.currentTime / player.current.duration >= 0){
                 setProgress(player.current.currentTime / player.current.duration)
             }
-        }) 
+        })
         const handleKeyDown = (e) => {
             if (e.key === "F11") {
                 setIsFullscreen((prev) => {

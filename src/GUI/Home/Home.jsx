@@ -19,7 +19,7 @@ function Home(){
         <section className={styles.popularContentSection}>
             <h1 className={styles.titlePopularContent}>Popular Content</h1>
             <div className={styles.popularContent}>
-                <KeyVisual onClick={() => navigate("/animeinfo", {
+                <KeyVisual onClick={() => navigate("/mangareader", {
                         state: {
                             animeName: "Sakamoto Days",
                             animeID: 783827,
