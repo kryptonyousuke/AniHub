@@ -5,7 +5,7 @@ import { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 import releaseListStyles from "../Utilities/AnimeEpisodesReleaseList.module.css";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AnihubHeader from "../Utilities/AnihubHeader";
 import Footer from "../Utilities/Footer";
 function Home(){
@@ -19,7 +19,7 @@ function Home(){
         <section className={styles.popularContentSection}>
             <h1 className={styles.titlePopularContent}>Popular Content</h1>
             <div className={styles.popularContent}>
-                <KeyVisual onClick={() => navigate("/mangareader", {
+                <KeyVisual onClick={() => navigate("/mangapage", {
                         state: {
                             animeName: "Sakamoto Days",
                             animeID: 783827,

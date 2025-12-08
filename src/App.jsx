@@ -5,6 +5,7 @@ import AnimeInfo from "./GUI/AnimeInfo/AnimeInfo"
 import VideoPlayer from "./GUI/VideoPlayer/VideoPlayer";
 import { useState } from "react";
 import Manga from "./GUI/Manga/Manga";
+import MangaReader from "./GUI/Manga/MangaReader";
 function App() {
   const [isFullscreen, setIsFullscreen] = useState(false);
   return (
@@ -15,7 +16,8 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/animeinfo" element={<AnimeInfo />} />
               <Route path="/player" element={<VideoPlayer onFullscreenChange={setIsFullscreen}/>} />
-              <Route path="/mangareader" element={<Manga />} />
+              <Route path="/mangapage" element={<Manga />} />
+              <Route path="/mangareader" element={<MangaReader />} />
           </Routes>
       </Router>
     </>

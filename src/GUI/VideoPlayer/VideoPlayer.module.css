@@ -1,5 +1,5 @@
 .videoPlayerContainer {
-   height: calc(100svh);
+   height: 100svh;
    overflow: hidden;
 }
 .videoPlayer {
