@@ -129,7 +129,7 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 1e3,
     height: 700,
-    minWidth: 800,
+    minWidth: 1e3,
     minHeight: 300,
     frame: false,
     titleBarStyle: "hidden",

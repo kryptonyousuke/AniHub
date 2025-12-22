@@ -14,6 +14,9 @@
     justify-content: center;
     background: rgb(26, 26, 26);
 }
+.hiddenPage {
+    display: none;
+}
 .page {
     height: calc(100vh - 115px);
     position: absolute;
@@ -25,6 +28,10 @@
     position: absolute;
     top: 0;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
 }
 .bottomBar {
     height: 40px;
@@ -32,4 +39,41 @@
     position: absolute;
     bottom: 0;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logo {
+    width: 100px;
+    height: 100px;
+    margin-left: 10px;
+    margin-right: 30px;
+    display: inline-block;
+    user-select: none;
+    -webkit-user-drag: none;
+    cursor: pointer;
+}
+
+.anihub {
+    display: inline-block;
+    font-size: 2rem;
+    transform: translateX(-2rem);
+    margin-right: 40px;
+    background-image: linear-gradient(100deg, #FE5F55, #ff00d4, #3185FC);
+    background-clip: text;
+    color: transparent;
+    cursor: pointer;
+}
+.simpleAniHubHeader {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    z-index: 20;
+    bottom: 40px;
+}
+.btnBar {
+    cursor: pointer;
+}
+.btnNext {
+    margin-left: 5px;
 }
