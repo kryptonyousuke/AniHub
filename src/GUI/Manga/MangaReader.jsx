@@ -4,12 +4,14 @@ import styles from "./MangaReader.module.css";
 import { MdArrowBackIos } from "react-icons/md";
 import { MdArrowForwardIos } from "react-icons/md";
 import { useLocation, useNavigate } from "react-router-dom";
+import { IoChevronBackSharp } from "react-icons/io5";
 function MangaReader(){
     const navigate = useNavigate();
     const location = useLocation();
     const pages = location.state.pages;
     const [selectedPage, setSelectedPage] = useState(location.state.selectedPage);
     return <div className={styles.mangaReader}>
+        <IoChevronBackSharp className={styles.backBtn} onClick={() => navigate("/mangapage", { state: { animeData: location.state.animeData} })}/>
         <div className={styles.simpleAniHubHeader}>
             <img className={styles.logo} src="AniHub_transparent.svg" onClick={() => navigate("/")} alt="logo"></img>
             <h1 className={styles.anihub} onClick={() => navigate("/")}>AniHub</h1>

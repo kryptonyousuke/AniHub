@@ -17,12 +17,15 @@ function AnihubHeader(){
         <img className={styles.logo} src="AniHub_transparent.svg" onClick={() => navigate("/")} alt="logo"></img>
         <h1 className={styles.anihub} onClick={() => navigate("/")}>AniHub</h1>
         <input className={styles.search} type="text" placeholder="Search" onChange={async (e) => {
+            if (e.target.value === "") {
+                return;
+            }
             setSearch(e.target.value);
             if (searchTimeoutRef.current) {
                 clearTimeout(searchTimeoutRef.current);
             }
             searchTimeoutRef.current = setTimeout(async () => {
-                const searchData = { action: "searchAnime", query: e.target.value };
+                const searchData = { action: isMangaMode ? "searchManga" : "searchAnime", query: e.target.value };
                 console.log(searchData);
                 const results = await window.electronAPI.runPlugins(searchData);
                 console.log(results)

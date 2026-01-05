@@ -21,8 +21,13 @@ function Home(){
             <div className={styles.popularContent}>
                 <KeyVisual onClick={() => navigate("/mangapage", {
                         state: {
-                            animeName: "Sakamoto Days",
-                            animeID: 783827,
+                            animeData: {
+                                title: "Sakamoto Days",
+                                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                                tags: ["Action", "Adventure"],
+                                keyvisual: "image.png",
+                                pages: ["image.png", "image.png", "image.png", "image.png", "image.png", "image.png", "image.png", "image.png",],
+                            }
                         }
                     }
                 )}/>

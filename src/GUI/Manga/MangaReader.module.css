@@ -1,9 +1,21 @@
 .mangaReader {
     height: calc(100svh - 35px);
     overflow: hidden;
-    background-color: red;
     position: relative;
     top: 35px;
+}
+.backBtn {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    z-index: 10;
+    background-color: black;
+    border-radius: 7px;
+    padding: 5px;
+    padding-left: 2px;
 }
 .reader {
     height: calc(100svh - 35px);
@@ -12,7 +24,7 @@
     position: relative;
     display: flex;
     justify-content: center;
-    background: rgb(26, 26, 26);
+    background: rgb(19, 19, 19);
 }
 .hiddenPage {
     display: none;

@@ -1,4 +1,6 @@
 Plugins/
 node_modules/
 dist/
+dist-electron/
 dist_electron/
+src/dist-electron
