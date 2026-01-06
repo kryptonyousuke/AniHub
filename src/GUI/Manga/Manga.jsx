@@ -7,19 +7,26 @@ function Manga(){
     const [isMangaMode, setIsMangaMode] = useState(true);
     const location = useLocation();
     const navigate = useNavigate();
+    const [description, setDescription] = useState("");
     const animeData = location.state?.animeData;
-    
+    const searchData = { action: "mangaInfo", id: animeData.mangaID };
+    console.log(searchData);
     if (!animeData) {
         return <div>Dados do mangá não encontrados.</div>;
     }
 
     const [pages, setPages] = useState(animeData.pages || []);
+    window.electronAPI.runSpecificPlugin(animeData.plugin, searchData).then((data)=>{
+        data = JSON.parse(data);
+        setPages(data.pages);
+        setDescription(data.description);
+    })
     return <div className={styles.manga}>
         <AnihubHeader />
 
         <img src={animeData.keyvisual} className={styles.mangaImage}></img>
         <h1 className={styles.mangaTitle}>{animeData.title}</h1>
-        <p className={styles.mangaDescription}>{animeData.description}</p>
+        <p className={styles.mangaDescription}>{description}</p>
         <div className={styles.mangaInfo}>
             <section className={styles.tagsArea}>
                 <FaRegStar className={styles.favorite}/>

@@ -42,7 +42,7 @@ function AnihubHeader(){
         }}/>
         {
             (search !== "" && animeList.length > 0) &&
-            <SearchResults results={animeList} />
+            <SearchResults isMangaMode={isMangaMode} results={animeList} />
         }
         {
             settingsVisible &&
