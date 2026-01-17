@@ -24,6 +24,3 @@ Any enterprise can make a plugin for this application and distribute it to the c
 - **Anime Streaming**: Does support modern streaming protocols, such as HLS and DASH + simple video files.
 - **Manga Reader**: We have a simple manga reader (still under development, but it works).
 - **Plugin Support**: currently supports only python plugins (under devolpment, but works). Future versions will support JS/TS and compiled binaries.
-![C](https://img.shields.io/badge/Language-C-blue)
-![Vulkan](https://img.shields.io/badge/Graphics-Vulkan-red)
-![Python](https://img.shields.io/badge/Language-Python-green)
