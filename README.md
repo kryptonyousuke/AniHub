@@ -1,5 +1,5 @@
 
-<h1 style="text-align: center; position:relative; height: 150px">
+<h1 align="center">
 <img src="build-icon/icons/png/512x512.png" style="
 width: 100px;
 margin-inline: auto;
