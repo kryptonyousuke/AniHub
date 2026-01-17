@@ -14,7 +14,6 @@ ipcMain.on("window-action", (event, action) => {
     case "maximize":
         if (window.isFullScreen()) {
           window.setFullScreen(false);
-
           window.unmaximize();
         } else if (window.isMaximized()) {
           window.unmaximize();
