@@ -24,3 +24,48 @@ Any enterprise can make a plugin for this application and distribute it to the c
 - **Anime Streaming**: Does support modern streaming protocols, such as HLS and DASH + simple video files.
 - **Manga Reader**: We have a simple manga reader (still under development, but it works).
 - **Plugin Support**: currently supports only python plugins (under devolpment, but works). Future versions will support JS/TS and compiled binaries.
+
+
+# How to build
+
+## Install the pnpm package.
+
+On linux distros that have apt:
+```bash
+    sudo apt install pnpm -y
+```
+For Arch based distros:
+```bash
+    sudo pacman -S pnpm --noconfirm
+```
+You can install pnpm on windows following the instructions from the oficial website [here.](https://pnpm.io/installation)
+
+## Build the project
+Clone this repository:
+```bash
+    git clone https://github.com/kryptonyousuke/AniHub
+    cd AniHub
+```
+
+And run:
+```bash
+    pnpm install # install the projects dependencies
+    pnpm run build # builds the project
+```
+
+This will make the correct build for your system.
+If you want to build for an specific system:
+```bash
+    # Windows build: 
+    pnpm run build --win
+    
+    # Linux build (AppImage):
+    pnpm run build --linux
+```
+
+
+# Testing
+If you don't want to compile the entire project, you can just test it in a electron instance by running:
+```bash
+    pnpm run dev
+```
