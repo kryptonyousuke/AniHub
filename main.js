@@ -104,7 +104,6 @@ function runSpecificPlugin(pluginName, inputData) {
 
     let output = "";
     let error = "";
-
     // receber saída
     py.stdout.on("data", (data) => {
       output += data.toString();
@@ -162,7 +161,7 @@ function createWindow() {
     width: 1000,
     height: 700,
     minWidth: 1000,
-    minHeight: 300,
+    minHeight: 500,
     frame: false,
     titleBarStyle: "hidden",
     icon: path.join(__dirname, "build-icon/icons/png/1024x1024.png"),

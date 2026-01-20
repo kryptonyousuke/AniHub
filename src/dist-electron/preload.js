@@ -1,1 +1,9 @@
-"use strict";const{contextBridge:t,ipcRenderer:i}=require("electron");t.exposeInMainWorld("electronAPI",{windowAction:n=>i.send("window-action",n),onWindowStateChange:n=>i.on("window-state-changed",(e,o)=>n(o)),installPlugin:()=>i.invoke("install-plugin"),runPlugins:n=>i.invoke("run-plugins",n),runSpecificPlugin:(n,e)=>i.invoke("run-specific-plugin",n,e)});
+"use strict";
+const { contextBridge, ipcRenderer } = require("electron");
+contextBridge.exposeInMainWorld("electronAPI", {
+  windowAction: (action) => ipcRenderer.send("window-action", action),
+  onWindowStateChange: (callback) => ipcRenderer.on("window-state-changed", (event, state) => callback(state)),
+  installPlugin: () => ipcRenderer.invoke("install-plugin"),
+  runPlugins: (data) => ipcRenderer.invoke("run-plugins", data),
+  runSpecificPlugin: (pluginName, data) => ipcRenderer.invoke("run-specific-plugin", pluginName, data)
+});
