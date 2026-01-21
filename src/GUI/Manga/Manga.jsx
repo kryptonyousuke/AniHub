@@ -1,4 +1,5 @@
 import { useState } from "react";
+import FadeLoading from "../../AnimComponents/FadeLoading";
 import AnihubHeader from "../Utilities/AnihubHeader"
 import styles from "./Manga.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -8,6 +9,7 @@ function Manga(){
     const location = useLocation();
     const navigate = useNavigate();
     const [description, setDescription] = useState("");
+    const [isLoaded, setIsLoaded] = useState(false);
     const animeData = location.state?.animeData;
     const searchData = { action: "mangaInfo", id: animeData.mangaID };
     console.log(searchData);
@@ -20,10 +22,11 @@ function Manga(){
         data = JSON.parse(data);
         setPages(data.pages);
         setDescription(data.description);
+        setIsLoaded(true);
     })
     return <div className={styles.manga}>
         <AnihubHeader />
-
+        {!isLoaded && <FadeLoading />}
         <img src={animeData.keyvisual} className={styles.mangaImage}></img>
         <h1 className={styles.mangaTitle}>{animeData.title}</h1>
         <p className={styles.mangaDescription}>{description}</p>

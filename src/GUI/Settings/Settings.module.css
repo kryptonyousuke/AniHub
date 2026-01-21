@@ -2,7 +2,8 @@
     width: 100%;
     height: 100%;
     position: fixed;
-    background-color: rgba(0, 0, 0, 0.815);
+    background-color: rgba(0, 0, 0, 0.515);
+    backdrop-filter: blur(3px);
     top: 0;
     z-index: 11;
     animation: appear 0.25s ease-in-out;
@@ -21,8 +22,9 @@
     width: 50vw;
     min-width: 600px;
     height: 90svh;
-    border: 2px solid white;
-    border-radius: 17px;
+    border: 1px solid #ddd;
+    padding-top: 20px;
+    border-radius: 50px;
     position: fixed;
     top: calc(10svh - 30px);
     left: 25vw;
@@ -55,8 +57,8 @@
     height: 37px;
     cursor: pointer;
     position: absolute;
-    right: 12px;
-    top: 10px;
+    right: 30px;
+    top: 20px;
 }
 .installArea {
     width: 60%;
@@ -72,6 +74,7 @@
     border: 2px solid white;
     margin-inline: 20%;
     padding: 30px;
+    text-align: center;
 }
 .installButton {
     background-color: whitesmoke;
@@ -90,6 +93,9 @@
 }
 .installButton:hover {
     filter: brightness(0.7);
+}
+.installButton:active {
+    transform: scale(.85);
 }
 .installButton:focus {
     border-color: rgb(150, 150, 150);

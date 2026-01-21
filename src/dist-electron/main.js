@@ -4,6 +4,11 @@ const path = require("path");
 const fs = require("fs");
 require("os");
 const { spawn } = require("child_process");
+app.commandLine.appendSwitch("js-flags", "--max-old-space-size=4096 --optimize-for-size");
+app.commandLine.appendSwitch("disable-frame-rate-limit");
+app.commandLine.appendSwitch("enable-gpu-rasterization");
+app.commandLine.appendSwitch("enable-begin-frame-scheduling");
+app.commandLine.appendSwitch("enable-zero-copy");
 ipcMain.on("window-action", (event, action) => {
   const window = BrowserWindow.getFocusedWindow();
   if (!window) return;
@@ -131,14 +136,15 @@ function createWindow() {
     height: 700,
     minWidth: 1e3,
     minHeight: 500,
-    // frame: false,
     titleBarStyle: "hidden",
     icon: path.join(__dirname, "build-icon/icons/png/1024x1024.png"),
     webPreferences: {
       contextIsolation: true,
       nodeIntegration: false,
+      offscreen: false,
       preload: path.join(__dirname, "preload.js")
-    }
+    },
+    show: true
   });
   win.maximize();
   win.on("maximize", () => {

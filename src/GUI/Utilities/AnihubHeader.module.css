@@ -3,6 +3,7 @@
     align-items: center;
     position: relative;
     animation: appear 1s ease;
+    z-index: 10;
 }
 
 @keyframes appear {
@@ -66,15 +67,14 @@ h1 {
     }
 }
 .search {
-    background-color: transparent;
     color: white;
-    background-color: black;
-    border: 3px solid white;
-    z-index: 10;
+    background-color: #000000aa;
+    backdrop-filter: blur(7px);
+    border: 2px solid white;
     position: fixed;
     left: 30vw;
     border-radius: 30px;
-    padding-inline: 30px 10px;
+    padding-inline: 40px 10px;
     padding-block: 20px 20px;
     width: 40vw;
     height: 64px;
@@ -88,10 +88,9 @@ h1 {
     height: 30px;
     cursor: pointer;
     transition: fill .6s ease-in-out, background-color .3s ease-in-out;
-    border-radius: 7px;
+    border-radius: 10px;
     box-sizing: unset;
     position: fixed;
     left: calc(70vw + 20px);
     padding: 7px;
-    z-index: 1;
 }

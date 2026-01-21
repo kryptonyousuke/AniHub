@@ -1,0 +1,37 @@
+@keyframes appear {
+   0% {
+      opacity: 0;
+   }
+   100% {
+      opacity: 1;
+   }
+}
+@keyframes appearing {
+   0% {
+      opacity: 0;
+   }
+   50% {
+      opacity: 1;
+   }
+   100% {
+      opacity: 0;
+   }
+}
+.loadingOverlay {
+   width: 100vw;
+   height: calc(100vh);
+   position: fixed;
+   top: 0;
+   left: 0;
+   background-color: rgba(0, 0, 0, 0.7);
+   animation: appear 1s ease-in;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   z-index: 2;
+}
+.anihubIcon {
+   width: 150px;
+   height: 150px;
+   animation: appearing 2.2s ease-in-out infinite;
+}

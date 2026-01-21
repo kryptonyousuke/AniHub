@@ -1,4 +1,5 @@
 import AnihubHeader from "../Utilities/AnihubHeader";
+import FadeLoading from "../../AnimComponents/FadeLoading";
 import styles from "./AnimeInfo.module.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
@@ -45,6 +46,7 @@ function AnimeInfo(){
     }, []);
     return <div className={styles.animeInfo}>
         <AnihubHeader/>
+        {!episodesLoaded && <FadeLoading />}
         <div className={styles.animeInfoContainer}>
             <img src={keyVisual} alt="" className={styles.animeKeyVisual}/>
             <div className={styles.infoContainer}>

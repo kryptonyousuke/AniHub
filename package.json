@@ -55,6 +55,7 @@
     "vite-plugin-electron": "^0.29.0"
   },
   "dependencies": {
+    "@iconify/react": "^6.0.2",
     "dashjs": "^5.1.1",
     "hls.js": "^1.6.15",
     "react": "^19.2.3",

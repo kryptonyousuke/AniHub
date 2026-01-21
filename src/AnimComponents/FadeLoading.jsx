@@ -1,9 +1,9 @@
-function FadeLoading({component: Component, isLoading}){
+import styles from "./FadeLoading.module.css";
+function FadeLoading({ component: Component, isLoading }) {
     return (
-        <div className="fade-loading">
-            <Component />
-            <div className="loader-animation-itself" style={{opacity: isLoading ? 1 : 0}}></div>
-        </div>
+      <div className={styles.loadingOverlay}>
+              <img src="AniHub_transparent.svg" className={styles.anihubIcon} />
+      </div>
     )
 }
 export default FadeLoading;
