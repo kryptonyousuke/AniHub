@@ -35,6 +35,7 @@ function Settings({ setSettingsVisible }) {
           <div className={styles.modularOption}>
             <p className={styles.optionName}>Enable NSFW</p>
             <input type="checkbox"></input>
+            <span className={styles.indicator}></span>
           </div>
         </div>
         </section>

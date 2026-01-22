@@ -146,3 +146,22 @@
 .modularOption > input[type="checkbox"]:checked::before {
     transform: translateX(10px);
 }
+.modularOption > input[type="checkbox"] ~ .indicator {
+    color: #dadada;
+    padding: 4px 7px;
+    border-radius: 5px;
+    position: absolute;
+    right: 100px;
+    background-color: #5a0000;
+    transition: all .125s ease-in-out;
+}
+
+.modularOption > input[type="checkbox"]:checked ~ .indicator {
+    background-color: #005a00;
+}
+.modularOption > input[type="checkbox"] ~ .indicator:after {
+    content: "disabled";
+}
+.modularOption > input[type="checkbox"]:checked ~ .indicator:after {
+    content: "enabled";
+}

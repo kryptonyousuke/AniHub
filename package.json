@@ -16,6 +16,7 @@
   },
   "build": {
     "appId": "com.kryptonsolutions.anihub",
+    "electronLanguages": ["pt-BR", "en-US"],
     "productName": "AniHub",
     "directories": {
       "buildResources": "assets",
@@ -33,14 +34,33 @@
     },
     "linux": {
       "icon": "./build-icon/icons/png/512x512.png",
-      "category": "AudioVideo",
+      "category": "Video;AudioVideo;Network;",
+      "desktop": {
+        "entry": {
+          "executableName": "AniHub",
+          "GenericName": "Anime Streaming Client",
+          "Terminal": false,
+          "MimeType": "x-scheme-handler/anihub;",
+          "StartupWMClass": "anihub"
+        }
+      },
       "target": [
-        "AppImage"
+        "AppImage",
+        "pacman",
+        "deb",
+        "rpm",
+        "tar.xz",
+        "tar.gz"
       ],
       "maintainer": "Krypton Yousuke <kryptonyousuke@gmail.com>"
     }
   },
-  "keywords": [],
+  "keywords": [
+    "streaming",
+    "video",
+    "anime",
+    "manga"
+  ],
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
