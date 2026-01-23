@@ -1,13 +1,22 @@
-const { app, globalShortcut, BrowserWindow, ipcMain, dialog} = require("electron");
+const { app, globalShortcut, BrowserWindow, ipcMain, dialog } = require("electron");
+const { spawn } = require("child_process");
 const path = require("path");
 const fs = require("fs");
 const os = require("os");
-const { spawn } = require("child_process");
+
+// Electron flags 
 app.commandLine.appendSwitch('js-flags', '--max-old-space-size=4096 --optimize-for-size');
 app.commandLine.appendSwitch('disable-frame-rate-limit');
 app.commandLine.appendSwitch('enable-gpu-rasterization');
 app.commandLine.appendSwitch('enable-begin-frame-scheduling');
 app.commandLine.appendSwitch('enable-zero-copy');
+
+/*
+* 
+*    Handles with windos events
+* 
+*/
+
 ipcMain.on("window-action", (event, action) => {
   const window = BrowserWindow.getFocusedWindow();
   if (!window) return;
@@ -67,6 +76,14 @@ ipcMain.handle("install-plugin", async () => {
     return { success: false, message: err.message };
   }
 });
+
+
+/*
+*
+* Runs a plugin by it's absolute path.
+* 
+*/
+
 function runPlugin(pluginPath, inputData) {
   return new Promise((resolve, reject) => {
     const py = spawn(pluginPath, {
@@ -100,6 +117,17 @@ function runPlugin(pluginPath, inputData) {
     py.stdin.end();
   });
 }
+
+
+
+
+/*
+* 
+* Send a command to a plugin selected by it's name.
+* 
+*/
+
+
 function runSpecificPlugin(pluginName, inputData) {
   return new Promise((resolve, reject) => {
     const py = spawn(path.join(app.getPath("userData"), "plugins", pluginName), {
@@ -108,26 +136,26 @@ function runSpecificPlugin(pluginName, inputData) {
 
     let output = "";
     let error = "";
-    // receber saída
+    // get data from stdout
     py.stdout.on("data", (data) => {
       output += data.toString();
     });
 
-    // capturar erros do Python
+    // get failures
     py.stderr.on("data", (data) => {
       error += data.toString();
     });
 
-    // fim do processo
+    // the process end
     py.on("close", (code) => {
       if (code === 0) {
         resolve(output.trim());
       } else {
-        reject(new Error(error || `Plugin falhou com código ${code}`));
+        reject(new Error(error || `Plugin failed with code: ${code}`));
       }
     });
 
-    // mandar dados via stdin
+    // send data to stdin (plugin's stdin)
     py.stdin.write(JSON.stringify(inputData));
     py.stdin.end();
   });
@@ -137,6 +165,12 @@ ipcMain.handle("run-specific-plugin", async (event, pluginName, inputData) => {
   return await runSpecificPlugin(pluginName, inputData);
 })
 
+
+/* 
+* 
+*  Sends a single command to all plugins.
+* 
+*/
 async function runAllPlugins(inputData) {
   const pluginDir = path.join(app.getPath("userData"), "plugins");
   if (!fs.existsSync(pluginDir)) return [];
@@ -158,6 +192,34 @@ async function runAllPlugins(inputData) {
 ipcMain.handle("run-plugins", async (event, inputData) => {
   return await runAllPlugins(inputData);
 });
+
+
+
+/*
+* 
+*     Used to get the list of all installed plugins.
+* 
+*/
+
+async function getAllPlugins() {
+  const pluginDir = path.join(app.getPath("userData"), "plugins");
+  if (!fs.existsSync(pluginDir)) return [];
+  const files = fs.readdirSync(pluginDir);
+  return files;
+}
+
+ipcMain.handle("get-all-plugins", async (event) => {
+  return await getAllPlugins();
+});
+
+
+
+
+/*
+* 
+*       Makes the window
+* 
+*/
 
 
 function createWindow() {

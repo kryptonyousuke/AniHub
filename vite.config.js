@@ -7,7 +7,7 @@ export default defineConfig({
     react(),
     electron({
       main: {
-        // Processo principal do Electron
+        // Main electron process
         entry: "../main.js",
       },
       preload: {
@@ -18,8 +18,8 @@ export default defineConfig({
   ],
   root: "src",
   build: {
-    outDir: "../dist/renderer", // renderer separado
+    outDir: "../dist/renderer", // renderer
     emptyOutDir: true,
-    base: "./", // importante para abrir no file:// no build
+    base: "./",
   },
 });

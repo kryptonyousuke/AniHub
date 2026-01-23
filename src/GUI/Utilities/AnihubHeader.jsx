@@ -22,16 +22,23 @@ function AnihubHeader(){
             }
             setSearch(e.target.value);
             if (searchTimeoutRef.current) {
-                clearTimeout(searchTimeoutRef.current);
+              clearTimeout(searchTimeoutRef.current);
             }
             searchTimeoutRef.current = setTimeout(async () => {
-                const searchData = { action: isMangaMode ? "searchManga" : "searchAnime", query: e.target.value };
-                console.log(searchData);
-                const results = await window.electronAPI.runPlugins(searchData);
-                console.log(results)
-                let data = JSON.parse(results[0].result);
-                data.plugin = results[0].plugin;
-                setAnimeList(data);
+              const searchData = { action: isMangaMode ? "searchManga" : "searchAnime", query: e.target.value };
+              console.log(searchData);
+              const pluginNames = await window.electronAPI.getAllPlugins();
+              for (const pluginName of pluginNames) {
+                window.electronAPI.runSpecificPlugin(pluginName, searchData).then((result) => {
+                  let searchResultList = JSON.parse(result);
+                  const resultsWithPlugin = searchResultList.map(anime => ({
+                      ...anime,
+                      plugin: pluginName
+                  }));
+                  console.log(resultsWithPlugin);
+                  setAnimeList(prevState => [...prevState, ...resultsWithPlugin]);
+                })
+              }
             }, 1500);
         }} />
         <FaBook className={styles.mangaModeIcon} onClick={()=>{setIsMangaMode(!isMangaMode)}} style={isMangaMode && {

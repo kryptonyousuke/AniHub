@@ -12,7 +12,7 @@ function AnimeInfo(){
     const episodes = useRef({});
     const [episodesState, setEpisodesState] = useState({});
     const [ selectedEpisodes, setSelectedEpisodes ] = useState([]);
-    const [ keyVisual, setKeyVisual ] = useState("");
+    const [keyVisual, setKeyVisual] = useState("");
     const [ isDubbedSelected, setIsDubbedSelected ] = useState(false);
     const [ isSubbedOrDubbedSelectorActive, setIsSubbedOrDubbedSelectorActive ] = useState(false);
     const [ episodesLoaded, setEpisodesLoaded ] = useState(false);
