@@ -30,7 +30,10 @@
     ],
     "win": {
       "icon": "./build-icon/icons/win/icon.ico",
-      "target": "portable"
+      "target": [
+        "portable",
+        "nsis"
+      ]
     },
     "linux": {
       "icon": "./build-icon/icons/png/512x512.png",
