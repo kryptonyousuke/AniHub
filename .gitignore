@@ -3,4 +3,4 @@ node_modules/
 dist/
 dist-electron/
 dist_electron/
-src/dist-electron
+src/dist-electron/

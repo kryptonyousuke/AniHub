@@ -1,6 +1,6 @@
 {
   "name": "anihub",
-  "version": "1.0.0",
+  "version": "0.1.0-alpha",
   "description": "AniHub is your anime hub :D",
   "author": {
     "name": "Krypton Yousuke",
@@ -38,7 +38,7 @@
       "desktop": {
         "entry": {
           "executableName": "AniHub",
-          "GenericName": "Anime Streaming Client",
+          "GenericName": "AniHub is your anime hub :D",
           "Terminal": false,
           "MimeType": "x-scheme-handler/anihub;",
           "StartupWMClass": "anihub"
@@ -47,6 +47,7 @@
       "target": [
         "AppImage",
         "pacman",
+        "flatpak",
         "deb",
         "rpm",
         "tar.xz",

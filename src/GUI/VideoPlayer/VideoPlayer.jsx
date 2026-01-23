@@ -35,7 +35,10 @@ function VideoPlayer({ onFullscreenChange }){
                     player.current.src = src;
                     return;
                 }
-                const hls = new Hls();
+                const hls = new Hls({
+                    manifestLoadingMaxRetry: 4,
+                    levelLoadingMaxRetry: 4,
+                });
                 hlsRef.current = hls;
                 hls.loadSource(src);
                 hls.attachMedia(player.current);
@@ -54,6 +57,29 @@ function VideoPlayer({ onFullscreenChange }){
                         setCurrentLevel(data.level);
                     }
                 });
+              
+                hls.on(Hls.Events.ERROR, (event, data) => {
+                  if (data.fatal) {
+                    switch (data.type) {
+                      case Hls.ErrorTypes.NETWORK_ERROR:
+                          console.log("Erro de rede fatal, tentando recuperar...");
+                          hls.startLoad();
+                          break;
+                      case Hls.ErrorTypes.MEDIA_ERROR:
+                          console.log("Erro de mídia fatal, tentando recuperar...");
+                          hls.recoverMediaError();
+                          break;
+                      case Hls.ErrorTypes.OTHER_ERROR:
+                          console.log("Erro de mídia fatal, tentando recuperar...");
+                          hls.recoverMediaError();
+                          break;
+                      default:
+                          hls.destroy();
+                          break;
+                    }
+                  }
+                });
+              
             } else if (src.includes(".mpd")){
                 const dash = MediaPlayer().create();
                 dash.initialize(player.current, src, true);
