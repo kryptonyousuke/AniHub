@@ -13,7 +13,7 @@ app.commandLine.appendSwitch('enable-zero-copy');
 
 /*
 * 
-*    Handles with windos events
+*    Handle with windows events
 * 
 */
 
@@ -80,7 +80,7 @@ ipcMain.handle("install-plugin", async () => {
 
 /*
 *
-* Runs a plugin by it's absolute path.
+* Run a plugin by it's absolute path.
 * 
 */
 
@@ -93,17 +93,17 @@ function runPlugin(pluginPath, inputData) {
     let output = "";
     let error = "";
 
-    // receber saída
+    // get output
     py.stdout.on("data", (data) => {
       output += data.toString();
     });
 
-    // capturar erros do Python
+    // get errors
     py.stderr.on("data", (data) => {
       error += data.toString();
     });
 
-    // fim do processo
+    // process end
     py.on("close", (code) => {
       if (code === 0) {
         resolve(output.trim());
@@ -112,7 +112,7 @@ function runPlugin(pluginPath, inputData) {
       }
     });
 
-    // mandar dados via stdin
+    // send data via stdin
     py.stdin.write(JSON.stringify(inputData));
     py.stdin.end();
   });
@@ -168,7 +168,7 @@ ipcMain.handle("run-specific-plugin", async (event, pluginName, inputData) => {
 
 /* 
 * 
-*  Sends a single command to all plugins.
+*  Send a single command to all plugins.
 * 
 */
 async function runAllPlugins(inputData) {
@@ -197,7 +197,7 @@ ipcMain.handle("run-plugins", async (event, inputData) => {
 
 /*
 * 
-*     Used to get the list of all installed plugins.
+*     Get the list of all installed plugins.
 * 
 */
 
@@ -217,7 +217,7 @@ ipcMain.handle("get-all-plugins", async (event) => {
 
 /*
 * 
-*       Makes the window
+*       Makes the window.
 * 
 */
 

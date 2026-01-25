@@ -17,7 +17,23 @@ left: calc(50% - 50px);
 
 ## **Anihub** is a streaming app that allows you to watch/read your favorite anime and manga online. It is built with Electron and Vite, and is available for Windows, macOS, and Linux. 
 
-Any enterprise can make a plugin for this application and distribute it to the community. The ads should be passed by the plugin to the player together to the content for monetization. This app is intended to be a way to unify the anime and manga streaming experience into a single platform, enhancing the user experience and providing a more seamless way to access their favorite content.
+Anyone can make a plugin for this application and distribute it to the community. Plugins may optionally provide ads alongside content for monetization. This app is intended to be a way to unify the anime and manga streaming experience into a single platform, enhancing the user experience and providing a more seamless way to access their favorite content.
+
+## Plugin System (WIP)
+
+AniHub does not provide any content by default.
+
+All anime and manga sources are delivered through external plugins.
+Currently supported:
+- Python plugins (executed as external processes)
+
+Planned:
+- JavaScript / TypeScript plugins
+- Native binaries
+- > ⚠️ Plugins are responsible for content sources, legality and ads delivery.
+> AniHub does not host or distribute any media content.
+
+
 
 ## Features
 
@@ -69,3 +85,28 @@ If you don't want to compile the entire project, you can just test it in a elect
 ```bash
     pnpm run dev
 ```
+
+# For developers
+
+## Architecture Overview
+
+AniHub is composed of three main layers:
+
+- **Renderer (React + Vite)**  
+  Responsible for UI, navigation, video playback and manga reader.
+
+- **Electron (Main + Preload)**  
+  Handles native APIs, filesystem access and plugin execution.
+
+- **Plugins (External)**  
+  Providers written in Python (currently) that fetch metadata and streaming sources.
+
+## Roadmap (Alpha)
+
+- [x] HLS / DASH playback
+- [x] Manga reader (basic)
+- [x] Python plugin execution
+- [ ] Plugin API documentation
+- [ ] JS/TS plugins
+- [ ] Better error handling
+- [ ] UI polish

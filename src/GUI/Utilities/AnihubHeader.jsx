@@ -17,7 +17,7 @@ function AnihubHeader(){
     return  <header className={styles.anihubHeader}>
         <img className={styles.logo} src="AniHub_transparent.svg" onClick={() => navigate("/")} alt="logo"></img>
         <h1 className={styles.anihub} onClick={() => navigate("/")}>AniHub</h1>
-        <input className={styles.search} type="search" placeholder="Naruto Shippuden" onChange={async (e) => {
+        <input className={styles.search} type="text" placeholder="Naruto Shippuden" onChange={async (e) => {
             if (e.target.value === "") {
                 return;
             }
