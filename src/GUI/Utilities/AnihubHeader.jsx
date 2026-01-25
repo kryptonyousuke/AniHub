@@ -5,6 +5,7 @@ import { RiSettingsFill } from "react-icons/ri";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Settings from "../Settings/Settings";
+import { Icon } from "@iconify/react";
 
 function AnihubHeader(){
     const [search, setSearch] = useState("");
@@ -16,7 +17,7 @@ function AnihubHeader(){
     return  <header className={styles.anihubHeader}>
         <img className={styles.logo} src="AniHub_transparent.svg" onClick={() => navigate("/")} alt="logo"></img>
         <h1 className={styles.anihub} onClick={() => navigate("/")}>AniHub</h1>
-        <input className={styles.search} type="text" placeholder="Naruto Shippuden" onChange={async (e) => {
+        <input className={styles.search} type="search" placeholder="Naruto Shippuden" onChange={async (e) => {
             if (e.target.value === "") {
                 return;
             }
@@ -55,8 +56,8 @@ function AnihubHeader(){
         {
             settingsVisible &&
             <Settings setSettingsVisible={setSettingsVisible} />
-        }
-        <RiSettingsFill className={styles.settingsIcon} onClick={() => setSettingsVisible(!settingsVisible)} />
+      }
+        <Icon icon="basil:settings-solid" width="70" height="70" className={styles.settingsIcon} onClick={() => setSettingsVisible(!settingsVisible)} />
     </header>
 }
 export default AnihubHeader;

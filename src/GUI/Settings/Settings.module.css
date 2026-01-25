@@ -90,6 +90,14 @@
     transition: all 0.16s ease-in;
     outline: none;
     margin: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.installIcon {
+    margin: -5px;
 }
 .installButton:hover {
     filter: brightness(0.7);
@@ -164,4 +172,16 @@
 }
 .modularOption > input[type="checkbox"]:checked ~ .indicator:after {
     content: "enabled";
+}
+.settingsWindowBar > span > h2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.pluginIcon {
+    color: black;
+    margin: -10px;
+    margin-inline: -2px -6px;
 }

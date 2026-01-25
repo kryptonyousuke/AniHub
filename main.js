@@ -5,7 +5,7 @@ const fs = require("fs");
 const os = require("os");
 
 // Electron flags 
-app.commandLine.appendSwitch('js-flags', '--max-old-space-size=4096 --optimize-for-size');
+app.commandLine.appendSwitch('js-flags', '--max-old-space-size=8192 --optimize-for-size');
 app.commandLine.appendSwitch('disable-frame-rate-limit');
 app.commandLine.appendSwitch('enable-gpu-rasterization');
 app.commandLine.appendSwitch('enable-begin-frame-scheduling');

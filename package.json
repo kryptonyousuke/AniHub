@@ -16,7 +16,10 @@
   },
   "build": {
     "appId": "com.kryptonsolutions.anihub",
-    "electronLanguages": ["pt-BR", "en-US"],
+    "electronLanguages": [
+      "pt-BR",
+      "en-US"
+    ],
     "productName": "AniHub",
     "directories": {
       "buildResources": "assets",
@@ -85,6 +88,6 @@
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-icons": "^5.5.0",
-    "react-router-dom": "^7.12.0"
+    "react-router-dom": "^7.13.0"
   }
 }

@@ -1,14 +1,25 @@
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .episode {
     position: relative;
     border-radius: 16px;
     min-width: 400px;
     width: 400px;
     cursor: pointer;
-    transition: all .16s ease-in;
+    transition: all 0.16s ease-in;
     overflow: hidden;
+    opacity: 0;
+    animation: appear 1s 1.3s ease forwards;
 }
 .episode:hover {
-    filter: brightness(.8);
+    filter: brightness(0.8);
 }
 .image {
     width: 400px;
@@ -18,7 +29,7 @@
 }
 .contentTitle {
     position: absolute;
-    top: 0px;
+    bottom: 0px;
     padding-block: 20px;
     font-family: "Lexend", sans-serif;
     font-weight: 500;
@@ -26,4 +37,11 @@
     width: 100%;
     text-indent: 20px;
     font-size: 1.2rem;
+}
+.newIcon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #fe5f55;
+    z-index: 1;
 }

@@ -4,7 +4,7 @@ import styles from "./AnimeInfo.module.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import EpisodesList from "./EpisodesList";
-import { useEffect, useState , useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 function AnimeInfo(){
     const location = useLocation();
     const { isReload, animeName, animeID, plugin, animeData} = location.state;

@@ -1,3 +1,11 @@
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .episodesList {
     display: flex;
     align-items: center;
@@ -9,6 +17,8 @@
     margin-left: 65px;
     mask-image: linear-gradient(90deg,rgba(255, 255, 255, 0.1),  white 10% 90%, rgba(255, 255, 255, 0.1));
     scroll-behavior: smooth;
+    opacity: 0;
+    animation: appear 1s 1s ease forwards;
 }
 .episodesList::-webkit-scrollbar {
     display: none;

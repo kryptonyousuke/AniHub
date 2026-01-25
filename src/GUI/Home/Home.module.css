@@ -43,6 +43,10 @@
     text-align: center;
     margin-block: 20px;
     font-size: 1.7rem;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
 }
 
 .popularContent {
@@ -78,8 +82,13 @@
 }
 .whatIsNew {
     margin-left: 40px;
-    margin-top: 30px;
+    margin-top: 20px;
     font-size: 1.7rem;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    opacity: 0;
+    animation: appear 1s 1s ease forwards;
 }
 .arrowBack, .arrowForward {
     height: 225px;
@@ -96,7 +105,11 @@
 }
 .arrowBack {
     transform: translate(10px, 20px);
+    opacity: 0;
+    animation: appear 1s 1s ease forwards;
 }
 .arrowForward {
     transform: translate(calc(100vw - 50px - 10px), 20px);
+    opacity: 0;
+    animation: appear 1s 1s ease forwards;
 }
