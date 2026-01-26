@@ -15,7 +15,7 @@ left: calc(50% - 50px);
 ![last](https://img.shields.io/github/last-commit/kryptonyousuke/Anihub?style=for-the-badge&color=red) ![GitHub contributors](https://img.shields.io/github/contributors/kryptonyousuke/AniHub?style=for-the-badge&labelColor=941fd3&color=white) ![GitHub Created At](https://img.shields.io/github/created-at/kryptonyousuke/AniHub?style=for-the-badge&labelColor=1fd37f&color=grey)
 
 
-## **Anihub** is a streaming app that allows you to watch/read your favorite anime and manga online. It is built with Electron and Vite, and is available for Windows, macOS, and Linux. 
+## **Anihub** is a open-source streaming app that allows you to watch/read your favorite anime and manga online by using plugins. 
 
 Anyone can make a plugin for this application and distribute it to the community. Plugins may optionally provide ads alongside content for monetization. This app is intended to be a way to unify the anime and manga streaming experience into a single platform, enhancing the user experience and providing a more seamless way to access their favorite content.
 
@@ -72,11 +72,14 @@ And run:
 This will make the correct build for your system.
 If you want to build for an specific system:
 ```bash
-    # Windows build: 
+    # Windows build (portable & installer): 
     pnpm run build --win
     
-    # Linux build (AppImage):
+    # Linux build (AppImage, deb, pacman, .tar.gz, .tar.xz, rpm, flatpak):
     pnpm run build --linux
+    
+    # Specific format:
+    pnpm run build --linux flatpak
 ```
 
 
