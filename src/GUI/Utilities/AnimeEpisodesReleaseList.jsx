@@ -1,27 +1,17 @@
+import { useEffect, useState } from "react";
 import styles from "./AnimeEpisodesReleaseList.module.css";
 import Episode from "./Episode";
-function AnimeEpisodesReleaseList(){
-    return <section className={styles.episodesList}>
-        <Episode title="Sakamoto Days: Episode 1" />
-        <Episode title="Sakamoto Days: Episode 2" />
-        <Episode title="Sakamoto Days: Episode 3" />
-        <Episode title="Sakamoto Days: Episode 4" />
-        <Episode title="Sakamoto Days: Episode 5" />
-        <Episode title="Sakamoto Days: Episode 6" />
-        <Episode title="Sakamoto Days: Episode 7" />
-        <Episode title="Sakamoto Days: Episode 8" />
-        <Episode title="Sakamoto Days: Episode 9" />
-        <Episode title="Sakamoto Days: Episode 10" />
-        <Episode title="Sakamoto Days: Episode 11" />
-        <Episode title="Sakamoto Days: Episode 12" />
-        <Episode title="Sakamoto Days: Episode 13" />
-        <Episode title="Sakamoto Days: Episode 14" />
-        <Episode title="Sakamoto Days: Episode 15" />
-        <Episode title="Sakamoto Days: Episode 16" />
-        <Episode title="Sakamoto Days: Episode 17" />
-        <Episode title="Sakamoto Days: Episode 18" />
-        <Episode title="Sakamoto Days: Episode 19" />
-        <Episode title="Sakamoto Days: Episode 20" />
-    </section>
+function AnimeEpisodesReleaseList() {
+  const [recentEpisodes, setRecentEpisodes] = useState({});
+  useEffect(() => {
+    async function loadData() {
+      let data = await (await fetch("https://api.jikan.moe/v4/watch/episodes")).json();
+      setRecentEpisodes(data);
+    }
+    loadData();
+  }, []);
+  return <section className={styles.episodesList}>
+    {recentEpisodes?.data?.map((episode, i) => <Episode imageSrc={episode.entry.images.webp.large_image_url} title={episode.entry.title + " " + episode.episodes[0].title} />)}
+  </section>
 }
 export default AnimeEpisodesReleaseList;
