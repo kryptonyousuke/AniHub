@@ -21,15 +21,18 @@
 }
 .contentTitle {
     position: absolute;
-    bottom: 0;
+    bottom: 5px;
     left: 0;
-    width: 100%;
+    width: calc(100% - 10px);
+    margin-inline: 5px;
+    padding: 5px;
+    border-radius: 10px;
     background-color: rgba(0,0,0,0.5);
-    height: 2.3rem;
     font-family: "Nunito", sans-serif;
     font-weight: 500;
     display: flex;
     text-indent: 20px;
     align-items: center;
-    font-size: 1.2rem;
+    /*border: 1px solid #999;*/
+    
 }

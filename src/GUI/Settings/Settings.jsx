@@ -34,19 +34,35 @@ function Settings({ setSettingsVisible }) {
           </div>
           
         
-          <section className={styles.pluginPage}>
-            <div className={styles.installArea}>
-              <p>Click the button below to install or update a plugin</p>
-              <button onClick={handleInstallPlugin} className={styles.installButton}><Icon icon="grommet-icons:install-option" className={styles.installIcon} width="24" height="24" />Install</button>
+        {selectedOption == 0 && <section className={styles.pluginPage}>
+          <div className={styles.installArea}>
+            <p>Click the button below to install or update a plugin</p>
+            <button onClick={handleInstallPlugin} className={styles.installButton}><Icon icon="grommet-icons:install-option" className={styles.installIcon} width="24" height="24" />Install</button>
+          </div>
+        </section>}
+        { selectedOption == 1 &&
+          <div className={styles.mainSettings}>
+            <div className={styles.modularOption}>
+              <p className={styles.optionName}>Enable NSFW</p>
+              <input type="checkbox"></input>
+              <span className={styles.indicator}></span>
             </div>
-            {/* <div className={styles.mainSettings}>
-              <div className={styles.modularOption}>
-                <p className={styles.optionName}>Enable NSFW</p>
-                <input type="checkbox"></input>
-                <span className={styles.indicator}></span>
-              </div>
-            </div>*/}
-          </section>
+          </div>
+        }
+        { selectedOption == 2 &&
+          <div className={styles.about}>
+            <div className={styles.cardGit}>
+              <Icon icon="fe:git" width="60" height="60" className={styles.gitIcon} />
+              <h1>Open-Source</h1>
+              <p>AniHub is 100% made by the open-source community.</p>
+            </div>
+            <div className={styles.cardGit}>
+              <Icon icon="fe:git" width="60" height="60" className={styles.gitIcon} />
+              <h1>Open-Source</h1>
+              <p>AniHub is 100% made by the open-source community.</p>
+            </div>
+          </div>
+        }
         </section>
     </div>
 }
