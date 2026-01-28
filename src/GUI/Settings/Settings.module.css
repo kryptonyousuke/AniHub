@@ -1,232 +1,268 @@
 .settings {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    background-color: rgba(0, 0, 0, 0.515);
-    backdrop-filter: blur(3px);
-    top: 0;
-    z-index: 11;
-    animation: appear 0.25s ease-in-out;
-    font-family: "Lexend";
-}
-@keyframes appear {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-.settingsSection {
-    background-color: black;
-    width: 50vw;
-    min-width: 600px;
-    height: 90svh;
-    border: 1px solid #ddd;
-    padding-top: 20px;
-    border-radius: 30px;
-    position: fixed;
-    top: calc(10svh - 30px);
-    left: 25vw;
-}
-@media screen and (width <= 1200px) {
-    .settingsSection {
-        left: calc(50vw - 300px);
-    }
-}
-.settingsWindowBar {
-    position: relative;
-    height: fit-content;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-.settingsWindowBar > span {
-    border-radius: 9px;
-    cursor: pointer;
-    margin-top: 20px;
-    border: 3px solid white;
-    transition: all .2s ease-in-out;
-}
-.settingsWindowBar > span > h2 {
-    padding: 4px 15px;
-    font-weight: bold;
-    font-size: 1.5rem;
-}
-.closeIcon {
-    width: 37px;
-    height: 37px;
-    cursor: pointer;
-    position: absolute;
-    right: 30px;
-    top: 20px;
-}
-.installArea {
-    width: 60%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    flex-direction: column;
-    margin-top: 30px;
-    gap: 20px;
-    border-radius: 20px;
-    background-color: #101010;
-    border: 2px solid white;
-    margin-inline: 20%;
-    padding: 30px;
-    text-align: center;
-}
-.installButton {
-    background-color: whitesmoke;
-    width: fit-content;
-    font-weight: bold;
-    color: black;
-    font-size: 1.1rem;
-    font-family: Nunito, sans-serif;
-    padding: 10px 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    border: 3px solid transparent;
-    transition: all 0.16s ease-in;
-    outline: none;
-    margin: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-.installIcon {
-    margin: -5px;
-}
-.installButton:hover {
-    filter: brightness(0.7);
-}
-.installButton:active {
-    transform: scale(.85);
-}
-.installButton:focus {
-    border-color: rgb(150, 150, 150);
-}
-.mainSettings {
-    width: 90%;
-    margin-top: 40px;
-    margin-inline: 5%;
-}
-.modularOption {
-    width: 100%;
-    height: 90px;
-    background-color: #101010;
-    border-radius: 30px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 40px;
-    position: relative;
-}
-.modularOption > .optionName {
-    font-size: 1.1rem;
-}
-.modularOption > input[type="checkbox"] {
-    outline: none;
-    background-color: #202020;
-    width: 60px;
-    height: 36px;
-    border-radius: 20px;
-    cursor: pointer;
-    appearance: none;
-    position: absolute;
-    right: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.modularOption > input[type="checkbox"]::before {
-    content: "";
-    min-width: 26px;
-    min-height: 26px;
-    background-color: #dddddd;
-    border-radius: 20px;
-    transform: translateX(-10px);
-    transition: all .2s ease-in-out;
-    font-family: "Lexend";
-}
-.modularOption > input[type="checkbox"]:checked::before {
-    transform: translateX(10px);
-}
-.modularOption > input[type="checkbox"] ~ .indicator {
-    color: #dadada;
-    padding: 4px 7px;
-    border-radius: 5px;
-    position: absolute;
-    right: 100px;
-    background-color: #5a0000;
-    transition: all .125s ease-in-out;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.515);
+  backdrop-filter: blur(3px);
+  top: 0;
+  z-index: 11;
+  animation: appear 0.25s ease-in-out;
+  font-family: "Lexend";
 }
 
-.modularOption > input[type="checkbox"]:checked ~ .indicator {
-    background-color: #005a00;
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
-.modularOption > input[type="checkbox"] ~ .indicator:after {
-    content: "disabled";
+
+.settingsSection {
+  background-color: black;
+  width: 50vw;
+  min-width: 600px;
+  height: 90svh;
+  border: 1px solid #ddd;
+  padding-top: 20px;
+  border-radius: 30px;
+  position: fixed;
+  top: calc(10svh - 30px);
+  left: 25vw;
 }
-.modularOption > input[type="checkbox"]:checked ~ .indicator:after {
-    content: "enabled";
+
+@media screen and (width <=1200px) {
+  .settingsSection {
+    left: calc(50vw - 300px);
+  }
 }
-.settingsWindowBar > span > h2 {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+
+.settingsWindowBar {
+  position: relative;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
+
+.settingsWindowBar>span {
+  border-radius: 9px;
+  cursor: pointer;
+  margin-top: 20px;
+  border: 3px solid white;
+  transition: all .2s ease-in-out;
+}
+
+.settingsWindowBar>span>h2 {
+  padding: 4px 15px;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.closeIcon {
+  width: 37px;
+  height: 37px;
+  cursor: pointer;
+  position: absolute;
+  right: 30px;
+  top: 20px;
+}
+
+.installArea {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin-top: 30px;
+  gap: 20px;
+  border-radius: 20px;
+  background-color: #101010;
+  border: 2px solid white;
+  margin-inline: 20%;
+  padding: 30px;
+  text-align: center;
+}
+
+.installButton {
+  background-color: whitesmoke;
+  width: fit-content;
+  font-weight: bold;
+  color: black;
+  font-size: 1.1rem;
+  font-family: Nunito, sans-serif;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: all 0.16s ease-in;
+  outline: none;
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.installIcon {
+  margin: -5px;
+}
+
+.installButton:hover {
+  filter: brightness(0.7);
+}
+
+.installButton:active {
+  transform: scale(.85);
+}
+
+.installButton:focus {
+  border-color: rgb(150, 150, 150);
+}
+
+.mainSettings {
+  width: 90%;
+  margin-top: 40px;
+  margin-inline: 5%;
+}
+
+.modularOption {
+  width: 100%;
+  height: 90px;
+  background-color: #101010;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 40px;
+  position: relative;
+}
+
+.modularOption>.optionName {
+  font-size: 1.1rem;
+}
+
+.modularOption>input[type="checkbox"] {
+  outline: none;
+  background-color: #202020;
+  width: 60px;
+  height: 36px;
+  border-radius: 20px;
+  cursor: pointer;
+  appearance: none;
+  position: absolute;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modularOption>input[type="checkbox"]::before {
+  content: "";
+  min-width: 26px;
+  min-height: 26px;
+  background-color: #dddddd;
+  border-radius: 20px;
+  transform: translateX(-10px);
+  transition: all .2s ease-in-out;
+  font-family: "Lexend";
+}
+
+.modularOption>input[type="checkbox"]:checked::before {
+  transform: translateX(10px);
+}
+
+.modularOption>input[type="checkbox"]~.indicator {
+  color: #dadada;
+  padding: 4px 7px;
+  border-radius: 5px;
+  position: absolute;
+  right: 100px;
+  background-color: #5a0000;
+  transition: all .125s ease-in-out;
+}
+
+.modularOption>input[type="checkbox"]:checked~.indicator {
+  background-color: #005a00;
+}
+
+.modularOption>input[type="checkbox"]~.indicator:after {
+  content: "disabled";
+}
+
+.modularOption>input[type="checkbox"]:checked~.indicator:after {
+  content: "enabled";
+}
+
+.settingsWindowBar>span>h2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
 .about {
-    width: 100%;
-    margin-top: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
+  width: 100%;
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
 }
 
 .cardGit {
-    background-color: rgb(20, 20, 20);
-    width: 30%;
-    min-width: 200px;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    gap: 15px;
-    cursor: pointer;
-    transition: all .3s ease-in-out;
-    border: 1px solid transparent;
+  background-color: rgb(20, 20, 20);
+  width: 30%;
+  min-width: 210px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 15px;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+  border: 1px solid transparent;
 }
+
 .cardGit:hover {
-    border: 1px solid white;
-    width: calc(30% + 50px);
+  border: 1px solid white;
+  width: calc(30% + 50px);
 }
-.cardGit:hover > h1 {
-    color: #FE5F55;
+
+.cardGit:hover>h1 {
+  color: #FE5F55;
 }
-.cardGit > h1 {
-    font-size: 1.5rem;
-    text-align: center;
-    text-indent: 0;
-    padding: 0; 
+
+.cardGit>h1 {
+  font-size: 1.5rem;
+  font-size: clamp(16px, 2vw, 1.5rem);
+  white-space: nowrap;
+  text-align: center;
+  text-indent: 0;
+  padding: 0;
 }
-.cardGit > p {
-    font-size: 1rem;
-    text-align: center;
-    color: #999;
+
+.cardGit>p {
+  font-size: clamp(14px, 1vw, 1rem);
+  text-align: center;
+  color: #999;
+  width: 200px;
 }
+
 .gitIcon {
-    background-color: rgb(40, 40, 40);
-    padding: 5px;
-    border-radius: 15px;
+  background-color: rgb(40, 40, 40);
+  padding: 5px;
+  border-radius: 15px;
+  transition: all .15s ease-in-out;
 }
-.cardGit:hover > .gitIcon {
-    color: #FE5F55;
+
+.cardGit:hover>.gitIcon {
+  color: #FE5F55;
+  transform: scale(1.05);
 }
