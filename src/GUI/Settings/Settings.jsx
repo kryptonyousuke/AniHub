@@ -1,9 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Settings.module.css'
 import { CgClose } from "react-icons/cg";
 import { Icon } from '@iconify/react';
 function Settings({ setSettingsVisible }) {
   const [selectedOption, setSelectedOption] = useState(1);
+  const [plugins, setPlugins] = useState([]);
+  useEffect(() => {
+    window.electronAPI.getAllPlugins().then((pluginList) => {
+      setPlugins(pluginList);
+    }).catch((err) => {
+            console.error("Failed to load plugins:", err);
+      });;
+  }, []);
     const handleInstallPlugin = async () => {
         const result = await window.electronAPI.installPlugin();
         if (result.success) {
@@ -38,6 +46,13 @@ function Settings({ setSettingsVisible }) {
           <div className={styles.installArea}>
             <p>Click the button below to install or update a plugin</p>
             <button onClick={handleInstallPlugin} className={styles.installButton}><Icon icon="grommet-icons:install-option" className={styles.installIcon} width="24" height="24" />Install</button>
+          </div>
+          <div className={styles.mainSettings}>
+            {
+              plugins.map((pluginName) => <div className={styles.modularOption}>
+              <p className={styles.optionName}>{pluginName}</p>
+              </div>)
+            }
           </div>
         </section>}
         { selectedOption == 1 &&

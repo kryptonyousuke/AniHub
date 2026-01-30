@@ -6,11 +6,11 @@ const os = require("os");
 
 // Electron flags 
 app.commandLine.appendSwitch('js-flags', '--max-old-space-size=4096 --optimize-for-size');
-app.commandLine.appendSwitch('disable-frame-rate-limit');
+// app.commandLine.appendSwitch('disable-frame-rate-limit');
 app.commandLine.appendSwitch('enable-gpu-rasterization');
 // app.commandLine.appendSwitch('enable-begin-frame-scheduling');
 app.commandLine.appendSwitch('enable-zero-copy');
-app.commandLine.appendSwitch('force-gpu-mem-available-mb', '2048');
+// app.commandLine.appendSwitch('force-gpu-mem-available-mb', '2048');
 
 /*
 * 
