@@ -19,6 +19,8 @@ left: calc(50% - 50px);
 
 Anyone can make a plugin for this application and distribute it to the community. Plugins may optionally provide ads alongside content for monetization. This app is intended to be a way to unify the anime and manga streaming experience into a single platform, enhancing the user experience and providing a more seamless way to access their favorite content.
 
+![anihub screenshot](screenshots/2026-01-30-183439_hyprshot.png)
+
 ## Plugin System (WIP)
 
 AniHub does not provide any content by default.
