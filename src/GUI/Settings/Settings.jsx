@@ -15,7 +15,12 @@ function Settings({ setSettingsVisible }) {
     const handleInstallPlugin = async () => {
         const result = await window.electronAPI.installPlugin();
         if (result.success) {
-            alert(`Plugin was installed in: ${result.path}`);
+          alert(`Plugin was installed in: ${result.path}`);
+          window.electronAPI.getAllPlugins().then((pluginList) => {
+            setPlugins(pluginList);
+          }).catch((err) => {
+                  console.error("Failed to load plugins:", err);
+            });;
         } else {
             alert(`Error: ${result.message}`);
         }
@@ -42,7 +47,7 @@ function Settings({ setSettingsVisible }) {
           </div>
           
         
-        {selectedOption == 0 && <section className={styles.pluginPage}>
+        {selectedOption === 0 && <section className={styles.pluginPage}>
           <div className={styles.installArea}>
             <p>Click the button below to install or update a plugin</p>
             <button onClick={handleInstallPlugin} className={styles.installButton}><Icon icon="grommet-icons:install-option" className={styles.installIcon} width="24" height="24" />Install</button>
@@ -50,21 +55,34 @@ function Settings({ setSettingsVisible }) {
           <div className={styles.mainSettings}>
             {
               plugins.map((pluginName) => <div className={styles.modularOption}>
-              <p className={styles.optionName}>{pluginName}</p>
+                <p className={styles.optionName}>{pluginName}</p>
+                <Icon icon="mynaui:trash-solid" width="40" height="40" className={styles.trashIcon} onClick={async () => {
+                  let result = await window.electronAPI.deletePlugin(pluginName);
+                  if (result.success) {
+                    alert("Plugin successfully uninstalled.");
+                    window.electronAPI.getAllPlugins().then((pluginList) => {
+                      setPlugins(pluginList);
+                    }).catch((err) => {
+                            console.error("Failed to load plugins:", err);
+                      });;
+                  } else {
+                    alert(JSON.stringify(result));
+                  }
+                }} />
               </div>)
             }
           </div>
         </section>}
-        { selectedOption == 1 &&
+        { selectedOption === 1 &&
           <div className={styles.mainSettings}>
-            <div className={styles.modularOption}>
+            {/* <div className={styles.modularOption}>
               <p className={styles.optionName}>Enable NSFW</p>
               <input type="checkbox"></input>
               <span className={styles.indicator}></span>
-            </div>
+            </div>*/}
           </div>
         }
-        { selectedOption == 2 &&
+        { selectedOption === 2 &&
           <div className={styles.about}>
             <div className={styles.cardGit}>
               <Icon icon="fe:git" width="60" height="60" className={styles.gitIcon} />

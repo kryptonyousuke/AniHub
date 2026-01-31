@@ -7,4 +7,5 @@ contextBridge.exposeInMainWorld("electronAPI", {
   getAllPlugins: () => ipcRenderer.invoke("get-all-plugins"),
   runPlugins: (data) => ipcRenderer.invoke("run-plugins", data),
   runSpecificPlugin: (pluginName, data) => ipcRenderer.invoke("run-specific-plugin", pluginName, data),
+  deletePlugin: (pluginName) => ipcRenderer.invoke("delete-plugin", pluginName),
 });

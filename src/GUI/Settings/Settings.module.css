@@ -266,3 +266,20 @@
   color: #FE5F55;
   transform: scale(1.05);
 }
+.trashIcon {
+    position: absolute;
+    right: 30px;
+    top: 25px;
+    color: #bb0000;
+    background-color: #440000;
+    cursor: pointer;
+    border-radius: 13px;
+    padding: 5px;
+    transition: all .2s ease-in-out;
+}
+.trashIcon:hover {
+    transform: scale(1.05);
+}
+.trashIcon:active {
+    transform: scale(.95);
+}

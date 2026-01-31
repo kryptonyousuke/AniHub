@@ -8,6 +8,7 @@ const os = require("os");
 app.commandLine.appendSwitch('js-flags', '--max-old-space-size=4096 --optimize-for-size');
 // app.commandLine.appendSwitch('disable-frame-rate-limit');
 app.commandLine.appendSwitch('enable-gpu-rasterization');
+app.commandLine.appendSwitch('enable-accelerated-2d-canvas');
 // app.commandLine.appendSwitch('enable-begin-frame-scheduling');
 app.commandLine.appendSwitch('enable-zero-copy');
 // app.commandLine.appendSwitch('force-gpu-mem-available-mb', '2048');
@@ -214,6 +215,26 @@ ipcMain.handle("get-all-plugins", async (event) => {
 });
 
 
+/*
+*     Delete a plugin by it's name.
+*/
+async function deletePlugin(pluginName) {
+  console.log(pluginName)
+  if (pluginName.includes("..")) {
+    return { success: false, error: null };
+  }
+  let filePath = path.join(app.getPath("userData"), "plugins", pluginName);
+  console.log(filePath)
+  try {
+    fs.rm(filePath, () => { });
+    return { success: true };
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
+}
+ipcMain.handle("delete-plugin", async (event, pluginName) => {
+  return await deletePlugin(pluginName);
+});
 
 
 /*

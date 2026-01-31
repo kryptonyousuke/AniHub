@@ -6,6 +6,7 @@ const fs = require("fs");
 require("os");
 app.commandLine.appendSwitch("js-flags", "--max-old-space-size=4096 --optimize-for-size");
 app.commandLine.appendSwitch("enable-gpu-rasterization");
+app.commandLine.appendSwitch("enable-accelerated-2d-canvas");
 app.commandLine.appendSwitch("enable-zero-copy");
 ipcMain.on("window-action", (event, action) => {
   const window = BrowserWindow.getFocusedWindow();
@@ -136,6 +137,24 @@ async function getAllPlugins() {
 }
 ipcMain.handle("get-all-plugins", async (event) => {
   return await getAllPlugins();
+});
+async function deletePlugin(pluginName) {
+  console.log(pluginName);
+  if (pluginName.includes("..")) {
+    return { success: false, error: null };
+  }
+  let filePath = path.join(app.getPath("userData"), "plugins", pluginName);
+  console.log(filePath);
+  try {
+    fs.rm(filePath, () => {
+    });
+    return { success: true };
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
+}
+ipcMain.handle("delete-plugin", async (event, pluginName) => {
+  return await deletePlugin(pluginName);
 });
 function createWindow() {
   const win = new BrowserWindow({
