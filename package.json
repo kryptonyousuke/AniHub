@@ -74,7 +74,7 @@
     "@vitejs/plugin-react": "^5.1.2",
     "ansi-regex": "^6.2.2",
     "concurrently": "^9.2.1",
-    "electron": "^40.0.0",
+    "electron": "^40.1.0",
     "electron-builder": "^26.4.0",
     "electron-icon-builder": "^2.0.1",
     "gauge": "^5.0.2",
@@ -83,6 +83,7 @@
   },
   "dependencies": {
     "@iconify/react": "^6.0.2",
+    "better-sqlite3": "^12.6.2",
     "dashjs": "^5.1.1",
     "hls.js": "^1.6.15",
     "react": "^19.2.4",
