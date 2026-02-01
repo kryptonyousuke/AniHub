@@ -89,10 +89,10 @@ function Settings({ setSettingsVisible }) {
               <h1>Open-Source</h1>
               <p>AniHub is 100% made by the open-source community.</p>
             </div>
-            <div className={styles.cardGit}>
-              <Icon icon="fe:git" width="60" height="60" className={styles.gitIcon} />
-              <h1>Open-Source</h1>
-              <p>AniHub is 100% made by the open-source community.</p>
+            <div className={styles.cardElectron}>
+              <Icon icon="eos-icons:atom-electron" width="60" height="60" className={styles.electronIcon} />
+              <h1>Electron based</h1>
+              <p>AniHub uses electron to make a beautiful GUI and improve its development process :D</p>
             </div>
           </div>
         }
