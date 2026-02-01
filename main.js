@@ -3,9 +3,21 @@ const { spawn } = require("child_process");
 const path = require("path");
 const fs = require("fs");
 const os = require("os");
-const sqlite = require("better-sqlite3")
+const Database = require("better-sqlite3");
 
-// Electron flags 
+
+const dbPath = path.join(app.getPath("userData"), "anihub_database.db");
+const db = new Database(dbPath, {verbose: console.log});
+
+
+/*************************************************
+*                                                *
+*                 Electron Flags                 *
+*                                                *
+*************************************************/
+
+
+
 app.commandLine.appendSwitch('js-flags', '--max-old-space-size=4096 --optimize-for-size');
 // app.commandLine.appendSwitch('disable-frame-rate-limit');
 app.commandLine.appendSwitch('enable-gpu-rasterization');
@@ -14,43 +26,7 @@ app.commandLine.appendSwitch('enable-accelerated-2d-canvas');
 app.commandLine.appendSwitch('enable-zero-copy');
 // app.commandLine.appendSwitch('force-gpu-mem-available-mb', '2048');
 
-/*
-* 
-*    Handle with windows events
-* 
-*/
 
-ipcMain.on("window-action", (event, action) => {
-  const window = BrowserWindow.getFocusedWindow();
-  if (!window) return;
-  switch (action) {
-    case "minimize":
-      window.minimize();
-      break;
-    case "maximize":
-        if (window.isFullScreen()) {
-          window.setFullScreen(false);
-          window.unmaximize();
-        } else if (window.isMaximized()) {
-          window.unmaximize();
-        } else {
-          window.maximize();
-        }
-        break;
-    case "toggle-fullscreen":
-        window.setFullScreen(!window.isFullScreen());
-        break;
-    case "close":
-      window.close();
-      break;
-  }
-});
-
-
-ipcMain.handle("window-is-maximized", () => {
-  const window = BrowserWindow.getFocusedWindow();
-  return window ? window.isMaximized() : false;
-});
 
 
 
@@ -64,8 +40,11 @@ ipcMain.handle("window-is-maximized", () => {
 *************************************************/
 
 
-
-
+/*
+* 
+*     Install a plugin.
+* 
+*/
 
 
 ipcMain.handle("install-plugin", async () => {
@@ -187,7 +166,7 @@ ipcMain.handle("run-specific-plugin", async (event, pluginName, inputData) => {
 
 /* 
 * 
-*  Send a single command to all plugins.
+*     Send a single command to all plugins.
 * 
 */
 
@@ -234,7 +213,9 @@ ipcMain.handle("get-all-plugins", async (event) => {
 
 
 /*
+*
 *     Delete a plugin by it's name.
+* 
 */
 
 async function deletePlugin(pluginName) {
@@ -267,6 +248,40 @@ ipcMain.handle("delete-plugin", async (event, pluginName) => {
 *************************************************/
 
 
+/*
+* 
+*     Creates a entire database if it does not exist.
+* 
+*/
+function createDatabase() {
+  db.exec(`
+      CREATE TABLE IF NOT EXISTS favorites_manga (
+        command_id TEXT UNIQUE NOT NULL,
+        name TEXT NOT NULL,
+        keyvisual_url TEXT NOT NULL,
+        nsfw BOOLEAN NOT NULL
+      );
+      CREATE TABLE IF NOT EXISTS favorites_anime (
+        command_id TEXT UNIQUE NOT NULL,
+        name TEXT NOT NULL,
+        keyvisual_url TEXT NOT NULL,
+        nsfw BOOLEAN NOT NULL
+      );
+      CREATE TABLE IF NOT EXISTS anime_history (
+        command_id TEXT UNIQUE NOT NULL,
+        name TEXT NOT NULL,
+        keyvisual_url TEXT NOT NULL,
+        nsfw BOOLEAN NOT NULL
+      );
+      CREATE TABLE IF NOT EXISTS manga_history (
+        command_id TEXT UNIQUE NOT NULL,
+        name TEXT NOT NULL,
+        keyvisual_url TEXT NOT NULL,
+        nsfw BOOLEAN NOT NULL
+      );
+  `);
+  
+}
 
 
 
@@ -283,8 +298,11 @@ ipcMain.handle("delete-plugin", async (event, pluginName) => {
 
 
 
-
-
+/*************************************************
+*                                                *
+*               Window Management                *
+*                                                *
+*************************************************/
 
 
 
@@ -350,3 +368,44 @@ app.whenReady().then(() => {
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
 });
+
+
+
+/*
+* 
+*    Handle with windows events
+* 
+*/
+
+ipcMain.on("window-action", (event, action) => {
+  const window = BrowserWindow.getFocusedWindow();
+  if (!window) return;
+  switch (action) {
+    case "minimize":
+      window.minimize();
+      break;
+    case "maximize":
+        if (window.isFullScreen()) {
+          window.setFullScreen(false);
+          window.unmaximize();
+        } else if (window.isMaximized()) {
+          window.unmaximize();
+        } else {
+          window.maximize();
+        }
+        break;
+    case "toggle-fullscreen":
+        window.setFullScreen(!window.isFullScreen());
+        break;
+    case "close":
+      window.close();
+      break;
+  }
+});
+
+
+ipcMain.handle("window-is-maximized", () => {
+  const window = BrowserWindow.getFocusedWindow();
+  return window ? window.isMaximized() : false;
+});
+app.on("quit", () => db.close());

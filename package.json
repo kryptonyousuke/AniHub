@@ -71,11 +71,12 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "@electron/rebuild": "^4.0.3",
     "@vitejs/plugin-react": "^5.1.2",
     "ansi-regex": "^6.2.2",
     "concurrently": "^9.2.1",
     "electron": "^40.1.0",
-    "electron-builder": "^26.4.0",
+    "electron-builder": "^26.7.0",
     "electron-icon-builder": "^2.0.1",
     "gauge": "^5.0.2",
     "vite": "^7.3.1",

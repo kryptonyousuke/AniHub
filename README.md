@@ -68,6 +68,7 @@ Clone this repository:
 And run:
 ```bash
     pnpm install # install the projects dependencies
+    pnpm exec electron-rebuild -f -w better-sqlite3 # electron does use its own node version, we need to rebuild native node addons.
     pnpm run build # builds the project
 ```
 
