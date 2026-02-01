@@ -75,11 +75,11 @@ function Settings({ setSettingsVisible }) {
         </section>}
         { selectedOption === 1 &&
           <div className={styles.mainSettings}>
-            {/* <div className={styles.modularOption}>
+            <div className={styles.modularOption}>
               <p className={styles.optionName}>Enable NSFW</p>
               <input type="checkbox"></input>
               <span className={styles.indicator}></span>
-            </div>*/}
+            </div>
           </div>
         }
         { selectedOption === 2 &&

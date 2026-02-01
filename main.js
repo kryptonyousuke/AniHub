@@ -3,6 +3,7 @@ const { spawn } = require("child_process");
 const path = require("path");
 const fs = require("fs");
 const os = require("os");
+const sqlite = require("better-sqlite3")
 
 // Electron flags 
 app.commandLine.appendSwitch('js-flags', '--max-old-space-size=4096 --optimize-for-size');
@@ -51,6 +52,22 @@ ipcMain.handle("window-is-maximized", () => {
   return window ? window.isMaximized() : false;
 });
 
+
+
+
+
+
+/*************************************************
+*                                                *
+*               Plugin Management                *
+*                                                *
+*************************************************/
+
+
+
+
+
+
 ipcMain.handle("install-plugin", async () => {
   const result = await dialog.showOpenDialog({
     properties: ["openFile"],
@@ -82,7 +99,7 @@ ipcMain.handle("install-plugin", async () => {
 
 /*
 *
-* Run a plugin by it's absolute path.
+*     Run a plugin by it's absolute path.
 * 
 */
 
@@ -125,10 +142,9 @@ function runPlugin(pluginPath, inputData) {
 
 /*
 * 
-* Send a command to a plugin selected by it's name.
+*     Send a command to a plugin selected by it's name.
 * 
 */
-
 
 function runSpecificPlugin(pluginName, inputData) {
   return new Promise((resolve, reject) => {
@@ -168,11 +184,13 @@ ipcMain.handle("run-specific-plugin", async (event, pluginName, inputData) => {
 })
 
 
+
 /* 
 * 
 *  Send a single command to all plugins.
 * 
 */
+
 async function runAllPlugins(inputData) {
   const pluginDir = path.join(app.getPath("userData"), "plugins");
   if (!fs.existsSync(pluginDir)) return [];
@@ -218,6 +236,7 @@ ipcMain.handle("get-all-plugins", async (event) => {
 /*
 *     Delete a plugin by it's name.
 */
+
 async function deletePlugin(pluginName) {
   console.log(pluginName)
   if (pluginName.includes("..")) {
@@ -237,12 +256,43 @@ ipcMain.handle("delete-plugin", async (event, pluginName) => {
 });
 
 
+
+
+
+
+/*************************************************
+*                                                *
+*     Database Management & stored user data.    *
+*                                                *
+*************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 * 
 *       Makes the window.
 * 
 */
-
 
 function createWindow() {
   const win = new BrowserWindow({
