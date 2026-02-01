@@ -107,12 +107,40 @@ AniHub is composed of three main layers:
 - **Plugins (External)**  
   Providers written in Python (currently) that fetch metadata and streaming sources.
 
+## Planned features
+
+### Home features:
+
+- [ ] Random banner
+
+### Manga features:
+- [ ] Favorite;
+- [ ] Pages counter;
+- [ ] Optional season/chapter division (delegated by the plugin);
+- [ ] Number of favorites/likes.
+
+
 ## Roadmap (Alpha)
 
-- [x] HLS / DASH playback
-- [x] Manga reader (basic)
-- [x] Python plugin execution
-- [ ] Plugin API documentation
-- [ ] JS/TS plugins
-- [ ] Better error handling
-- [ ] UI polish
+- [x] HLS / DASH playback;
+- [x] Manga reader (basic);
+- [x] Python plugin execution;
+- [ ] JS/TS plugins;
+- [ ] Better error handling;
+- [ ] UI polish;
+- [ ] navegation history;
+- [ ] internal database;
+- [x] Basic plugin manager.
+
+
+## Roadmap (Beta)
+
+- [ ] All needed icons were added;
+- [ ] All planned features were implemented;
+- [ ] Entire internal plugin management (plugin import + communication) is complete;
+- [ ] Design is responsive enough;
+- [ ] Plugin API documentation.
+
+## Roadmap (Release Candidate)
+
+- [ ] 100% lazy loading based.
