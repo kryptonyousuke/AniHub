@@ -18,22 +18,21 @@ html, body {
     font-family: "Nunito", sans-serif;
 }
 body::-webkit-scrollbar {
-  width: 0px;       /* Largura da barra vertical */
-  height: 12px;      /* Altura da barra horizontal */
+  width: 0px;
+  height: 12px;
 }
 
-/* Fundo da barra */
+
 body::-webkit-scrollbar-track {
   background: transparent;
   margin-top: 35px;
 }
 
-/* Cor do “polegar” (a parte que se move) */
 body::-webkit-scrollbar-thumb {
   background: #022557;
 }
 
-/* Cor do polegar quando hover */
+
 body::-webkit-scrollbar-thumb:hover {
   background: #180b0b;
 }

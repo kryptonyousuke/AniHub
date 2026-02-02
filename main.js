@@ -1,13 +1,17 @@
-const { app, globalShortcut, BrowserWindow, ipcMain, dialog } = require("electron");
-const { spawn } = require("child_process");
-const path = require("path");
-const fs = require("fs");
-const os = require("os");
-const Database = require("better-sqlite3");
+import { app, globalShortcut, BrowserWindow, ipcMain, dialog } from "electron";
+import { spawn } from "child_process";
+import path from "path";
+import fs from "fs";
+import os from "os";
+import { AnihubDatabase } from "./src/internal/databaseHandler.js";
+import { fileURLToPath } from "url"
+import { dirname } from "path"
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 
 const dbPath = path.join(app.getPath("userData"), "anihub_database.db");
-const db = new Database(dbPath, {verbose: console.log});
 
 
 /*************************************************
@@ -248,40 +252,7 @@ ipcMain.handle("delete-plugin", async (event, pluginName) => {
 *************************************************/
 
 
-/*
-* 
-*     Creates a entire database if it does not exist.
-* 
-*/
-function createDatabase() {
-  db.exec(`
-      CREATE TABLE IF NOT EXISTS favorites_manga (
-        command_id TEXT UNIQUE NOT NULL,
-        name TEXT NOT NULL,
-        keyvisual_url TEXT NOT NULL,
-        nsfw BOOLEAN NOT NULL
-      );
-      CREATE TABLE IF NOT EXISTS favorites_anime (
-        command_id TEXT UNIQUE NOT NULL,
-        name TEXT NOT NULL,
-        keyvisual_url TEXT NOT NULL,
-        nsfw BOOLEAN NOT NULL
-      );
-      CREATE TABLE IF NOT EXISTS anime_history (
-        command_id TEXT UNIQUE NOT NULL,
-        name TEXT NOT NULL,
-        keyvisual_url TEXT NOT NULL,
-        nsfw BOOLEAN NOT NULL
-      );
-      CREATE TABLE IF NOT EXISTS manga_history (
-        command_id TEXT UNIQUE NOT NULL,
-        name TEXT NOT NULL,
-        keyvisual_url TEXT NOT NULL,
-        nsfw BOOLEAN NOT NULL
-      );
-  `);
-  
-}
+
 
 
 
@@ -408,4 +379,3 @@ ipcMain.handle("window-is-maximized", () => {
   const window = BrowserWindow.getFocusedWindow();
   return window ? window.isMaximized() : false;
 });
-app.on("quit", () => db.close());

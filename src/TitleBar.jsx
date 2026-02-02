@@ -8,7 +8,7 @@ function TitleBar() {
   const handleAction = (action) => {
     window.electronAPI.windowAction(action);
   };
-  const [windowState, setWindowState] = useState("maximized"); // restored | maximized | fullscreen
+  const [windowState, setWindowState] = useState("maximized"); // restored || maximized || fullscreen
   useEffect(() => {
     window.electronAPI.onWindowStateChange((state) => {
       setWindowState(state);

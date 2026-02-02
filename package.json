@@ -69,7 +69,7 @@
     "manga"
   ],
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "devDependencies": {
     "@electron/rebuild": "^4.0.3",
     "@vitejs/plugin-react": "^5.1.2",
