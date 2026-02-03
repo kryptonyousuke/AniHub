@@ -3,6 +3,8 @@ import react from "@vitejs/plugin-react";
 import electron from "vite-plugin-electron/simple";
 
 export default defineConfig({
+  base: "./",
+  
   plugins: [
     react(),
     electron({
@@ -20,6 +22,5 @@ export default defineConfig({
   build: {
     outDir: "../dist/renderer", // renderer
     emptyOutDir: true,
-    base: "./",
   },
 });

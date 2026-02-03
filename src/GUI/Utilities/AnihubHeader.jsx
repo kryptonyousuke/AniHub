@@ -1,7 +1,6 @@
 import styles from "./AnihubHeader.module.css"
 import SearchResults from "./SearchResults";
 import { FaBook } from "react-icons/fa6";
-import { RiSettingsFill } from "react-icons/ri";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Settings from "../Settings/Settings";

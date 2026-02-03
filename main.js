@@ -2,7 +2,6 @@ import { app, globalShortcut, BrowserWindow, ipcMain, dialog } from "electron";
 import { spawn } from "child_process";
 import path from "path";
 import fs from "fs";
-import os from "os";
 import { AnihubDatabase } from "./src/internal/databaseHandler.js";
 import { fileURLToPath } from "url"
 import { dirname } from "path"
@@ -12,7 +11,7 @@ const __dirname = dirname(__filename)
 
 
 const dbPath = path.join(app.getPath("userData"), "anihub_database.db");
-
+const anihubDB = new AnihubDatabase(dbPath);
 
 /*************************************************
 *                                                *
@@ -298,6 +297,7 @@ function createWindow() {
     },
     show: true
   });
+  
   win.maximize()
   win.on("maximize", () => {
     win.webContents.send("window-state-changed", "maximized");
@@ -379,3 +379,4 @@ ipcMain.handle("window-is-maximized", () => {
   const window = BrowserWindow.getFocusedWindow();
   return window ? window.isMaximized() : false;
 });
+ipcMain.on("close", () => anihubDB.close());
