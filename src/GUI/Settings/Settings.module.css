@@ -1,13 +1,16 @@
 .settings {
-  width: 100%;
-  height: 100%;
+  width: 100svw;
+  height: calc(100svh - 30px);
   position: fixed;
   background-color: rgba(0, 0, 0, 0.515);
   backdrop-filter: blur(3px);
-  top: 0;
+  top: 30px;
   z-index: 11;
   animation: appear 0.25s ease-in-out;
   font-family: "Lexend";
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @keyframes appear {
@@ -22,15 +25,13 @@
 
 .settingsSection {
   background-color: black;
-  width: 50vw;
+  width: 70vw;
   min-width: 600px;
+  max-width: 800px;
   height: 90svh;
   border: 1px solid #ddd;
   padding-top: 20px;
   border-radius: 30px;
-  position: fixed;
-  top: calc(10svh - 30px);
-  left: 25vw;
 }
 
 @media screen and (width <=1200px) {
