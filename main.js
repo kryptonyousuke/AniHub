@@ -9,10 +9,6 @@ import { dirname } from "path"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-
-const dbPath = path.join(app.getPath("userData"), "anihub_database.db");
-const anihubDB = new AnihubDatabase(dbPath);
-
 /*************************************************
 *                                                *
 *                 Electron Flags                 *
@@ -184,15 +180,22 @@ ipcMain.handle("delete-plugin", async (event, pluginName) => {
 *************************************************/
 
 
+const dbPath = path.join(app.getPath("userData"), "anihub_database.db");
+const anihubDB = new AnihubDatabase(dbPath);
 
+/* Exposing well-controlled internal database handles */
 
+ipcMain.handle("store-favorite", (event, command_id, name, keyvisual_url, nsfw, type) => anihubDB.storeFavorite(command_id, name, keyvisual_url, nsfw, type));
 
+ipcMain.handle("store-history", (event, command_id, name, keyvisual_url, nsfw, type, timestamp) => anihubDB.storeHistory(command_id, name, keyvisual_url, nsfw, type, timestamp));
 
+ipcMain.handle("get-favorites", (event) => anihubDB.getFavorites());
 
+ipcMain.handle("get-history", (event) => anihubDB.getHistory());
 
+ipcMain.handle("delete-favorite-by-id", (event, id) => anihubDB.deleteFavoriteById(id));
 
-
-
+ipcMain.handle("delete-history-by-id", (event, id) => anihubDB.deleteHistoryById(id));
 
 
 

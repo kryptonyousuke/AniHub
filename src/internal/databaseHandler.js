@@ -59,7 +59,7 @@ export class AnihubDatabase {
       DO UPDATE SET last_access = excluded.last_access; `).run(command_id, name, keyvisual_url, nsfw, type, timestamp);
   }
   
-  getFavorite() {
+  getFavorites() {
     return this.db.prepare("SELECT * FROM favorites;").iterate();
   }
   
