@@ -30,6 +30,8 @@ app.commandLine.appendSwitch('enable-zero-copy');
 // app.commandLine.appendSwitch('force-gpu-mem-available-mb', '2048');
 
 
+app.commandLine.appendSwitch("ozone-platform", "wayland");
+app.commandLine.appendSwitch("enable-features", "WaylandWindowDecorations");
 
 
 

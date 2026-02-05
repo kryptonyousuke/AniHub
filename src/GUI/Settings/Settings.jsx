@@ -43,7 +43,12 @@ function Settings({ setSettingsVisible }) {
                   }} onClick={()=>setSelectedOption(2)}><h2 style={{
                       color: selectedOption == 2 ? "black" : "white"
                     }}><Icon icon="mdi:about" width="24" height="24" />About</h2></span>
-              <CgClose className={styles.closeIcon} onClick={() => setSettingsVisible(false)} />
+                  <span style={{
+                            background: selectedOption == 3 ? "white" : "transparent"
+                      }} onClick={()=>setSelectedOption(3)}><h2 style={{
+                          color: selectedOption == 3 ? "black" : "white"
+                        }}><Icon icon="streamline-flex:graph-bar-increase-square-solid" width="24" height="24" />Metrics</h2></span>
+          <CgClose className={styles.closeIcon} onClick={() => setSettingsVisible(false)} />
           </div>
           
         
