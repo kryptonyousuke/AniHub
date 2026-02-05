@@ -1,5 +1,4 @@
 import { useState } from "react";
-import AnihubHeader from "../Utilities/AnihubHeader";
 import styles from "./MangaReader.module.css";
 import { MdArrowBackIos } from "react-icons/md";
 import { MdArrowForwardIos } from "react-icons/md";

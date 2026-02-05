@@ -5,7 +5,6 @@ import styles from "./Manga.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
 function Manga(){
-  const [isMangaMode, setIsMangaMode] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
   const [description, setDescription] = useState("");
