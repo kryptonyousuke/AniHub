@@ -26,7 +26,7 @@ function Manga(){
   })
   return <div className={styles.manga}>
       <AnihubHeader />
-      {/* {!isLoaded && <FadeLoading />}*/}
+      {!isLoaded && <FadeLoading />}
       
       <img src={animeData.keyvisual} className={styles.mangaImage}></img>
       <h1 className={styles.mangaTitle}>{animeData.title}</h1>

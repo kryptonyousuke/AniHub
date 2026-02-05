@@ -26,6 +26,7 @@
     },
     "files": [
       "dist/**/*",
+      "src/internal/*",
       "./main.js",
       "preload.js",
       "package.json"

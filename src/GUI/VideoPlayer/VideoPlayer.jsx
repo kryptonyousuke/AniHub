@@ -40,9 +40,9 @@ function VideoPlayer({ onFullscreenChange }){
                     levelLoadingMaxRetry: 4,
                 });
                 hlsRef.current = hls;
-                hls.loadSource(src);
-                hls.attachMedia(player.current);
-                hls.on(Hls.Events.MANIFEST_PARSED, (_, data) => {
+                hlsRef.current.loadSource(src);
+                hlsRef.current.attachMedia(player.current);
+                hlsRef.current.on(Hls.Events.MANIFEST_PARSED, (_, data) => {
                     if (data.levels && data.levels.length > 0 && !isManualResolution.current) {
                         setLevels(data.levels);
                     }
@@ -52,29 +52,29 @@ function VideoPlayer({ onFullscreenChange }){
                         }
                     }
                 });
-                hls.on(Hls.Events.LEVEL_SWITCHED, (_, data) => {
+                hlsRef.current.on(Hls.Events.LEVEL_SWITCHED, (_, data) => {
                     if (!isManualResolution.current){
                         setCurrentLevel(data.level);
                     }
                 });
               
-                hls.on(Hls.Events.ERROR, (event, data) => {
+                hlsRef.current.on(Hls.Events.ERROR, (event, data) => {
                   if (data.fatal) {
                     switch (data.type) {
                       case Hls.ErrorTypes.NETWORK_ERROR:
                           console.log("Erro de rede fatal, tentando recuperar...");
-                          hls.startLoad();
+                          hlsRef.current.startLoad();
                           break;
                       case Hls.ErrorTypes.MEDIA_ERROR:
                           console.log("Erro de mídia fatal, tentando recuperar...");
-                          hls.recoverMediaError();
+                          hlsRef.current.recoverMediaError();
                           break;
                       case Hls.ErrorTypes.OTHER_ERROR:
                           console.log("Erro de mídia fatal, tentando recuperar...");
-                          hls.recoverMediaError();
+                          hlsRef.current.recoverMediaError();
                           break;
                       default:
-                          hls.destroy();
+                          hlsRef.current.destroy();
                           break;
                     }
                   }
@@ -84,10 +84,10 @@ function VideoPlayer({ onFullscreenChange }){
                 const dash = MediaPlayer().create();
                 dash.initialize(player.current, src, true);
                 dashRef.current = dash;
-                dash.on(MediaPlayer.events.STREAM_INITIALIZED, () => {
-                    const quals = dash.getRepresentationsByType("video");
+                hlsRef.current.on(MediaPlayer.events.STREAM_INITIALIZED, () => {
+                    const quals = hlsRef.current.dash.getRepresentationsByType("video");
                     setLevels(quals);
-                    setCurrentLevel(dash.getQualityFor("video"));
+                    setCurrentLevel(hlsRef.current.dash.getQualityFor("video"));
                 });
             } else {
                 player.current.src = src;
@@ -113,18 +113,6 @@ function VideoPlayer({ onFullscreenChange }){
             setSrc(levels[level].src);
         }
     };
-    // loading screen
-    useEffect(() => {
-        player.current.addEventListener('waiting', () => {
-            setIsLoading(true);
-        });
-        player.current.addEventListener('playing', () => {
-            setIsLoading(false);
-        });
-        player.current.addEventListener('ended', () => {
-            setIsLoading(false);
-        });
-    }, [player.current]);
 
     // volume
     useEffect(() => {
@@ -166,6 +154,15 @@ function VideoPlayer({ onFullscreenChange }){
         };
     
         window.addEventListener("keydown", handleKeyDown);
+        player.current.addEventListener('waiting', () => {
+            setIsLoading(true);
+        });
+        player.current.addEventListener('playing', () => {
+            setIsLoading(false);
+        });
+        player.current.addEventListener('ended', () => {
+            setIsLoading(false);
+        });
     }, [])
     const handleMouseMove = () => {
         setIsMouseActive(true);
