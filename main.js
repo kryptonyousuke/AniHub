@@ -81,45 +81,7 @@ ipcMain.handle("install-plugin", async () => {
 });
 
 
-/*
-*
-*     Run a plugin by it's absolute path.
-* 
-*/
 
-function runPlugin(pluginPath, inputData) {
-  return new Promise((resolve, reject) => {
-    const py = spawn(pluginPath, {
-      stdio: ["pipe", "pipe", "pipe"]
-    });
-
-    let output = "";
-    let error = "";
-
-    // get output
-    py.stdout.on("data", (data) => {
-      output += data.toString();
-    });
-
-    // get errors
-    py.stderr.on("data", (data) => {
-      error += data.toString();
-    });
-
-    // process end
-    py.on("close", (code) => {
-      if (code === 0) {
-        resolve(output.trim());
-      } else {
-        reject(new Error(error || `Plugin falhou com código ${code}`));
-      }
-    });
-
-    // send data via stdin
-    py.stdin.write(JSON.stringify(inputData));
-    py.stdin.end();
-  });
-}
 
 
 
@@ -166,37 +128,6 @@ function runSpecificPlugin(pluginName, inputData) {
 ipcMain.handle("run-specific-plugin", async (event, pluginName, inputData) => {
   return await runSpecificPlugin(pluginName, inputData);
 })
-
-
-
-/* 
-* 
-*     Send a single command to all plugins.
-* 
-*/
-
-async function runAllPlugins(inputData) {
-  const pluginDir = path.join(app.getPath("userData"), "plugins");
-  if (!fs.existsSync(pluginDir)) return [];
-
-  const files = fs.readdirSync(pluginDir);
-
-  const results = [];
-  for (const file of files) {
-    const pluginPath = path.join(pluginDir, file);
-    try {
-      const result = await runPlugin(pluginPath, inputData);
-      results.push({ plugin: file, result });
-    } catch (err) {
-      results.push({ plugin: file, error: err.message });
-    }
-  }
-  return results;
-}
-ipcMain.handle("run-plugins", async (event, inputData) => {
-  return await runAllPlugins(inputData);
-});
-
 
 
 /*
