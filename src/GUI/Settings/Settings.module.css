@@ -34,11 +34,7 @@
   border-radius: 30px;
 }
 
-@media screen and (width <=1200px) {
-  .settingsSection {
-    left: calc(50vw - 300px);
-  }
-}
+
 
 .settingsWindowBar {
   position: relative;
@@ -256,7 +252,7 @@
 }
 
 .cardGit>p, .cardElectron>p{
-  font-size: clamp(14px, 1vw, 1rem);
+  font-size: clamp(14px, 1vw, .8rem);
   text-align: center;
   color: #999;
   width: 200px;
