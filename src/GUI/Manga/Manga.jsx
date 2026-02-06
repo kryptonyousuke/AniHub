@@ -17,12 +17,18 @@ function Manga(){
       return <div>Dados do mangá não encontrados.</div>;
   }
   const [pages, setPages] = useState(animeData.pages || []);
-  window.electronAPI.runSpecificPlugin(animeData.plugin, searchData).then((data)=>{
+  if (!animeData.description) {
+    window.electronAPI.runSpecificPlugin(animeData.plugin, searchData).then((data) => {
       data = JSON.parse(data);
+      animeData.pages = data.pages;
+      animeData.description = data.description;
       setPages(data.pages);
       setDescription(data.description);
       setIsLoaded(true);
-  })
+    })
+  } else {
+    setIsLoaded(true);
+  }
   return <div className={styles.manga}>
       <AnihubHeader />
       {!isLoaded && <FadeLoading />}
@@ -32,7 +38,17 @@ function Manga(){
       <p className={styles.mangaDescription}>{description}</p>
       <div className={styles.mangaInfo}>
           <section className={styles.tagsArea}>
-        {!isStarred ? <Icon icon="line-md:star" width="50" height="50" className={styles.star} onClick={()=>setIsStarred(prevState=>!prevState)}/> : <Icon icon="line-md:star-filled" width="50" height="50" className={styles.star} onClick={()=>setIsStarred(prevState=>!prevState)}/>}
+        {!isStarred ? <Icon icon="line-md:star" width="50" height="50" className={styles.star} onClick={() => {
+          setIsStarred(prevState => !prevState);
+          window.electronAPI.storeFavorite(JSON.stringify(animeData), animeData.title, animeData.keyvisual, 0, "manga").then((result) => {
+            if (result) {
+              alert("Saved.");
+              return;
+            }
+            alert("Failed.")
+          });
+        }
+        } /> : <Icon icon="line-md:star-filled" width="50" height="50" className={styles.star} onClick={() => setIsStarred(prevState => !prevState)} />}
               <h3>Tags:</h3>
               <div className={styles.tags}>
                   {animeData.tags.map((tag) => <p>{tag}</p>)}
