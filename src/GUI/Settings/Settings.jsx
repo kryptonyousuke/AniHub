@@ -5,12 +5,15 @@ import { Icon } from '@iconify/react';
 function Settings({ setSettingsVisible }) {
   const [selectedOption, setSelectedOption] = useState(1);
   const [plugins, setPlugins] = useState([]);
+  const [metrics, setMetrics] = useState([]);
   useEffect(() => {
     window.electronAPI.getAllPlugins().then((pluginList) => {
       setPlugins(pluginList);
     }).catch((err) => {
             console.error("Failed to load plugins:", err);
-      });;
+      });
+    
+    window.electronAPI.getFavorites().then(data => setMetrics(data));
   }, []);
     const handleInstallPlugin = async () => {
         const result = await window.electronAPI.installPlugin();
@@ -101,7 +104,13 @@ function Settings({ setSettingsVisible }) {
             </div>
           </div>
         }
+        { selectedOption === 3 &&
+          <div className={styles.metrics}>
+            {metrics.map(info => <p key={info.id}> {info.name} </p>)}
+          </div>
+        }
         </section>
+
     </div>
 }
 export default Settings;

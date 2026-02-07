@@ -30,29 +30,41 @@
   max-width: 900px;
   height: 90svh;
   border: 1px solid #ddd;
-  padding-top: 20px;
   border-radius: 30px;
+  display: flex;
+  flex-direction: row;
 }
 
 
 
 .settingsWindowBar {
   position: relative;
-  height: fit-content;
   display: flex;
   justify-content: center;
-  gap: 20px;
+  align-items: center;
+  flex-direction: column;
+  background-color: #111;
+  border-radius: 30px;
+  padding-block: 20px;
+  width: fit-content;
+  padding: 30px;
+  height: 80%;
+  top: 10%;
+  margin-left: 30px;
+  border: 1px solid #333;
 }
 
 .settingsWindowBar>span {
-  border-radius: 9px;
+  border-radius: 40px;
+  padding: 10px 30px;
   cursor: pointer;
   margin-top: 20px;
-  border: 3px solid white;
+  /*border: 3px solid white;*/
   transition: all .2s ease-in-out;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .settingsWindowBar>span>h2 {
@@ -298,4 +310,8 @@
 }
 .trashIcon:active {
     transform: scale(.95);
+}
+.metrics {
+    font-size: 3rem;
+    color: white;
 }

@@ -60,11 +60,11 @@ export class AnihubDatabase {
   }
   
   getFavorites() {
-    return this.db.prepare("SELECT * FROM favorites;").iterate();
+    return this.db.prepare("SELECT * FROM favorites;").all();
   }
   
   getHistory() {
-    return this.db.prepare("SELECT * FROM history ORDER BY last_access DESC;").iterate();
+    return this.db.prepare("SELECT * FROM history ORDER BY last_access DESC;").all();
   }
   
   deleteFavoriteById(id) {
