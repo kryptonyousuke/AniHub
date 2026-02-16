@@ -81,7 +81,9 @@
   right: 30px;
   top: 20px;
 }
-
+.pluginPage {
+    width: 100%;
+}
 .installArea {
   width: 60%;
   display: flex;
@@ -312,6 +314,30 @@
     transform: scale(.95);
 }
 .metrics {
-    font-size: 3rem;
+    font-size: 1.3rem;
     color: white;
+    width: 100%;
+}
+.keyvisual {
+    width: 100px;
+    height: 150px;
+    border-radius: 10px;
+}
+.favorite {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+    border-radius: 15px;
+    padding-right: 20px;
+    width: 100%;
+}
+
+.favorite:hover {
+    background-color: #111;
+}
+
+.favorite > h2 {
+    font-size: 1.3rem;
 }

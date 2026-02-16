@@ -106,7 +106,10 @@ function Settings({ setSettingsVisible }) {
         }
         { selectedOption === 3 &&
           <div className={styles.metrics}>
-            {metrics.map(info => <p key={info.id}> {info.name} </p>)}
+            {metrics.map(info => <div className={styles.favorite} key={info.id}>
+              <img src={info.keyvisual_url} className={styles.keyvisual} />
+              <h2>{info.name}</h2>
+            </div>)}
           </div>
         }
         </section>
