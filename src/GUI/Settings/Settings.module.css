@@ -323,21 +323,32 @@
     height: 150px;
     border-radius: 10px;
 }
+
+.favoritesContainer {
+    padding: 20px;
+}
+
 .favorite {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     gap: 20px;
     cursor: pointer;
     border-radius: 15px;
     padding-right: 20px;
     width: 100%;
+    transition: all .15s ease-in-out;
 }
 
 .favorite:hover {
     background-color: #111;
 }
-
-.favorite > h2 {
+.favInfo {
+    height: 124px;
+    display: flex;
+    flex-direction: column;
+    padding-block: 13px;
+}
+.favInfo > h2 {
     font-size: 1.3rem;
 }

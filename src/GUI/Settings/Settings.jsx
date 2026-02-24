@@ -106,10 +106,14 @@ function Settings({ setSettingsVisible }) {
         }
         { selectedOption === 3 &&
           <div className={styles.metrics}>
-            {metrics.map(info => <div className={styles.favorite} key={info.id}>
-              <img src={info.keyvisual_url} className={styles.keyvisual} />
-              <h2>{info.name}</h2>
-            </div>)}
+            <div className={styles.favoritesContainer}>
+              {metrics.map(info => <div className={styles.favorite} key={info.id}>
+                <img src={info.keyvisual_url} className={styles.keyvisual} />
+                <div className={styles.favInfo}>
+                  <h2>{info.name}</h2>
+                </div>
+              </div>)}
+            </div>
           </div>
         }
         </section>
