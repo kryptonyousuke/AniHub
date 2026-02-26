@@ -31,14 +31,20 @@ function VideoPlayer({ onFullscreenChange }){
     useEffect(()=>{
         if (player.current) {
             if (src.includes(".m3u8")) {
-                if (player.current.canPlayType("application/vnd.apple.mpegurl")) {
-                    player.current.src = src;
-                    return;
-                }
+              console.log("Using HLS.");
+                // if (player.current.canPlayType("application/vnd.apple.mpegurl")) {
+                //     console.log("Hls is supported by default.");
+                //     player.current.src = src;
+                //     return;
+                // }
+                console.log("Hls is not supported by default. Using JS module.");
                 const hls = new Hls({
                     manifestLoadingMaxRetry: 4,
                     levelLoadingMaxRetry: 4,
+                    maxBufferLength: 600,
+                    maxMaxBufferLength: 1200
                 });
+
                 hlsRef.current = hls;
                 hlsRef.current.loadSource(src);
                 hlsRef.current.attachMedia(player.current);
@@ -57,8 +63,20 @@ function VideoPlayer({ onFullscreenChange }){
                         setCurrentLevel(data.level);
                     }
                 });
+              console.log({ action: "validateToken", animeId: animeData.animeID, episodeId: episode.ep_id });
+                window.electronAPI.runSpecificPlugin(plugin, { action: "validateToken", animeId: animeData.animeID, episodeId: episode.ep_id }).then((data) => {
+                  console.log(data);
+                });
+              hlsRef.current.on(Hls.Events.FRAG_LOADED, (_, data) => {
+                console.log("frag")
+                window.electronAPI.runSpecificPlugin(plugin, { action: "validateToken", animeId: animeData.animeID, episodeId: episode.ep_id }).then((data) => {
+                  data = JSON.parse(data);
+                  console.log(data);
+                });
+              });
               
                 hlsRef.current.on(Hls.Events.ERROR, (event, data) => {
+                  console.log("Error detected.")
                   if (data.fatal) {
                     switch (data.type) {
                       case Hls.ErrorTypes.NETWORK_ERROR:
@@ -80,16 +98,18 @@ function VideoPlayer({ onFullscreenChange }){
                   }
                 });
               
-            } else if (src.includes(".mpd")){
+            } else if (src.includes(".mpd")) {
+                console.log("Using DASH.")
                 const dash = MediaPlayer().create();
                 dash.initialize(player.current, src, true);
                 dashRef.current = dash;
-                hlsRef.current.on(MediaPlayer.events.STREAM_INITIALIZED, () => {
-                    const quals = hlsRef.current.dash.getRepresentationsByType("video");
+                dashRef.current.on(MediaPlayer.events.STREAM_INITIALIZED, () => {
+                    const quals = dashRef.current.dash.getRepresentationsByType("video");
                     setLevels(quals);
-                    setCurrentLevel(hlsRef.current.dash.getQualityFor("video"));
+                    setCurrentLevel(dashRef.current.dash.getQualityFor("video"));
                 });
             } else {
+                console.log("Reading a generic video file.")
                 player.current.src = src;
             }
         }
@@ -211,12 +231,12 @@ function VideoPlayer({ onFullscreenChange }){
             <TbArrowsMaximize className={styles.enterFullscreen} onClick={() => {
                 window.electronAPI.windowAction("toggle-fullscreen")
                 onFullscreenChange(true);
-                setIsFullscreen(!isFullscreen);
+                setIsFullscreen(prev => !prev);
             }} /> :
             <FiMinimize2 className={styles.exitFullscreen} onClick={() => {
                 window.electronAPI.windowAction("toggle-fullscreen");
                 onFullscreenChange(false);
-                setIsFullscreen(!isFullscreen);
+                setIsFullscreen(prev => !prev);
             }} />
             }
         </div>
@@ -225,8 +245,8 @@ function VideoPlayer({ onFullscreenChange }){
             !isPaused ? player.current.pause() : player.current.play()
             }} onDoubleClick={() => {
 
-                setIsFullscreen(!isFullscreen);
-                onFullscreenChange(!isFullscreen);
+                setIsFullscreen(prev => !prev);
+                onFullscreenChange(prev => !prev);
                 window.electronAPI.windowAction("toggle-fullscreen");
 
             }} />
