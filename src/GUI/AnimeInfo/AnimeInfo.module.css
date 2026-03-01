@@ -1,6 +1,8 @@
 
 .animeInfo {
-    margin-top: 35px;
+    height: 100svh;
+    overflow: hidden;
+    padding-top: 35px;
 }
 .animeInfoContainer {
     display: flex;
@@ -8,11 +10,8 @@
     gap: 30px;
 }
 .animeKeyVisual {
-    width: 30vw;
-    min-width: 400px;
-    max-width: 470px;
-    height: 70vh;
-    max-height: 682px;
+    width: clamp(300px, 30vw, 470px);
+    height: clamp(532px, 40vw, 835px);
     border-radius: 30px;
     object-fit: cover;
 }
