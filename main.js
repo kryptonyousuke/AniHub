@@ -5,7 +5,6 @@ import fs from "fs";
 import { AnihubDatabase } from "./src/internal/databaseHandler.js";
 import { fileURLToPath } from "url"
 import { dirname } from "path"
-
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
@@ -90,6 +89,8 @@ ipcMain.handle("install-plugin", async () => {
 
 function runSpecificPlugin(pluginName, inputData) {
   return new Promise((resolve, reject) => {
+    console.log(path.join(app.getPath("userData"), "plugins", pluginName));
+    console.log(inputData);
     const py = spawn(path.join(app.getPath("userData"), "plugins", pluginName), {
       stdio: ["pipe", "pipe", "pipe"]
     });

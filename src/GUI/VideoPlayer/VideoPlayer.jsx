@@ -32,22 +32,28 @@ function VideoPlayer({ onFullscreenChange }){
         if (player.current) {
             if (src.includes(".m3u8")) {
               console.log("Using HLS.");
-                // if (player.current.canPlayType("application/vnd.apple.mpegurl")) {
-                //     console.log("Hls is supported by default.");
-                //     player.current.src = src;
-                //     return;
-                // }
+                if (player.current.canPlayType("application/vnd.apple.mpegurl")) {
+                    console.log("Hls is supported by default.");
+                    player.current.src = src;
+                    return;
+                }
                 console.log("Hls is not supported by default. Using JS module.");
                 const hls = new Hls({
-                    manifestLoadingMaxRetry: 4,
-                    levelLoadingMaxRetry: 4,
-                    maxBufferLength: 600,
-                    maxMaxBufferLength: 1200
+                  manifestLoadingMaxRetry: 4,
+                  levelLoadingMaxRetry: 4,
+                  maxBufferHole: 0.5,
+                  highBufferWatchdogPeriod: 1,
+                  startFragPrefetch: true,
+                  autoStartLoad: true,
+                  fragLoadingMaxRetry: 2,
+                  enableWorker: true,
+                  lowLatencyMode: false
                 });
 
                 hlsRef.current = hls;
                 hlsRef.current.loadSource(src);
                 hlsRef.current.attachMedia(player.current);
+                hls.startLoad(0.2);
                 hlsRef.current.on(Hls.Events.MANIFEST_PARSED, (_, data) => {
                     if (data.levels && data.levels.length > 0 && !isManualResolution.current) {
                         setLevels(data.levels);
@@ -63,20 +69,9 @@ function VideoPlayer({ onFullscreenChange }){
                         setCurrentLevel(data.level);
                     }
                 });
-              console.log({ action: "validateToken", animeId: animeData.animeID, episodeId: episode.ep_id });
-                window.electronAPI.runSpecificPlugin(plugin, { action: "validateToken", animeId: animeData.animeID, episodeId: episode.ep_id }).then((data) => {
-                  console.log(data);
-                });
-              hlsRef.current.on(Hls.Events.FRAG_LOADED, (_, data) => {
-                console.log("frag")
-                window.electronAPI.runSpecificPlugin(plugin, { action: "validateToken", animeId: animeData.animeID, episodeId: episode.ep_id }).then((data) => {
-                  data = JSON.parse(data);
-                  console.log(data);
-                });
-              });
-              
                 hlsRef.current.on(Hls.Events.ERROR, (event, data) => {
                   console.log("Error detected.")
+                  console.log(data)
                   if (data.fatal) {
                     switch (data.type) {
                       case Hls.ErrorTypes.NETWORK_ERROR:
