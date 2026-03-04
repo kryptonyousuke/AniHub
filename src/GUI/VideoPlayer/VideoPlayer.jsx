@@ -32,19 +32,22 @@ function VideoPlayer({ onFullscreenChange }){
         if (player.current) {
             if (src.includes(".m3u8")) {
               console.log("Using HLS.");
-                if (player.current.canPlayType("application/vnd.apple.mpegurl")) {
-                    console.log("Hls is supported by default.");
-                    player.current.src = src;
-                    return;
-                }
+                // if (player.current.canPlayType("application/vnd.apple.mpegurl")) {
+                //     console.log("Hls is supported by default.");
+                //     player.current.src = src;
+                //     return;
+                // }
                 console.log("Hls is not supported by default. Using JS module.");
                 const hls = new Hls({
                   manifestLoadingMaxRetry: 4,
                   levelLoadingMaxRetry: 4,
+                  maxMaxBufferLength: 600,
+                  maxBufferSize: 200 * 1000 * 1000,
                   maxBufferHole: 0.5,
-                  highBufferWatchdogPeriod: 1,
+                  highBufferWatchdogPeriod: 3,
                   startFragPrefetch: true,
                   autoStartLoad: true,
+                  backBufferLength: 90,
                   fragLoadingMaxRetry: 2,
                   enableWorker: true,
                   lowLatencyMode: false
