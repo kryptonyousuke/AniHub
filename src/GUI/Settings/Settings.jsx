@@ -55,12 +55,12 @@ function Settings({ setSettingsVisible }) {
                         background: selectedOption == 4 ? "white" : "transparent"
                   }} onClick={()=>setSelectedOption(4)}><h2 style={{
                       color: selectedOption == 4 ? "black" : "white"
-                    }}><Icon icon="streamline-flex:graph-bar-increase-square-solid" width="24" height="24" />Favorites</h2></span>
+                    }}><Icon icon="clarity:star-solid" width="24" height="24" />Favorites</h2></span>
               <span style={{
                         background: selectedOption == 5 ? "white" : "transparent"
                   }} onClick={()=>setSelectedOption(5)}><h2 style={{
                       color: selectedOption == 5 ? "black" : "white"
-                    }}><Icon icon="streamline-flex:graph-bar-increase-square-solid" width="24" height="24" />History</h2></span>
+                    }}><Icon icon="mdi:timer-star" width="24" height="24" />History</h2></span>
           <CgClose className={styles.closeIcon} onClick={() => setSettingsVisible(false)} />
           </div>
           
