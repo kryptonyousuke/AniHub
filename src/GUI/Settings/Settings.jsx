@@ -36,21 +36,31 @@ function Settings({ setSettingsVisible }) {
               }} onClick={()=>setSelectedOption(0)}><h2 style={{
                     color: selectedOption == 0 ? "black" : "white"
                 }}><Icon icon="mingcute:plugin-2-fill" width="30" height="30" className={styles.pluginIcon} />Plugins</h2></span>
-                <span style={{
-                          background: selectedOption == 1 ? "white" : "transparent"
-                    }} onClick={()=>setSelectedOption(1)}><h2 style={{
-                              color: selectedOption == 1 ? "black" : "white"
-                        }}><Icon icon="mingcute:settings-6-fill" width="24" height="24" />Settings</h2></span>
+              <span style={{
+                        background: selectedOption == 1 ? "white" : "transparent"
+                  }} onClick={()=>setSelectedOption(1)}><h2 style={{
+                            color: selectedOption == 1 ? "black" : "white"
+                      }}><Icon icon="mingcute:settings-6-fill" width="24" height="24" />Settings</h2></span>
               <span style={{
                         background: selectedOption == 2 ? "white" : "transparent"
                   }} onClick={()=>setSelectedOption(2)}><h2 style={{
                       color: selectedOption == 2 ? "black" : "white"
                     }}><Icon icon="mdi:about" width="24" height="24" />About</h2></span>
-                  <span style={{
-                            background: selectedOption == 3 ? "white" : "transparent"
-                      }} onClick={()=>setSelectedOption(3)}><h2 style={{
-                          color: selectedOption == 3 ? "black" : "white"
-                        }}><Icon icon="streamline-flex:graph-bar-increase-square-solid" width="24" height="24" />Metrics</h2></span>
+              <span style={{
+                        background: selectedOption == 3 ? "white" : "transparent"
+                  }} onClick={()=>setSelectedOption(3)}><h2 style={{
+                      color: selectedOption == 3 ? "black" : "white"
+                    }}><Icon icon="streamline-flex:graph-bar-increase-square-solid" width="24" height="24" />Metrics</h2></span>
+              <span style={{
+                        background: selectedOption == 4 ? "white" : "transparent"
+                  }} onClick={()=>setSelectedOption(4)}><h2 style={{
+                      color: selectedOption == 4 ? "black" : "white"
+                    }}><Icon icon="streamline-flex:graph-bar-increase-square-solid" width="24" height="24" />Favorites</h2></span>
+              <span style={{
+                        background: selectedOption == 5 ? "white" : "transparent"
+                  }} onClick={()=>setSelectedOption(5)}><h2 style={{
+                      color: selectedOption == 5 ? "black" : "white"
+                    }}><Icon icon="streamline-flex:graph-bar-increase-square-solid" width="24" height="24" />History</h2></span>
           <CgClose className={styles.closeIcon} onClick={() => setSettingsVisible(false)} />
           </div>
           

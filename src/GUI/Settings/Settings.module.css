@@ -253,12 +253,11 @@
   color: #FE5F55;
 }
 .cardElectron:hover>h1 {
-    color: #3185FC;
+  color: #3185FC;
 }
 
 .cardGit>h1, .cardElectron>h1 {
-  font-size: 1.5rem;
-  font-size: clamp(16px, 2vw, 1.5rem);
+  font-size: clamp(16px, 2vw, 1.3rem);
   white-space: nowrap;
   text-align: center;
   text-indent: 0;

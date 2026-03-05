@@ -193,7 +193,7 @@
    height: 50px;
    cursor: pointer;
    position: absolute;
-   right: 40px;
+   right: 25px;
 }
 .topControls, .controls {
    transition: all .3s ease-in-out;

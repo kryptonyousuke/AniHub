@@ -47,7 +47,7 @@ function VideoPlayer({ onFullscreenChange }){
                   highBufferWatchdogPeriod: 3,
                   startFragPrefetch: true,
                   autoStartLoad: true,
-                  backBufferLength: 90,
+                  backBufferLength: 1440,
                   fragLoadingMaxRetry: 2,
                   enableWorker: true,
                   lowLatencyMode: false
