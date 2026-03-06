@@ -235,8 +235,10 @@
   min-width: 210px;
   border-radius: 20px;
   display: flex;
+  
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   padding: 20px;
   gap: 15px;
   cursor: pointer;
@@ -312,17 +314,31 @@
 .trashIcon:active {
     transform: scale(.95);
 }
-.metrics {
+.favorites {
     font-size: 1.3rem;
     color: white;
     width: 100%;
 }
 .keyvisual {
-    width: 100px;
-    height: 150px;
+    width: 80px;
+    height: 120px;
     border-radius: 10px;
 }
-
+.typeSelector {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.typeSelector > p {
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 5px 15px;
+    transition: all .15s ease-in-out;
+    cursor: pointer;
+}
 .favoritesContainer {
     padding: 20px;
 }

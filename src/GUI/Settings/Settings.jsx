@@ -3,9 +3,14 @@ import styles from './Settings.module.css'
 import { CgClose } from "react-icons/cg";
 import { Icon } from '@iconify/react';
 function Settings({ setSettingsVisible }) {
-  const [selectedOption, setSelectedOption] = useState(1);
+  const [selectedOption, setSelectedOption] = useState(0);
   const [plugins, setPlugins] = useState([]);
-  const [metrics, setMetrics] = useState([]);
+  const [favManga, setFavManga] = useState([]);
+  const [histAnime, setHistAnime] = useState([]);
+  const [histManga, setHistManga] = useState([]);
+  const [favAnime, setFavAnime] = useState([]);
+  const [favSelectedOption, setFavSelectedOption] = useState(0);
+  const [histSelectedOption, setHistSelectedOption] = useState(0);
   useEffect(() => {
     window.electronAPI.getAllPlugins().then((pluginList) => {
       setPlugins(pluginList);
@@ -13,7 +18,10 @@ function Settings({ setSettingsVisible }) {
             console.error("Failed to load plugins:", err);
       });
     
-    window.electronAPI.getFavorites().then(data => setMetrics(data));
+    window.electronAPI.getFavorites().then(data => {
+      setFavManga(data.filter(content => content.type === "manga"));
+      setFavAnime(data.filter(content => content.type === "anime"));
+    });
   }, []);
     const handleInstallPlugin = async () => {
         const result = await window.electronAPI.installPlugin();
@@ -114,10 +122,26 @@ function Settings({ setSettingsVisible }) {
             </div>
           </div>
         }
-        { selectedOption === 3 &&
-          <div className={styles.metrics}>
+        { selectedOption === 4 &&
+          <div className={styles.favorites}>
+            <div className={styles.typeSelector}>
+              <p style={{
+                backgroundColor: favSelectedOption == 0 ? "white" : "transparent",
+                color: favSelectedOption == 0 ? "black" : "white"
+              }} onClick={()=>setFavSelectedOption(0)}>Manga</p>
+              <p style={{
+                backgroundColor: favSelectedOption == 1 ? "white" : "transparent",
+                color: favSelectedOption == 1 ? "black" : "white"
+              }} onClick={()=>setFavSelectedOption(1)}>Anime</p>
+            </div>
             <div className={styles.favoritesContainer}>
-              {metrics.map(info => <div className={styles.favorite} key={info.id}>
+              {favSelectedOption === 0 ? favManga.map(info => <div className={styles.favorite} key={info.id}>
+                <img src={info.keyvisual_url} className={styles.keyvisual} />
+                <div className={styles.favInfo}>
+                  <h2>{info.name}</h2>
+                </div>
+              </div>) :
+              favAnime.map(info => <div className={styles.favorite} key={info.id}>
                 <img src={info.keyvisual_url} className={styles.keyvisual} />
                 <div className={styles.favInfo}>
                   <h2>{info.name}</h2>
