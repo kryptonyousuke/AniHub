@@ -66,6 +66,21 @@ h1 {
     }
 }
 .search {
+    width: 30vw;
+    padding-inline: 30px 10px;
+    padding-block: 20px 20px;
+    border: 2px solid #979797;
+    border-radius: 14px;
+    font-family: monospace;
+    font-weight: 400;
+    font-size: 1rem;
+    background-color: #111;
+    color: white;
+    position: fixed;
+    left: 35vw;
+    right: 35vw;
+}
+/*.search {
     color: #888;
     background-color: #1a1a1aaa;
     backdrop-filter: blur(7px);
@@ -108,7 +123,7 @@ h1 {
 .search:hover::placeholder, .search:focus::placeholder {
     color: #aaa;
     font-weight: bold;
-}
+}*/
 
 .mangaModeIcon {
     width: 30px;

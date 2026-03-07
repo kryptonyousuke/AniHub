@@ -43,10 +43,8 @@ function AnihubHeader(){
         }} />
         <FaBook className={styles.mangaModeIcon} onClick={()=>{setIsMangaMode(!isMangaMode)}} style={isMangaMode && {
             backgroundColor: "#ffffffbb",
-            
             color: "black",
             fill: "black",
-
         }}/>
         {
             (search !== "" && animeList.length > 0) &&
