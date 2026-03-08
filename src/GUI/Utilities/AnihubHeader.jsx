@@ -16,7 +16,8 @@ function AnihubHeader(){
     return  <header className={styles.anihubHeader}>
         <img className={styles.logo} src="AniHub_transparent.svg" onClick={() => navigate("/")} alt="logo"></img>
         <h1 className={styles.anihub} onClick={() => navigate("/")}>AniHub</h1>
-        <input className={styles.search} type="text" placeholder="Naruto Shippuden" onChange={async (e) => {
+        <div className={styles.searchArea}>
+          <input className={styles.search} type="text" placeholder="Naruto Shippuden" onChange={async (e) => {
             if (e.target.value === "") {
                 return;
             }
@@ -40,7 +41,11 @@ function AnihubHeader(){
                 })
               }
             }, 1500);
-        }} />
+          }} />
+          <div className={styles.searchHud}>
+          <button className={`${styles.searchSelector} ${styles.contentFilter}`}><Icon icon="line-md:filter" width="24" height="24" />Filter</button>
+          </div>
+        </div>
         <FaBook className={styles.mangaModeIcon} onClick={()=>{setIsMangaMode(!isMangaMode)}} style={isMangaMode && {
             backgroundColor: "#ffffffbb",
             color: "black",

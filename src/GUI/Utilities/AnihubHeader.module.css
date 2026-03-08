@@ -65,20 +65,56 @@ h1 {
         left: calc(50vw - 20vw) !important;
     }
 }
-.search {
+.searchArea {
     width: 30vw;
-    padding-inline: 30px 10px;
-    padding-block: 20px 20px;
     border: 2px solid #979797;
     border-radius: 14px;
-    font-family: monospace;
-    font-weight: 400;
-    font-size: 1rem;
     background-color: #111;
-    color: white;
     position: fixed;
     left: 35vw;
     right: 35vw;
+    top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    padding-bottom: 10px;
+    
+}
+.search {
+    width: 100%;
+    height: 60px;
+    padding-inline: 30px 10px;
+    padding-block: 20px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: transparent;
+    font-family: monospace;
+    font-weight: 400;
+    font-size: 1rem;
+    color: white;
+}
+.searchHud {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+}
+.searchSelector {
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    background-color: transparent;
+    color: white;
+    font-size: 13px;
+    font-family: "JetBrains Mono";
+    padding: 10px 10px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
 /*.search {
     color: #888;
