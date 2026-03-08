@@ -44,6 +44,7 @@ function AnihubHeader(){
           }} />
           <div className={styles.searchHud}>
           <button className={`${styles.searchSelector} ${styles.contentFilter}`}><Icon icon="line-md:filter" width="24" height="24" />Filter</button>
+          <button className={`${styles.searchSelector} ${styles.sendSearch}`}><Icon icon="fluent:send-32-filled" width="24" height="24" /></button>
           </div>
         </div>
         <FaBook className={styles.mangaModeIcon} onClick={()=>{setIsMangaMode(!isMangaMode)}} style={isMangaMode && {

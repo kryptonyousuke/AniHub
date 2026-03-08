@@ -100,6 +100,7 @@ h1 {
     height: 30px;
     display: flex;
     flex-direction: row;
+    position: relative;
 }
 .searchSelector {
     font-weight: bold;
@@ -116,6 +117,15 @@ h1 {
     align-items: center;
     cursor: pointer;
 }
+.sendSearch {
+    position: absolute;
+    color: black;
+    background-color: white;
+    border-radius: 10px;
+    padding: 5px 5px 5px 6px;
+    right: 10px;
+}
+
 /*.search {
     color: #888;
     background-color: #1a1a1aaa;
