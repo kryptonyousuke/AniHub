@@ -19,7 +19,8 @@ function AnihubHeader(){
         <div className={styles.searchArea}>
           <input className={styles.search} type="text" placeholder="Naruto Shippuden" onChange={async (e) => {
             if (e.target.value === "") {
-                return;
+              setAnimeList([]);
+              return;
             }
             setSearch(e.target.value);
             if (searchTimeoutRef.current) {

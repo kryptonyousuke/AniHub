@@ -331,13 +331,18 @@
     justify-content: center;
     gap: 20px;
 }
-.typeSelector > p {
+.typeSelector > button {
     border-radius: 30px;
     font-weight: bold;
     font-size: 1rem;
     padding: 5px 15px;
     transition: all .15s ease-in-out;
     cursor: pointer;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
 }
 .favoritesContainer {
     padding: 20px;

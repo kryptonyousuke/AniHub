@@ -9,14 +9,14 @@
     position: fixed;
     z-index: 10;
     left: 30vw;
-    top: 130px;
+    top: 150px;
     border: 2px solid white;
     opacity: 0;
     animation: appear-from-bottom .25s forwards ease;
     padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
     transition: all .16s ease-in;
     overflow-y: scroll;
     max-height: 70vh;

@@ -125,14 +125,14 @@ function Settings({ setSettingsVisible }) {
         { selectedOption === 4 &&
           <div className={styles.favorites}>
             <div className={styles.typeSelector}>
-              <p style={{
+              <button style={{
                 backgroundColor: favSelectedOption == 0 ? "white" : "transparent",
                 color: favSelectedOption == 0 ? "black" : "white"
-              }} onClick={()=>setFavSelectedOption(0)}>Manga</p>
-              <p style={{
+              }} onClick={()=>setFavSelectedOption(0)}><Icon icon="flowbite:book-solid" width="22" height="22" />Manga</button>
+              <button style={{
                 backgroundColor: favSelectedOption == 1 ? "white" : "transparent",
                 color: favSelectedOption == 1 ? "black" : "white"
-              }} onClick={()=>setFavSelectedOption(1)}>Anime</p>
+              }} onClick={()=>setFavSelectedOption(1)}><Icon icon="material-symbols:live-tv-rounded" width="22" height="22" />Anime</button>
             </div>
             <div className={styles.favoritesContainer}>
               {favSelectedOption === 0 ? favManga.map(info => <div className={styles.favorite} key={info.id}>
