@@ -8,26 +8,24 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { useLocation, useNavigate } from "react-router-dom";
 import { TbArrowsMaximize } from "react-icons/tb";
 import { FiMinimize2 } from "react-icons/fi";
+/* Formats seconds into H:M:S */
 const formatTime = (seconds) => {
-  // Converte para inteiro (equivalente ao seu | 0)
   const totalSeconds = Math.trunc(seconds);
-  
   const hrs = Math.trunc(totalSeconds / 3600);
   const mins = Math.trunc((totalSeconds % 3600) / 60);
   const secs = totalSeconds % 60;
-
-  // O método padStart(2, '0') garante que '9' vire '09'
   const fMins = String(mins).padStart(2, '0');
   const fSecs = String(secs).padStart(2, '0');
-
   if (hrs > 0) {
     return `${hrs}:${fMins}:${fSecs}`;
   }
   return `${fMins}:${fSecs}`;
 };
+
 function VideoPlayer({ onFullscreenChange }){
     const location = useLocation();
     const { episode, plugin, animeData } = location.state;
+    animeData.selectedEp = episode;
     const effectRan = useRef(false);
     const mouseMoveTimeout = useRef(null);
     const player = useRef(null);
@@ -47,7 +45,11 @@ function VideoPlayer({ onFullscreenChange }){
     const [src, setSrc] = useState("");
     const isManualResolution = useRef(null);
     const navigate = useNavigate();
+    
     useEffect(()=>{
+        console.log([JSON.stringify(location.state), animeData.animeName, episode.ep_thumbnail, false, "anime", Date.now()]);
+        window.electronAPI.storeHistory(JSON.stringify(location.state), animeData.animeName, episode.ep_thumbnail, 1, "anime", Date.now());
+        console.log(animeData);
         if (player.current) {
             if (src.includes(".m3u8")) {
               console.log("Using HLS.");

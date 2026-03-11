@@ -22,6 +22,10 @@ function Settings({ setSettingsVisible }) {
       setFavManga(data.filter(content => content.type === "manga"));
       setFavAnime(data.filter(content => content.type === "anime"));
     });
+    window.electronAPI.getHistory().then(data => {
+      setHistManga(data.filter(content => content.type === "manga"));
+      setHistAnime(data.filter(content => content.type === "anime"));
+    });
   }, []);
     const handleInstallPlugin = async () => {
         const result = await window.electronAPI.installPlugin();
@@ -142,6 +146,34 @@ function Settings({ setSettingsVisible }) {
                 </div>
               </div>) :
               favAnime.map(info => <div className={styles.favorite} key={info.id}>
+                <img src={info.keyvisual_url} className={styles.keyvisual} />
+                <div className={styles.favInfo}>
+                  <h2>{info.name}</h2>
+                </div>
+              </div>)}
+            </div>
+          </div>
+        }
+        { selectedOption === 5 &&
+          <div className={styles.favorites}>
+            <div className={styles.typeSelector}>
+              <button style={{
+                backgroundColor: favSelectedOption == 0 ? "white" : "transparent",
+                color: favSelectedOption == 0 ? "black" : "white"
+              }} onClick={()=>setFavSelectedOption(0)}><Icon icon="flowbite:book-solid" width="22" height="22" />Manga</button>
+              <button style={{
+                backgroundColor: favSelectedOption == 1 ? "white" : "transparent",
+                color: favSelectedOption == 1 ? "black" : "white"
+              }} onClick={()=>setFavSelectedOption(1)}><Icon icon="material-symbols:live-tv-rounded" width="22" height="22" />Anime</button>
+            </div>
+            <div className={styles.favoritesContainer}>
+              {favSelectedOption === 0 ? histManga.map(info => <div className={styles.favorite} key={info.id}>
+                <img src={info.keyvisual_url} className={styles.keyvisual} />
+                <div className={styles.favInfo}>
+                  <h2>{info.name}</h2>
+                </div>
+              </div>) :
+              histAnime.map(info => <div className={styles.favorite} key={info.id}>
                 <img src={info.keyvisual_url} className={styles.keyvisual} />
                 <div className={styles.favInfo}>
                   <h2>{info.name}</h2>

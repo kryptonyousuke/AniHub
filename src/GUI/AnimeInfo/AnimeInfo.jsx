@@ -10,7 +10,7 @@ function AnimeInfo(){
     const { isReload, animeName, animeID, plugin, animeData} = location.state;
     const [ description, setDescription ] = useState("");
     const episodes = useRef({});
-    const [episodesState, setEpisodesState] = useState({});
+    const [ episodesState, setEpisodesState ] = useState({});
     const [ selectedEpisodes, setSelectedEpisodes ] = useState([]);
     const [keyVisual, setKeyVisual] = useState("");
     const [ isDubbedSelected, setIsDubbedSelected ] = useState(false);
