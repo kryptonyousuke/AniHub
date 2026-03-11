@@ -19,7 +19,7 @@ function VideoPlayer({ onFullscreenChange }){
     const hlsRef = useRef(null);
     const dashRef = useRef(null);
     const [isPaused, setIsPaused] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [volume, setVolume] = useState(1);
     const [progress, setProgress] = useState(0);
     const [isFullscreen, setIsFullscreen] = useState(false);
@@ -59,7 +59,8 @@ function VideoPlayer({ onFullscreenChange }){
                 hls.startLoad(0.2);
                 hlsRef.current.on(Hls.Events.MANIFEST_PARSED, (_, data) => {
                     if (data.levels && data.levels.length > 0 && !isManualResolution.current) {
-                        setLevels(data.levels);
+                      setLevels(data.levels);
+                      setIsLoading(false);
                     }
                     else {
                         if (!isManualResolution.current){
@@ -292,15 +293,15 @@ function VideoPlayer({ onFullscreenChange }){
             />
             {isQualitySelectorActive && <div className={styles.qualitySelectorValuesContainer}>
                 {levels.length > 0 && levels.map((l, i) => (
-                    <div onClick={() => {
-                        setCurrentLevel(i);
-                        handleChange({
-                            target: {
-                                value: i
-                            }
-                        });
-                        setIsQualitySelectorActive(false);
-                    }}>
+                  <div onClick={() => {
+                    setIsLoading(true);
+                    setCurrentLevel(i);
+                    handleChange({
+                        target: {
+                            value: i
+                        }
+                    });
+                    setIsQualitySelectorActive(false);}}>
                         {l.height}p
                     </div>
                 ))}
