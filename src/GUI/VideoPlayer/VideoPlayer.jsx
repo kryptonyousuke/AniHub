@@ -8,6 +8,23 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { useLocation, useNavigate } from "react-router-dom";
 import { TbArrowsMaximize } from "react-icons/tb";
 import { FiMinimize2 } from "react-icons/fi";
+const formatTime = (seconds) => {
+  // Converte para inteiro (equivalente ao seu | 0)
+  const totalSeconds = Math.trunc(seconds);
+  
+  const hrs = Math.trunc(totalSeconds / 3600);
+  const mins = Math.trunc((totalSeconds % 3600) / 60);
+  const secs = totalSeconds % 60;
+
+  // O método padStart(2, '0') garante que '9' vire '09'
+  const fMins = String(mins).padStart(2, '0');
+  const fSecs = String(secs).padStart(2, '0');
+
+  if (hrs > 0) {
+    return `${hrs}:${fMins}:${fSecs}`;
+  }
+  return `${fMins}:${fSecs}`;
+};
 function VideoPlayer({ onFullscreenChange }){
     const location = useLocation();
     const { episode, plugin, animeData } = location.state;
@@ -21,6 +38,8 @@ function VideoPlayer({ onFullscreenChange }){
     const [isPaused, setIsPaused] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [volume, setVolume] = useState(1);
+    const [duration, setDuration] = useState(0);
+    const [currentTime, setCurrentTimeIndicator] = useState(0);
     const [progress, setProgress] = useState(0);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [isMouseActive, setIsMouseActive] = useState(true);
@@ -32,12 +51,6 @@ function VideoPlayer({ onFullscreenChange }){
         if (player.current) {
             if (src.includes(".m3u8")) {
               console.log("Using HLS.");
-                // if (player.current.canPlayType("application/vnd.apple.mpegurl")) {
-                //     console.log("Hls is supported by default.");
-                //     player.current.src = src;
-                //     return;
-                // }
-                console.log("Hls is not supported by default. Using JS module.");
                 const hls = new Hls({
                   manifestLoadingMaxRetry: 4,
                   levelLoadingMaxRetry: 4,
@@ -48,7 +61,7 @@ function VideoPlayer({ onFullscreenChange }){
                   startFragPrefetch: true,
                   autoStartLoad: true,
                   backBufferLength: 1440,
-                  fragLoadingMaxRetry: 2,
+                  fragLoadingMaxRetry: 4,
                   enableWorker: true,
                   lowLatencyMode: false
                 });
@@ -79,15 +92,15 @@ function VideoPlayer({ onFullscreenChange }){
                   if (data.fatal) {
                     switch (data.type) {
                       case Hls.ErrorTypes.NETWORK_ERROR:
-                          console.log("Erro de rede fatal, tentando recuperar...");
+                          console.log("Network error. Trying again...");
                           hlsRef.current.startLoad();
                           break;
                       case Hls.ErrorTypes.MEDIA_ERROR:
-                          console.log("Erro de mídia fatal, tentando recuperar...");
+                          console.log("Media error. Trying again...");
                           hlsRef.current.recoverMediaError();
                           break;
                       case Hls.ErrorTypes.OTHER_ERROR:
-                          console.log("Erro de mídia fatal, tentando recuperar...");
+                          console.log("Unknow error. Trying again.");
                           hlsRef.current.recoverMediaError();
                           break;
                       default:
@@ -112,7 +125,6 @@ function VideoPlayer({ onFullscreenChange }){
                 player.current.src = src;
             }
         }
-
         return () => {
             if (hlsRef.current) hlsRef.current.destroy();
             if (dashRef.current) dashRef.current.reset();
@@ -157,21 +169,22 @@ function VideoPlayer({ onFullscreenChange }){
             effectRan.current = true;
         }
         player.current.addEventListener("timeupdate", () => {
-            if (player.current.currentTime / player.current.duration >= 0){
-                setProgress(player.current.currentTime / player.current.duration)
-            }
+          setCurrentTimeIndicator(Math.trunc(player.current.currentTime));
+          setDuration(player.current.duration | 0);
+          if (player.current.currentTime / player.current.duration >= 0){
+              setProgress(player.current.currentTime / player.current.duration)
+          }
         })
         const handleKeyDown = (e) => {
             if (e.key === "F11") {
                 setIsFullscreen((prev) => {
-                    console.log("Estado anterior de tela cheia:", prev);
                     const newState = !prev;
                     onFullscreenChange(newState);
                     return newState;
                 });
             }
         };
-    
+
         window.addEventListener("keydown", handleKeyDown);
         player.current.addEventListener('waiting', () => {
             setIsLoading(true);
@@ -223,8 +236,7 @@ function VideoPlayer({ onFullscreenChange }){
                             animeData: animeData
                         }})
             }} />
-            <h1>{episode.ep_name
-                }</h1>
+            <h1>{episode.ep_name}</h1>
             {
                 !isFullscreen ?
             <TbArrowsMaximize className={styles.enterFullscreen} onClick={() => {
@@ -314,6 +326,7 @@ function VideoPlayer({ onFullscreenChange }){
                 }}>
                 {levels[currentLevel] ? `${levels[currentLevel].height}p` : 'Auto'}
             </div>
+            <p className={styles.timeIndicator}>{formatTime(currentTime)} - {formatTime(duration)} | {Math.trunc(progress*100)}%</p>
         </div>
     </div>
 }
