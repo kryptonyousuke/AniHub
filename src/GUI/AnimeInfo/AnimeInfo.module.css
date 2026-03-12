@@ -26,7 +26,23 @@
     text-align: justify;
     font-family: Lexend;
     font-weight: 400;
+    height: 120px;
+    overflow-y: auto;
+    padding-right: 5px;
     color: rgb(190, 190, 190);
+}
+.sinopse::-webkit-scrollbar {
+    width: 2px;
+    background-color: transparent;
+    height: 20px !important;
+    overflow: hidden;
+}
+.sinopse::-webkit-scrollbar-button {
+    opacity: 0;
+}
+.sinopse::-webkit-scrollbar-thumb {
+    background-color: #fe6055c4;
+    border-radius: 2px;
 }
 .watchButton {
     background-color: transparent;

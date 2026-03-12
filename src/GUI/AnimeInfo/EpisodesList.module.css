@@ -4,7 +4,7 @@
     margin-top: 10px;
     overflow-y: scroll;
     position: relative;
-    height: 540px;
+    height: 580px;
     padding-right: 4px;
 }
 .episodesList::-webkit-scrollbar {
