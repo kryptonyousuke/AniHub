@@ -324,6 +324,7 @@
     height: 120px;
     border-radius: 10px;
 }
+
 .typeSelector {
     width: 100%;
     margin-top: 20px;
@@ -346,6 +347,9 @@
 }
 .favoritesContainer {
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .favorite {
@@ -360,6 +364,7 @@
     transition: all .15s ease-in-out;
 }
 
+
 .favorite:hover {
     background-color: #111;
 }
@@ -371,4 +376,32 @@
 }
 .favInfo > h2 {
     font-size: 1.3rem;
+}
+.epThumbnail {
+    width: 144px;
+    height: 81px;
+    border-radius: 10px;
+}
+.historyContent {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 15px;
+    padding-right: 20px;
+    width: 100%;
+    gap: 20px;
+    transition: all .15s ease-in-out;
+}
+.historyContent:hover {
+    background-color: #111;
+}
+.histInfo {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 100%;
+}
+.histInfo > h2 {
+    font-size: 1rem;
 }

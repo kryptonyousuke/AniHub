@@ -48,7 +48,7 @@ function VideoPlayer({ onFullscreenChange }){
     
     useEffect(()=>{
         console.log([JSON.stringify(location.state), animeData.animeName, episode.ep_thumbnail, false, "anime", Date.now()]);
-        window.electronAPI.storeHistory(JSON.stringify(location.state), animeData.animeName, episode.ep_thumbnail, 1, "anime", Date.now());
+        window.electronAPI.storeHistory(JSON.stringify(location.state), `${episode.ep_number}. ${episode.ep_name} - ${animeData.animeName}`, episode.ep_thumbnail, 1, "anime", Date.now());
         console.log(animeData);
         if (player.current) {
             if (src.includes(".m3u8")) {

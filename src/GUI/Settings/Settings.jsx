@@ -169,13 +169,13 @@ function Settings({ setSettingsVisible }) {
             <div className={styles.favoritesContainer}>
               {favSelectedOption === 0 ? histManga.map(info => <div className={styles.favorite} key={info.id}>
                 <img src={info.keyvisual_url} className={styles.keyvisual} />
-                <div className={styles.favInfo}>
+                <div className={styles.histInfo}>
                   <h2>{info.name}</h2>
                 </div>
               </div>) :
-              histAnime.map(info => <div className={styles.favorite} key={info.id}>
-                <img src={info.keyvisual_url} className={styles.keyvisual} />
-                <div className={styles.favInfo}>
+              histAnime.map(info => <div className={styles.historyContent} key={info.id}>
+                <img src={info.keyvisual_url} className={styles.epThumbnail} />
+                <div className={styles.histInfo}>
                   <h2>{info.name}</h2>
                 </div>
               </div>)}
