@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import styles from './Settings.module.css'
 import { CgClose } from "react-icons/cg";
 import { Icon } from '@iconify/react';
+import { useNavigate } from 'react-router-dom';
 function Settings({ setSettingsVisible }) {
+  const navigate = useNavigate();
   const [selectedOption, setSelectedOption] = useState(0);
   const [plugins, setPlugins] = useState([]);
   const [favManga, setFavManga] = useState([]);
@@ -173,7 +175,15 @@ function Settings({ setSettingsVisible }) {
                   <h2>{info.name}</h2>
                 </div>
               </div>) :
-              histAnime.map(info => <div className={styles.historyContent} key={info.id}>
+                histAnime.map(info => <div className={styles.historyContent} key={info.id} onClick={() => {
+                  let animeGeneralData = JSON.parse(info.command_id);
+                  navigate("/player", {
+                    state: {
+                      episode: animeGeneralData.episode,
+                      plugin: animeGeneralData.plugin,
+                      animeData: animeGeneralData.animeData
+                    }
+                  })}}>
                 <img src={info.keyvisual_url} className={styles.epThumbnail} />
                 <div className={styles.histInfo}>
                   <h2>{info.name}</h2>

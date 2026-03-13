@@ -392,16 +392,26 @@
     width: 100%;
     gap: 20px;
     transition: all .15s ease-in-out;
+    border: 3px solid transparent;
 }
 .historyContent:hover {
     background-color: #111;
+    padding-block: 5px;
+    padding-left: 5px;
+    border: 3px solid white;
 }
 .histInfo {
     display: flex;
     justify-content: left;
     align-items: center;
     width: 100%;
+    margin-left: 5px;
+    transition: all .15s ease-in-out;
 }
 .histInfo > h2 {
     font-size: 1rem;
+}
+
+.historyContent:hover .histInfo {
+    margin-left: 0;
 }
