@@ -72,19 +72,19 @@
   "type": "module",
   "devDependencies": {
     "@electron/rebuild": "^4.0.3",
-    "@vitejs/plugin-react": "^6.0.0",
+    "@vitejs/plugin-react": "^6.0.1",
     "ansi-regex": "^6.2.2",
     "concurrently": "^9.2.1",
-    "electron": "^40.8.1",
+    "electron": "^41.0.3",
     "electron-builder": "^26.8.1",
     "electron-icon-builder": "^2.0.1",
     "gauge": "^5.0.2",
-    "vite": "^8.0.0",
-    "vite-plugin-electron": "^0.29.0"
+    "vite": "^8.0.1",
+    "vite-plugin-electron": "^0.29.1"
   },
   "dependencies": {
     "@iconify/react": "^6.0.2",
-    "better-sqlite3": "^12.6.2",
+    "better-sqlite3": "^12.8.0",
     "dashjs": "^5.1.1",
     "hls.js": "^1.6.15",
     "react": "^19.2.4",

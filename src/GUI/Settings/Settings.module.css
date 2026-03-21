@@ -376,6 +376,7 @@
 }
 .favInfo > h2 {
     font-size: 1.3rem;
+    padding-block: 5px;
 }
 .epThumbnail {
     width: 144px;
@@ -410,6 +411,8 @@
 }
 .histInfo > h2 {
     font-size: 1rem;
+    max-height: 81px;
+    overflow: hidden;
 }
 
 .historyContent:hover .histInfo {
