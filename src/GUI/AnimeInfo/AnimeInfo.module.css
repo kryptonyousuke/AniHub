@@ -87,16 +87,17 @@
     cursor: pointer;
     width: 100%;
     padding-block: 10px;
+    text-align: center;
     font-weight: bold;
     color: white;
     border: 0;
-    font-size: 1.2rem;
+    font-size: clamp(.9rem, 1vw, 1rem);
     border-radius: 10px;
     background-color: transparent;
     transition: all .2s ease-in-out;
 }
 .seasonSelector > *:hover {
-    background-color: #FE5F55;
+    background-color: #0bc499;
 }
 .dubbedOrSubbedSelector {
     display: flex;
@@ -109,8 +110,8 @@
     left: 138px;
     background-color: rgba(65, 65, 65, 0.7);
     border-radius: 10px;
-    padding: 5px;
     animation: appear .3s linear;
+    padding: 5px;
 }
 
 
@@ -141,6 +142,28 @@
     cursor: pointer;
     transition: all .3s ease-in-out;
 }
+
 .btnSelectDubbedOrSubbed:hover {
     filter: brightness(.9);
 }
+
+.btnSelectSeason {
+    width: 130px;
+    height: 40px;
+    font-size: clamp(.9rem, 1vw, 1rem);
+    font-weight: bold;
+    background-color: #0bc499;
+    border: 0;
+    color: rgb(250, 233, 201);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+    padding: 5px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.btnSelectSeasonhover:hover {
+    filter: brightness(.9);
+}
+

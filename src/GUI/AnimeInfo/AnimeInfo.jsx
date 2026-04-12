@@ -121,7 +121,7 @@ function AnimeInfo(){
                             }
                           </div>
                       }
-                      <button className={styles.btnSelectDubbedOrSubbed} onClick={() => {setIsSeasonSelectorActive(!isSeasonSelectorActive)}}>{selectedSeasonName}</button>
+                      <button className={styles.btnSelectSeason} onClick={() => {setIsSeasonSelectorActive(!isSeasonSelectorActive)}}>{selectedSeasonName}</button>
                         { isSubbedOrDubbedSelectorActive &&
                             <div className={styles.dubbedOrSubbedSelector}>
                                 <button onClick={() => {setIsDubbedSelected(false); setIsSubbedOrDubbedSelectorActive(false)}}>Subbed</button>
