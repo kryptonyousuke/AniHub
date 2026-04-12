@@ -22,6 +22,8 @@
     padding: 20px 30px;
     cursor: text;
     position: relative;
+    padding-bottom: 60px;
+    
 }
 .sinopse {
     text-align: justify;
@@ -53,9 +55,9 @@
 }
 .lowerInfoContainer {
     position: absolute;
-    right: 20px;
     bottom: 10px;
     display: flex;
+    gap: 10px;
     width: 100%;
 }
 @keyframes appear {
@@ -66,13 +68,45 @@
         opacity: 1;
     }
 }
+.seasonSelector {
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+    position: absolute;
+    width: 130px;
+    top: 50px;
+    z-index: 2;
+    background-color: rgba(65, 65, 65, 0.7);
+    border-radius: 10px;
+    padding: 5px;
+    animation: appear .3s linear;
+}
+
+
+.seasonSelector > * {
+    cursor: pointer;
+    width: 100%;
+    padding-block: 10px;
+    font-weight: bold;
+    color: white;
+    border: 0;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    background-color: transparent;
+    transition: all .2s ease-in-out;
+}
+.seasonSelector > *:hover {
+    background-color: #FE5F55;
+}
 .dubbedOrSubbedSelector {
     display: flex;
     flex-direction: column;
     row-gap: 4px;
     position: absolute;
     width: 130px;
-    top: -110px;
+    z-index: 2;
+    top: 50px;
+    left: 138px;
     background-color: rgba(65, 65, 65, 0.7);
     border-radius: 10px;
     padding: 5px;
