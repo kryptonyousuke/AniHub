@@ -20,6 +20,7 @@
     border: 2px solid white;
     border-radius: 20px;
     padding: 20px 30px;
+    cursor: text;
     position: relative;
 }
 .sinopse {
@@ -44,52 +45,18 @@
     background-color: #fe6055c4;
     border-radius: 2px;
 }
-.watchButton {
-    background-color: transparent;
-    color: #FE5F55;
-    border: 2px solid #FE5F55;
-    font-size: 2rem;
-    border-radius: 15px;
-    font-weight: bold;
-    padding-block: 10px;
-    width: 60%;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: color .2s ease-in, transform .16s ease-in, filter .2s ease-in;
-}
-.watchButton > span {
-    margin-left: -50px;
-    transition: all .2s ease-in;
-}
-.watchButton:hover {
-    background-image: linear-gradient(172deg, #FE5F55 40%, #ff00d4);
-    padding-block: 12px;
-    border: 0px;
-    color: black;
-    transform: scale(1.025);
-}
-.watchButton:hover > .eyeIcon {
-    opacity: 1;
-    transform: translate(0, 5px);
-}
-.watchButton:hover > span {
-    margin-left: 0;
-}
-.watchButton:focus {
-    transform: scale(.975);
-    filter: brightness(.8);
-}
 
 .eyeIcon {
     transform: translate(30px, 5px);
     opacity: 0;
     transition: all .3s ease-in-out;
 }
-.dubbedOrSubbedContainer {
+.lowerInfoContainer {
     position: absolute;
     right: 20px;
     bottom: 10px;
-    display: inline-block;
+    display: flex;
+    width: 100%;
 }
 @keyframes appear {
     0% {

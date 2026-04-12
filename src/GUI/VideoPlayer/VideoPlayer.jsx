@@ -8,6 +8,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { useLocation, useNavigate } from "react-router-dom";
 import { TbArrowsMaximize } from "react-icons/tb";
 import { FiMinimize2 } from "react-icons/fi";
+
 /* Formats seconds into H:M:S */
 const formatTime = (seconds) => {
   const totalSeconds = Math.trunc(seconds);
