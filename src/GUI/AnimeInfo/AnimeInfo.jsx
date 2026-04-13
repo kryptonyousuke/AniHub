@@ -45,7 +45,6 @@ function AnimeInfo(){
                 : s
             )
           );
-          setEpisodesLoaded(true);
         }
         else if (dubResult) {
           setDubbedSeasons(prev => 
@@ -108,13 +107,13 @@ function AnimeInfo(){
                           <div className={styles.seasonSelector}>
                             {isDubbedSelected ? dubbedSeasons.map((season) => <button key={season.season_id} onClick={() => { // dubbed seasons
                               setIsSeasonSelectorActive(false);
-                              setSelectedEpisodes(season.episodes);
+                              setSelectedEpisodes(season.episodes_list);
                               setSelectedSeasonName(season.season_name);
                               episodesGetter(season.season_id);
                             }}>{season.season_name}</button>) :
                             subbedSeasons.map((season) => <button key={season.season_id} onClick={() => { // subbed seasons
                               setIsSeasonSelectorActive(false);
-                              setSelectedEpisodes(season.episodes);
+                              setSelectedEpisodes(season.episodes_list);
                               setSelectedSeasonName(season.season_name);
                               episodesGetter(season.season_id);
                               
@@ -125,8 +124,8 @@ function AnimeInfo(){
                       <button className={styles.btnSelectSeason} onClick={() => {setIsSeasonSelectorActive(!isSeasonSelectorActive)}}>{selectedSeasonName}</button>
                         { isSubbedOrDubbedSelectorActive &&
                             <div className={styles.dubbedOrSubbedSelector}>
-                                <button onClick={() => {setIsDubbedSelected(false); setIsSubbedOrDubbedSelectorActive(false)}}>Subbed</button>
-                                <button onClick={() => {setIsDubbedSelected(true); setIsSubbedOrDubbedSelectorActive(false)}}>Dubbed</button>
+                              { subbedSeasons.length > 0 && <button onClick={() => { setIsDubbedSelected(false); setIsSubbedOrDubbedSelectorActive(false); episodesGetter(subbedSeasons[0].season_id) }}>Subbed</button>}
+                              { dubbedSeasons.length > 0 && <button onClick={() => { setIsDubbedSelected(true); setIsSubbedOrDubbedSelectorActive(false); episodesGetter(dubbedSeasons[0].season_id) }}>Dubbed</button>}
                             </div>
                         }
                         <button className={styles.btnSelectDubbedOrSubbed} onClick={() => { setIsSubbedOrDubbedSelectorActive(!isSubbedOrDubbedSelectorActive) }}>{isDubbedSelected ? "Dubbed" : "Subbed"}</button>
