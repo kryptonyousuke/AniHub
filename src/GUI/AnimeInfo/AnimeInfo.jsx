@@ -45,17 +45,19 @@ function AnimeInfo(){
                 : s
             )
           );
+          setEpisodesLoaded(true);
         }
         else if (dubResult) {
-          let updatedSeason = dubbedSeasons[dubbedSeasons.indexOf(dubResult)];
-          updatedSeason.episodes_list = allEpisodes;
           setDubbedSeasons(prev => 
-              prev.map((item, i) => 
-                i === dubbedSeasons.indexOf(dubResult) ? updatedSeason : item
-              ));
+            prev.map(s =>
+              s.season_id === seasonId
+                ? { ...s, episodes_list: allEpisodes }
+                : s
+            )
+          );
         }
+        setEpisodesLoaded(true);
       });
-      setEpisodesLoaded(true);
     }
     useEffect(() => {
         if (effectRan.current === false && isReload) {
@@ -88,7 +90,6 @@ function AnimeInfo(){
               }
               // setEpisodesState(data.episodes_list);
               // setSelectedEpisodes(data.episodes_list.subbed);
-              setEpisodesLoaded(true);
             });
             effectRan.current = true;
         }
@@ -105,13 +106,13 @@ function AnimeInfo(){
                     <div className={styles.lowerInfoContainer}>
                       { isSeasonSelectorActive && // season picker
                           <div className={styles.seasonSelector}>
-                            {isDubbedSelected ? dubbedSeasons.map((season) => <button onClick={() => { // dubbed seasons
+                            {isDubbedSelected ? dubbedSeasons.map((season) => <button key={season.season_id} onClick={() => { // dubbed seasons
                               setIsSeasonSelectorActive(false);
                               setSelectedEpisodes(season.episodes);
                               setSelectedSeasonName(season.season_name);
                               episodesGetter(season.season_id);
                             }}>{season.season_name}</button>) :
-                            subbedSeasons.map((season) => <button onClick={() => { // subbed seasons
+                            subbedSeasons.map((season) => <button key={season.season_id} onClick={() => { // subbed seasons
                               setIsSeasonSelectorActive(false);
                               setSelectedEpisodes(season.episodes);
                               setSelectedSeasonName(season.season_name);

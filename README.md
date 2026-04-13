@@ -114,10 +114,11 @@ AniHub is composed of three main layers:
 - [ ] Random banner
 
 ### Anime features
-- [x] history
+- [x] History;
+- [ ] Favorite.
 
 ### Manga features:
-- [x] history
+- [x] History
 - [x] Favorite;
 - [ ] Pages counter;
 - [ ] Optional season/chapter division (delegated by the plugin);
@@ -132,8 +133,8 @@ AniHub is composed of three main layers:
 - [ ] JS/TS plugins;
 - [ ] Better error handling;
 - [ ] UI polish;
-- [x] navigation history;
-- [x] internal database;
+- [x] Navigation history;
+- [x] Internal database;
 - [x] Basic plugin manager.
 
 
