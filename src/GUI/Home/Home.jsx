@@ -34,8 +34,10 @@ function Home() {
   }, []);
   return <div className={styles.home}>
         <AnihubHeader/>
-
-        <img className={styles.banner} src="banner3.jpg" alt="banner"></img>
+        <div className={styles.bannerArea}>
+          <img className={styles.banner} src="banner3.jpg" alt="banner"></img>
+          <h1 className={styles.animeNameOfTheYear}>Frieren</h1>
+        </div>
         <div className={styles.windowShadow}></div>
         <section className={styles.popularContentSection}>
             <h1 className={styles.titlePopularContent}><Icon icon="tabler:chart-bar-popular" width="40" height="40" /> Popular Content</h1>

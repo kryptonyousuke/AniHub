@@ -30,13 +30,33 @@
     }
 }
 
-.banner {
+.bannerArea {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    flex-direction: column;
     height: 350px;
     width: 70vw;
     margin-left: 15%;
+}
+
+.bannerArea > .animeNameOfTheYear {
+    text-align: center;
+    width: 100%;
+    font-size: clamp(1rem, 15vw, 180px);
+    background-color: transparent;
+    mix-blend-mode: difference;
+    padding: 0;
+    text-indent: -3.6%;
+}
+
+.banner {
+    height: 350px;
+    width: 100%;
     object-fit: cover;
     border-radius: 20px;
     animation: appear 2s ease-in-out;
+    position: absolute;
 }
 .titlePopularContent {
     font-weight: bold;
