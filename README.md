@@ -132,16 +132,14 @@ AniHub is composed of three main layers:
 - [x] Python plugin execution;
 - [ ] JS/TS plugins;
 - [ ] Better error handling;
-- [ ] UI polish;
 - [x] Navigation history;
 - [x] Internal database;
 - [x] Basic plugin manager.
-
+- [ ] All planned features were implemented;
 
 ## Roadmap (Beta)
-
+- [ ] UI polish;
 - [ ] All needed icons were added;
-- [ ] All planned features were implemented;
 - [ ] Entire internal plugin management (plugin import + communication) is complete;
 - [ ] Design is responsive enough;
 - [ ] Plugin API documentation.

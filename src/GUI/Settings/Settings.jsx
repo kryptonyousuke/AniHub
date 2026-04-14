@@ -54,7 +54,7 @@ function Settings({ setSettingsVisible }) {
                         background: selectedOption == 1 ? "white" : "transparent"
                   }} onClick={()=>setSelectedOption(1)}><h2 style={{
                             color: selectedOption == 1 ? "black" : "white"
-                      }}><Icon icon="mingcute:settings-6-fill" width="24" height="24" />Settings</h2></span>
+                      }}><Icon icon="mingcute:settings-6-fill" width="24" height="24" />Tweaks</h2></span>
               <span style={{
                         background: selectedOption == 2 ? "white" : "transparent"
                   }} onClick={()=>setSelectedOption(2)}><h2 style={{
@@ -109,6 +109,11 @@ function Settings({ setSettingsVisible }) {
           <div className={styles.mainSettings}>
             <div className={styles.modularOption}>
               <p className={styles.optionName}>Enable NSFW</p>
+              <input type="checkbox"></input>
+              <span className={styles.indicator}></span>
+            </div>
+            <div className={styles.modularOption}>
+              <p className={styles.optionName}>Discord Rich Presence</p>
               <input type="checkbox"></input>
               <span className={styles.indicator}></span>
             </div>

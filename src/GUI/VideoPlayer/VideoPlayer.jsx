@@ -15,322 +15,402 @@ const formatTime = (seconds) => {
   const hrs = Math.trunc(totalSeconds / 3600);
   const mins = Math.trunc((totalSeconds % 3600) / 60);
   const secs = totalSeconds % 60;
-  const fMins = String(mins).padStart(2, '0');
-  const fSecs = String(secs).padStart(2, '0');
+  const fMins = String(mins).padStart(2, "0");
+  const fSecs = String(secs).padStart(2, "0");
   if (hrs > 0) {
     return `${hrs}:${fMins}:${fSecs}`;
   }
   return `${fMins}:${fSecs}`;
 };
 
-function VideoPlayer({ onFullscreenChange }){
-    const location = useLocation();
-    const { episode, plugin, animeData } = location.state;
-    animeData.selectedEp = episode;
-    const effectRan = useRef(false);
-    const mouseMoveTimeout = useRef(null);
-    const player = useRef(null);
-    const [levels, setLevels] = useState([]);
-    const [currentLevel, setCurrentLevel] = useState(-1);
-    const hlsRef = useRef(null);
-    const dashRef = useRef(null);
-    const [isPaused, setIsPaused] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
-    const [volume, setVolume] = useState(1);
-    const [duration, setDuration] = useState(0);
-    const [currentTime, setCurrentTimeIndicator] = useState(0);
-    const [progress, setProgress] = useState(0);
-    const [isFullscreen, setIsFullscreen] = useState(false);
-    const [isMouseActive, setIsMouseActive] = useState(true);
-    const [isQualitySelectorActive, setIsQualitySelectorActive] = useState(false);
-    const [src, setSrc] = useState("");
-    const isManualResolution = useRef(null);
-    const navigate = useNavigate();
-    
-    useEffect(()=>{
-        console.log([JSON.stringify(location.state), animeData.animeName, episode.ep_thumbnail, false, "anime", Date.now()]);
-        window.electronAPI.storeHistory(JSON.stringify(location.state), `${episode.ep_number}. ${episode.ep_name} - ${animeData.animeName}`, episode.ep_thumbnail, 1, "anime", Date.now());
-        console.log(animeData);
-        if (player.current) {
-            if (src.includes(".m3u8")) {
-              console.log("Using HLS.");
-                const hls = new Hls({
-                  manifestLoadingMaxRetry: 4,
-                  levelLoadingMaxRetry: 4,
-                  maxMaxBufferLength: 600,
-                  maxBufferSize: 200 * 1000 * 1000,
-                  maxBufferHole: 0.5,
-                  highBufferWatchdogPeriod: 3,
-                  startFragPrefetch: true,
-                  autoStartLoad: true,
-                  backBufferLength: 1440,
-                  fragLoadingMaxRetry: 4,
-                  enableWorker: true,
-                  lowLatencyMode: false
-                });
+function VideoPlayer({ onFullscreenChange }) {
+  const location = useLocation();
+  const { episode, plugin, animeData } = location.state;
+  animeData.selectedEp = episode;
+  const effectRan = useRef(false);
+  const mouseMoveTimeout = useRef(null);
+  const player = useRef(null);
+  const [levels, setLevels] = useState([]);
+  const [currentLevel, setCurrentLevel] = useState(-1);
+  const hlsRef = useRef(null);
+  const dashRef = useRef(null);
+  const [isPaused, setIsPaused] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [volume, setVolume] = useState(1);
+  const [duration, setDuration] = useState(0);
+  const [currentTime, setCurrentTimeIndicator] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isMouseActive, setIsMouseActive] = useState(true);
+  const [isQualitySelectorActive, setIsQualitySelectorActive] = useState(false);
+  const [src, setSrc] = useState("");
+  const isManualResolution = useRef(null);
+  const navigate = useNavigate();
 
-                hlsRef.current = hls;
-                hlsRef.current.loadSource(src);
-                hlsRef.current.attachMedia(player.current);
-                hls.startLoad(0.2);
-                hlsRef.current.on(Hls.Events.MANIFEST_PARSED, (_, data) => {
-                    if (data.levels && data.levels.length > 0 && !isManualResolution.current) {
-                      setLevels(data.levels);
-                      setIsLoading(false);
-                    }
-                    else {
-                        if (!isManualResolution.current){
-                            setLevels([{ height: player.current.videoHeight}]);
-                        }
-                    }
-                });
-                hlsRef.current.on(Hls.Events.LEVEL_SWITCHED, (_, data) => {
-                    if (!isManualResolution.current){
-                        setCurrentLevel(data.level);
-                    }
-                });
-                hlsRef.current.on(Hls.Events.ERROR, (event, data) => {
-                  console.log("Error detected.")
-                  console.log(data)
-                  if (data.fatal) {
-                    switch (data.type) {
-                      case Hls.ErrorTypes.NETWORK_ERROR:
-                          console.log("Network error. Trying again...");
-                          hlsRef.current.startLoad();
-                          break;
-                      case Hls.ErrorTypes.MEDIA_ERROR:
-                          console.log("Media error. Trying again...");
-                          hlsRef.current.recoverMediaError();
-                          break;
-                      case Hls.ErrorTypes.OTHER_ERROR:
-                          console.log("Unknow error. Trying again.");
-                          hlsRef.current.recoverMediaError();
-                          break;
-                      default:
-                          hlsRef.current.destroy();
-                          break;
-                    }
-                  }
-                });
-              
-            } else if (src.includes(".mpd")) {
-                console.log("Using DASH.")
-                const dash = MediaPlayer().create();
-                dash.initialize(player.current, src, true);
-                dashRef.current = dash;
-                dashRef.current.on(MediaPlayer.events.STREAM_INITIALIZED, () => {
-                    const quals = dashRef.current.dash.getRepresentationsByType("video");
-                    setLevels(quals);
-                    setCurrentLevel(dashRef.current.dash.getQualityFor("video"));
-                });
-            } else {
-                console.log("Reading a generic video file.")
-                player.current.src = src;
+  useEffect(() => {
+    console.log([
+      JSON.stringify(location.state),
+      animeData.animeName,
+      episode.ep_thumbnail,
+      false,
+      "anime",
+      Date.now(),
+    ]);
+    window.electronAPI.storeHistory(
+      JSON.stringify(location.state),
+      `${episode.ep_number}. ${episode.ep_name} - ${animeData.animeName}`,
+      episode.ep_thumbnail,
+      1,
+      "anime",
+      Date.now(),
+    );
+    console.log(animeData);
+    if (player.current) {
+      if (src.includes(".m3u8")) {
+        console.log("Using HLS.");
+        const hls = new Hls({
+          manifestLoadingMaxRetry: 4,
+          levelLoadingMaxRetry: 4,
+          maxMaxBufferLength: 600,
+          maxBufferSize: 200 * 1000 * 1000,
+          maxBufferHole: 0.5,
+          highBufferWatchdogPeriod: 3,
+          startFragPrefetch: true,
+          autoStartLoad: true,
+          backBufferLength: 1440,
+          fragLoadingMaxRetry: 4,
+          enableWorker: true,
+          lowLatencyMode: false,
+        });
+
+        hlsRef.current = hls;
+        hlsRef.current.loadSource(src);
+        hlsRef.current.attachMedia(player.current);
+        hls.startLoad(0.2);
+        hlsRef.current.on(Hls.Events.MANIFEST_PARSED, (_, data) => {
+          if (
+            data.levels &&
+            data.levels.length > 0 &&
+            !isManualResolution.current
+          ) {
+            setLevels(data.levels);
+            setIsLoading(false);
+          } else {
+            if (!isManualResolution.current) {
+              setLevels([{ height: player.current.videoHeight }]);
             }
-        }
-        return () => {
-            if (hlsRef.current) hlsRef.current.destroy();
-            if (dashRef.current) dashRef.current.reset();
-        };
-    }, [src]);
-    const handleChange = (e) => {
-        const level = parseInt(e.target.value, 10);
-        setCurrentLevel(level);
-        if (!isManualResolution.current){
-            if (hlsRef.current) {
-                hlsRef.current.currentLevel = level;
-            } else if (dashRef.current) {
-                dashRef.current.setRepresentationForTypeByIndex('video', level);
-            }
-        }
-        else {
-            setSrc(levels[level].src);
-        }
-    };
-
-    // volume
-    useEffect(() => {
-        player.current.volume = volume;
-    }, [volume]);
-    
-    useEffect (() => {
-        if (!effectRan.current){
-            window.electronAPI.runSpecificPlugin(plugin, {
-                action: "episodeInfo",
-                episode_id: episode.ep_id
-            }).then((data) => {
-                data = JSON.parse(data);
-
-                if (data.manualResolution === true) {
-                    setLevels(data.streams);
-                    isManualResolution.current = true;
-                    setSrc(data.streams[data.streams.length - 1].src);
-                    setCurrentLevel(data.streams.length - 1);
-                } else {
-                }
-            });
-            effectRan.current = true;
-        }
-        player.current.addEventListener("timeupdate", () => {
-          setCurrentTimeIndicator(Math.trunc(player.current.currentTime));
-          setDuration(player.current.duration | 0);
-          if (player.current.currentTime / player.current.duration >= 0){
-              setProgress(player.current.currentTime / player.current.duration)
           }
-        })
-        const handleKeyDown = (e) => {
-            if (e.key === "F11") {
-                setIsFullscreen((prev) => {
-                    const newState = !prev;
-                    onFullscreenChange(newState);
-                    return newState;
-                });
+        });
+        hlsRef.current.on(Hls.Events.LEVEL_SWITCHED, (_, data) => {
+          if (!isManualResolution.current) {
+            setCurrentLevel(data.level);
+          }
+        });
+        hlsRef.current.on(Hls.Events.ERROR, (event, data) => {
+          console.log("Error detected.");
+          console.log(data);
+          if (data.fatal) {
+            switch (data.type) {
+              case Hls.ErrorTypes.NETWORK_ERROR:
+                console.log("Network error. Trying again...");
+                hlsRef.current.startLoad();
+                break;
+              case Hls.ErrorTypes.MEDIA_ERROR:
+                console.log("Media error. Trying again...");
+                hlsRef.current.recoverMediaError();
+                break;
+              case Hls.ErrorTypes.OTHER_ERROR:
+                console.log("Unknow error. Trying again.");
+                hlsRef.current.recoverMediaError();
+                break;
+              default:
+                hlsRef.current.destroy();
+                break;
             }
-        };
+          }
+        });
+      } else if (src.includes(".mpd")) {
+        console.log("Using DASH.");
+        const dash = MediaPlayer().create();
+        dash.initialize(player.current, src, true);
+        dashRef.current = dash;
+        dashRef.current.on(MediaPlayer.events.STREAM_INITIALIZED, () => {
+          const quals = dashRef.current.dash.getRepresentationsByType("video");
+          setLevels(quals);
+          setCurrentLevel(dashRef.current.dash.getQualityFor("video"));
+        });
+      } else {
+        console.log("Reading a generic video file.");
+        player.current.src = src;
+      }
+    }
+    return () => {
+      if (hlsRef.current) hlsRef.current.destroy();
+      if (dashRef.current) dashRef.current.reset();
+    };
+  }, [src]);
+  const handleChange = (e) => {
+    const level = parseInt(e.target.value, 10);
+    setCurrentLevel(level);
+    if (!isManualResolution.current) {
+      if (hlsRef.current) {
+        hlsRef.current.currentLevel = level;
+      } else if (dashRef.current) {
+        dashRef.current.setRepresentationForTypeByIndex("video", level);
+      }
+    } else {
+      setSrc(levels[level].src);
+    }
+  };
 
-        window.addEventListener("keydown", handleKeyDown);
-        player.current.addEventListener('waiting', () => {
-            setIsLoading(true);
+  // volume
+  useEffect(() => {
+    player.current.volume = volume;
+  }, [volume]);
+
+  useEffect(() => {
+    if (!effectRan.current) {
+      window.electronAPI
+        .runSpecificPlugin(plugin, {
+          action: "episodeInfo",
+          episode_id: episode.ep_id,
+        })
+        .then((data) => {
+          data = JSON.parse(data);
+
+          if (data.manualResolution === true) {
+            setLevels(data.streams);
+            isManualResolution.current = true;
+            setSrc(data.streams[data.streams.length - 1].src);
+            setCurrentLevel(data.streams.length - 1);
+          } else {
+          }
         });
-        player.current.addEventListener('playing', () => {
-            setIsLoading(false);
+      effectRan.current = true;
+    }
+    player.current.addEventListener("timeupdate", () => {
+      setCurrentTimeIndicator(Math.trunc(player.current.currentTime));
+      setDuration(player.current.duration | 0);
+      if (player.current.currentTime / player.current.duration >= 0) {
+        setProgress(player.current.currentTime / player.current.duration);
+      }
+    });
+    const handleKeyDown = (e) => {
+      if (e.key === "F11") {
+        setIsFullscreen((prev) => {
+          const newState = !prev;
+          onFullscreenChange(newState);
+          return newState;
         });
-        player.current.addEventListener('ended', () => {
-            setIsLoading(false);
+      } else if (e.code === "Space") {
+        console.log("Space pressed.");
+        if (player.current === null) return;
+        e.preventDefault();
+        console.log("isPaused: ", isPaused);
+        setIsPaused(prev => {
+          prev ? player.current.play() : player.current.pause();
+          return !prev;
         });
-    }, [])
-    const handleMouseMove = () => {
-        setIsMouseActive(true);
-        clearTimeout(mouseMoveTimeout.current);
-        mouseMoveTimeout.current = setTimeout(() => {
-            setIsMouseActive(false);
-        }, 3000);
+      }
     };
 
+    window.addEventListener("keydown", handleKeyDown);
+    player.current.addEventListener("waiting", () => {
+      setIsLoading(true);
+    });
+    player.current.addEventListener("playing", () => {
+      setIsLoading(false);
+    });
+    player.current.addEventListener("ended", () => {
+      setIsLoading(false);
+    });
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+  const handleMouseMove = () => {
+    setIsMouseActive(true);
+    clearTimeout(mouseMoveTimeout.current);
+    mouseMoveTimeout.current = setTimeout(() => {
+      setIsMouseActive(false);
+    }, 3000);
+  };
 
-
-
-    /*
+  /*
         Component itself starts here.
     */
 
-
-
-
-    return <div className={styles.videoPlayerContainer} onMouseMove={handleMouseMove} onClick={handleMouseMove} style={{
-        cursor: isMouseActive ? "default" : "none"
-    }}>
-        <div className={styles.topControls} style={{
-                "--topDistance": !isFullscreen ? "35px" : "0px",
-                opacity: isMouseActive ? 1 : 0
-            }}>
-            <FaArrowLeftLong className={styles.backArrow} onClick={()=>{
-                if (isFullscreen){
-                    window.electronAPI.windowAction("toggle-fullscreen");
-                }
-                onFullscreenChange(false);
-                setIsFullscreen(false);
-                navigate("/animeinfo", {
-                        state: {
-                            isReload: true,
-                            animeName: animeData.animeName,
-                            animeID: animeData.animeID,
-                            plugin: plugin,
-                            animeData: animeData
-                        }})
-            }} />
-            <h1>{episode.ep_name}</h1>
-            {
-                !isFullscreen ?
-            <TbArrowsMaximize className={styles.enterFullscreen} onClick={() => {
-                window.electronAPI.windowAction("toggle-fullscreen")
-                onFullscreenChange(true);
-                setIsFullscreen(prev => !prev);
-            }} /> :
-            <FiMinimize2 className={styles.exitFullscreen} onClick={() => {
-                window.electronAPI.windowAction("toggle-fullscreen");
-                onFullscreenChange(false);
-                setIsFullscreen(prev => !prev);
-            }} />
+  return (
+    <div
+      className={styles.videoPlayerContainer}
+      onMouseMove={handleMouseMove}
+      onClick={handleMouseMove}
+      style={{
+        cursor: isMouseActive ? "default" : "none",
+      }}
+    >
+      <div
+        className={styles.topControls}
+        style={{
+          "--topDistance": !isFullscreen ? "35px" : "0px",
+          opacity: isMouseActive ? 1 : 0,
+        }}
+      >
+        <FaArrowLeftLong
+          className={styles.backArrow}
+          onClick={() => {
+            if (isFullscreen) {
+              window.electronAPI.windowAction("toggle-fullscreen");
             }
+            onFullscreenChange(false);
+            setIsFullscreen(false);
+            navigate("/animeinfo", {
+              state: {
+                isReload: true,
+                animeName: animeData.animeName,
+                animeID: animeData.animeID,
+                plugin: plugin,
+                animeData: animeData,
+              },
+            });
+          }}
+        />
+        <h1>{episode.ep_name}</h1>
+        {!isFullscreen ? (
+          <TbArrowsMaximize
+            className={styles.enterFullscreen}
+            onClick={() => {
+              window.electronAPI.windowAction("toggle-fullscreen");
+              onFullscreenChange(true);
+              setIsFullscreen((prev) => !prev);
+            }}
+          />
+        ) : (
+          <FiMinimize2
+            className={styles.exitFullscreen}
+            onClick={() => {
+              window.electronAPI.windowAction("toggle-fullscreen");
+              onFullscreenChange(false);
+              setIsFullscreen((prev) => !prev);
+            }}
+          />
+        )}
+      </div>
+      <video
+        ref={player}
+        src={src}
+        className={styles.videoPlayer}
+        autoPlay={true}
+        onClick={() => {
+          setIsPaused(!isPaused);
+          !isPaused ? player.current.pause() : player.current.play();
+        }}
+        onDoubleClick={() => {
+          setIsFullscreen((prev) => !prev);
+          onFullscreenChange((prev) => !prev);
+          window.electronAPI.windowAction("toggle-fullscreen");
+        }}
+      />
+      {isLoading && (
+        <div className={styles.loadingOverlay}>
+          <img src="AniHub_transparent.svg" className={styles.anihubIcon} />
         </div>
-        <video ref={player} src={src} className={styles.videoPlayer} autoPlay={true} onClick={()=> {
-            setIsPaused(!isPaused);
-            !isPaused ? player.current.pause() : player.current.play()
-            }} onDoubleClick={() => {
+      )}
+      <div
+        className={styles.controls}
+        style={{
+          opacity: isMouseActive ? 1 : 0,
+        }}
+      >
+        {isPaused ? (
+          <FaPlay
+            className={styles.playPause}
+            onClick={() => {
+              player.current.play();
+              setIsPaused(false);
+            }}
+          />
+        ) : (
+          <FaPause
+            className={styles.playPause}
+            onClick={() => {
+              player.current.pause();
+              setIsPaused(true);
+            }}
+          />
+        )}
+        <input
+          type="range"
+          min="0"
+          max="1"
+          value={progress}
+          step="0.00000000000001"
+          className={styles.timeSlider}
+          onChange={(e) => {
+            player.current.currentTime =
+              e.target.value * player.current.duration;
+            setProgress(e.target.value);
+          }}
+          style={{ "--progress": `${progress * 100}%` }}
+        />
 
-                setIsFullscreen(prev => !prev);
-                onFullscreenChange(prev => !prev);
-                window.electronAPI.windowAction("toggle-fullscreen");
-
-            }} />
-        {isLoading && <div className={styles.loadingOverlay}>
-                <img src="AniHub_transparent.svg" className={styles.anihubIcon} />
-            </div>}
-        <div className={styles.controls} style={{
-            opacity: isMouseActive ? 1 : 0
-        }}>
-        
-            {isPaused ? <FaPlay className={styles.playPause} onClick={() => {player.current.play(); setIsPaused(false);}} /> : <FaPause className={styles.playPause} onClick={() => {player.current.pause(); setIsPaused(true)}} />}
-            <input type="range"
-                min="0"
-                max="1"
-                value={progress}
-                step="0.00000000000001"
-                className={styles.timeSlider}
-                onChange={(e) => {
-                    player.current.currentTime = e.target.value * player.current.duration;
-                    setProgress(e.target.value);
-                }}
-                style={{ "--progress": `${progress * 100}%` }}
-                />
-
-
-        
-            <input
-                type="range"
-                min="0"
-                max="1"
-                step="0.01"
-                value={volume}
-                onChange={(e) => setVolume(parseFloat(e.target.value))}
-                onWheel={(e) => {
-                    const step = 0.05;
-                    if (e.deltaY < 0) {
-                        setVolume((prevVolume) => Math.min(prevVolume + step, 1));
-                    } else {
-                        setVolume((prevVolume) => Math.max(prevVolume - step, 0));
-                    }
-                    e.preventDefault()
-                }}
-                className={styles.soundSlider}
-                style={{ "--vol": `${volume * 100}%` }}
-            />
-            {isQualitySelectorActive && <div className={styles.qualitySelectorValuesContainer}>
-                {levels.length > 0 && levels.map((l, i) => (
-                  <div onClick={() => {
+        <input
+          type="range"
+          min="0"
+          max="1"
+          step="0.01"
+          value={volume}
+          onChange={(e) => setVolume(parseFloat(e.target.value))}
+          onWheel={(e) => {
+            const step = 0.05;
+            if (e.deltaY < 0) {
+              setVolume((prevVolume) => Math.min(prevVolume + step, 1));
+            } else {
+              setVolume((prevVolume) => Math.max(prevVolume - step, 0));
+            }
+            e.preventDefault();
+          }}
+          className={styles.soundSlider}
+          style={{ "--vol": `${volume * 100}%` }}
+        />
+        {isQualitySelectorActive && (
+          <div className={styles.qualitySelectorValuesContainer}>
+            {levels.length > 0 &&
+              levels.map((l, i) => (
+                <div
+                  onClick={() => {
                     setIsLoading(true);
                     setCurrentLevel(i);
                     handleChange({
-                        target: {
-                            value: i
-                        }
+                      target: {
+                        value: i,
+                      },
                     });
-                    setIsQualitySelectorActive(false);}}>
-                        {l.height}p
-                    </div>
-                ))}
-            </div>
-            }
-            <div className={styles.qualitySelector} onClick={() => {
-                setIsQualitySelectorActive(!isQualitySelectorActive)}
-                } style={{
-                    borderColor: isQualitySelectorActive ? "white" : "transparent"
-                }}>
-                {levels[currentLevel] ? `${levels[currentLevel].height}p` : 'Auto'}
-            </div>
-            <p className={styles.timeIndicator}>{formatTime(currentTime)} - {formatTime(duration)} | {Math.trunc(progress*100)}%</p>
+                    setIsQualitySelectorActive(false);
+                  }}
+                >
+                  {l.height}p
+                </div>
+              ))}
+          </div>
+        )}
+        <div
+          className={styles.qualitySelector}
+          onClick={() => {
+            setIsQualitySelectorActive(!isQualitySelectorActive);
+          }}
+          style={{
+            borderColor: isQualitySelectorActive ? "white" : "transparent",
+          }}
+        >
+          {levels[currentLevel] ? `${levels[currentLevel].height}p` : "Auto"}
         </div>
+        <p className={styles.timeIndicator}>
+          {formatTime(currentTime)} - {formatTime(duration)} |{" "}
+          {Math.trunc(progress * 100)}%
+        </p>
+      </div>
     </div>
+  );
 }
 export default VideoPlayer;

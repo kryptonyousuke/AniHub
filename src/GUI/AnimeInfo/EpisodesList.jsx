@@ -9,7 +9,7 @@ function EpisodesList( { animeName, animeID, description, keyVisual, episodes, s
         {selectedEpisodes.map((season) => {
             return season.map((episode)=>{
 
-                    return <div className={styles.episode} onClick={()=>{navigate("/player", {
+                    return <div className={styles.episode} key={episode.ep_id} onClick={()=>{navigate("/player", {
                         state: {
                             episode: episode,
                             plugin: plugin,
