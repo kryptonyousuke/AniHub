@@ -88,8 +88,6 @@ function AnimeInfo(){
                 setSelectedSeasonName(subSeasons[0].season_name);
                 episodesGetter(subSeasons[0].season_id, dubSeasons, subSeasons);
               }
-              // setEpisodesState(data.episodes_list);
-              // setSelectedEpisodes(data.episodes_list.subbed);
             });
             effectRan.current = true;
         }
@@ -123,8 +121,8 @@ function AnimeInfo(){
                       <button className={styles.btnSelectSeason} onClick={() => {setIsSeasonSelectorActive(!isSeasonSelectorActive)}}>{selectedSeasonName}</button>
                         { isSubbedOrDubbedSelectorActive &&
                             <div className={styles.dubbedOrSubbedSelector}>
-                  {subbedSeasons.length > 0 && <button onClick={() => { setIsDubbedSelected(false); setIsSubbedOrDubbedSelectorActive(false); episodesGetter(subbedSeasons[0].season_id); setSelectedSeasonName(subbedSeasons[0].season_name); }}>Subbed</button>}
-                  {dubbedSeasons.length > 0 && <button onClick={() => { setIsDubbedSelected(true); setIsSubbedOrDubbedSelectorActive(false); episodesGetter(dubbedSeasons[0].season_id); setSelectedSeasonName(dubbedSeasons[0].season_name); }}>Dubbed</button>}
+                              {subbedSeasons.length > 0 && <button onClick={() => { setIsDubbedSelected(false); setIsSubbedOrDubbedSelectorActive(false); episodesGetter(subbedSeasons[0].season_id); setSelectedSeasonName(subbedSeasons[0].season_name); }}>Subbed</button>}
+                              {dubbedSeasons.length > 0 && <button onClick={() => { setIsDubbedSelected(true); setIsSubbedOrDubbedSelectorActive(false); episodesGetter(dubbedSeasons[0].season_id); setSelectedSeasonName(dubbedSeasons[0].season_name); }}>Dubbed</button>}
                             </div>
                         }
                         <button className={styles.btnSelectDubbedOrSubbed} onClick={() => { setIsSubbedOrDubbedSelectorActive(!isSubbedOrDubbedSelectorActive) }}>{isDubbedSelected ? "Dubbed" : "Subbed"}</button>

@@ -10,8 +10,8 @@
     gap: 30px;
 }
 .animeKeyVisual {
-    width: clamp(300px, 30vw, 470px);
-    height: clamp(532px, 40vw, 835px);
+    width: clamp(300px, 28.23svw, 470px);
+    height: clamp(532px, 50svw, 835px);
     border-radius: 30px;
     object-fit: cover;
 }
@@ -91,7 +91,7 @@
     font-weight: bold;
     color: white;
     border: 0;
-    font-size: clamp(.9rem, 1vw, 1rem);
+    font-size: clamp(.9rem, 1vw, .96rem);
     border-radius: 10px;
     background-color: transparent;
     transition: all .2s ease-in-out;
