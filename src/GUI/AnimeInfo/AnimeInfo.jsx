@@ -20,9 +20,9 @@ function AnimeInfo(){
     const [ episodesLoaded, setEpisodesLoaded ] = useState(false);
     const [ selectedSeasonName, setSelectedSeasonName ] = useState("Season 1");
     const effectRan = useRef(false);
-    const episodesGetter = (seasonId) => {
+    const episodesGetter = (seasonId, dubSeasonsArg = dubbedSeasons, subSeasonsArg = subbedSeasons) => {
       let subResult = subbedSeasons.find(s => s.season_id === seasonId);
-      let dubResult = dubbedSeasons.find(s => s.season_id === seasonId);
+      let dubResult = dubSeasonsArg.find(s => s.season_id === seasonId);
       let sub = subResult?.episodes_list;
       let dub = dubResult?.episodes_list;
       if (sub && sub.length > 0) {
@@ -80,12 +80,13 @@ function AnimeInfo(){
               setSubbedSeasons(subSeasons);
               setDubbedSeasons(dubSeasons);
               if (dubSeasons.length > 0) {
+                setIsDubbedSelected(true);
                 setSelectedSeasonName(dubSeasons[0].season_name);
-                episodesGetter(dubSeasons[0].season_id);
+                episodesGetter(dubSeasons[0].season_id, dubSeasons, subSeasons);
               }
-              if (subSeasons.length > 0) {
+              else if (subSeasons.length > 0) {
                 setSelectedSeasonName(subSeasons[0].season_name);
-                episodesGetter(subSeasons[0].season_id);
+                episodesGetter(subSeasons[0].season_id, dubSeasons, subSeasons);
               }
               // setEpisodesState(data.episodes_list);
               // setSelectedEpisodes(data.episodes_list.subbed);
@@ -107,13 +108,11 @@ function AnimeInfo(){
                           <div className={styles.seasonSelector}>
                             {isDubbedSelected ? dubbedSeasons.map((season) => <button key={season.season_id} onClick={() => { // dubbed seasons
                               setIsSeasonSelectorActive(false);
-                              setSelectedEpisodes(season.episodes_list);
                               setSelectedSeasonName(season.season_name);
                               episodesGetter(season.season_id);
                             }}>{season.season_name}</button>) :
                             subbedSeasons.map((season) => <button key={season.season_id} onClick={() => { // subbed seasons
                               setIsSeasonSelectorActive(false);
-                              setSelectedEpisodes(season.episodes_list);
                               setSelectedSeasonName(season.season_name);
                               episodesGetter(season.season_id);
                               
@@ -124,8 +123,8 @@ function AnimeInfo(){
                       <button className={styles.btnSelectSeason} onClick={() => {setIsSeasonSelectorActive(!isSeasonSelectorActive)}}>{selectedSeasonName}</button>
                         { isSubbedOrDubbedSelectorActive &&
                             <div className={styles.dubbedOrSubbedSelector}>
-                              { subbedSeasons.length > 0 && <button onClick={() => { setIsDubbedSelected(false); setIsSubbedOrDubbedSelectorActive(false); episodesGetter(subbedSeasons[0].season_id) }}>Subbed</button>}
-                              { dubbedSeasons.length > 0 && <button onClick={() => { setIsDubbedSelected(true); setIsSubbedOrDubbedSelectorActive(false); episodesGetter(dubbedSeasons[0].season_id) }}>Dubbed</button>}
+                  {subbedSeasons.length > 0 && <button onClick={() => { setIsDubbedSelected(false); setIsSubbedOrDubbedSelectorActive(false); episodesGetter(subbedSeasons[0].season_id); setSelectedSeasonName(subbedSeasons[0].season_name); }}>Subbed</button>}
+                  {dubbedSeasons.length > 0 && <button onClick={() => { setIsDubbedSelected(true); setIsSubbedOrDubbedSelectorActive(false); episodesGetter(dubbedSeasons[0].season_id); setSelectedSeasonName(dubbedSeasons[0].season_name); }}>Dubbed</button>}
                             </div>
                         }
                         <button className={styles.btnSelectDubbedOrSubbed} onClick={() => { setIsSubbedOrDubbedSelectorActive(!isSubbedOrDubbedSelectorActive) }}>{isDubbedSelected ? "Dubbed" : "Subbed"}</button>
