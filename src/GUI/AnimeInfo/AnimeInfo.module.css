@@ -166,4 +166,9 @@
 .btnSelectSeasonhover:hover {
     filter: brightness(.9);
 }
-
+.star {
+    position: absolute;
+    right: 50px;
+    top: -5px;
+    cursor: pointer;
+}

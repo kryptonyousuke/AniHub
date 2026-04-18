@@ -4,6 +4,8 @@ import styles from "./AnimeInfo.module.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import EpisodesList from "./EpisodesList";
 import { useEffect, useState, useRef } from "react";
+import { Icon } from "@iconify/react";
+
 
 function AnimeInfo(){
     const location = useLocation();
@@ -18,6 +20,8 @@ function AnimeInfo(){
     const [ subbedSeasons, setSubbedSeasons ] = useState([]);
     const [ isSeasonSelectorActive, setIsSeasonSelectorActive ] = useState(false);
     const [ episodesLoaded, setEpisodesLoaded ] = useState(false);
+    const [isStarred, setIsStarred] = useState(false);
+
     const [ selectedSeasonName, setSelectedSeasonName ] = useState("Season 1");
     const effectRan = useRef(false);
     const episodesGetter = (seasonId, dubSeasonsArg = dubbedSeasons, subSeasonsArg = subbedSeasons) => {
@@ -91,6 +95,7 @@ function AnimeInfo(){
             });
             effectRan.current = true;
         }
+        
     }, []);
     return <div className={styles.animeInfo}>
         <AnihubHeader/>
@@ -118,6 +123,7 @@ function AnimeInfo(){
                             }
                           </div>
                       }
+
                       <button className={styles.btnSelectSeason} onClick={() => {setIsSeasonSelectorActive(!isSeasonSelectorActive)}}>{selectedSeasonName}</button>
                         { isSubbedOrDubbedSelectorActive &&
                             <div className={styles.dubbedOrSubbedSelector}>
@@ -125,7 +131,23 @@ function AnimeInfo(){
                               {dubbedSeasons.length > 0 && <button onClick={() => { setIsDubbedSelected(true); setIsSubbedOrDubbedSelectorActive(false); episodesGetter(dubbedSeasons[0].season_id); setSelectedSeasonName(dubbedSeasons[0].season_name); }}>Dubbed</button>}
                             </div>
                         }
-                        <button className={styles.btnSelectDubbedOrSubbed} onClick={() => { setIsSubbedOrDubbedSelectorActive(!isSubbedOrDubbedSelectorActive) }}>{isDubbedSelected ? "Dubbed" : "Subbed"}</button>
+                      <button className={styles.btnSelectDubbedOrSubbed} onClick={() => { setIsSubbedOrDubbedSelectorActive(!isSubbedOrDubbedSelectorActive) }}>{isDubbedSelected ? "Dubbed" : "Subbed"}</button>
+                      {!isStarred ? <Icon icon="line-md:star" width="50" height="50" className={styles.star} onClick={() => {
+                        setIsStarred(prevState => !prevState);
+                        window.electronAPI.storeFavorite(JSON.stringify({
+                            animeName: animeName,
+                            description: description,
+                            keyVisual: keyVisual,
+                            animeID: animeID,
+                        }), animeName, keyVisual, 0, "anime").then((result) => {
+                          if (result) {
+                            alert("Saved.");
+                            return;
+                          }
+                          alert("Failed.")
+                        });
+                      }
+                      } /> : <Icon icon="line-md:star-filled" width="50" height="50" className={styles.star} onClick={() => setIsStarred(prevState => !prevState)} />}
                     </div>
                 </div>
                 {
