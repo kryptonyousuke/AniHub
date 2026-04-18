@@ -184,7 +184,7 @@ function Settings({ setSettingsVisible }) {
                   let animeGeneralData = JSON.parse(info.command_id);
                   navigate("/player", {
                     state: {
-                      episode: animeGeneralData.episode,
+                      selectedEpisode: animeGeneralData.episode,
                       plugin: animeGeneralData.plugin,
                       animeData: animeGeneralData.animeData
                     }
