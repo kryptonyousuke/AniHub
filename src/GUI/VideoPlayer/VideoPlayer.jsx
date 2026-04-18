@@ -8,6 +8,8 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { useLocation, useNavigate } from "react-router-dom";
 import { TbArrowsMaximize } from "react-icons/tb";
 import { FiMinimize2 } from "react-icons/fi";
+import { Icon } from '@iconify/react';
+
 
 /* Formats seconds into H:M:S */
 const formatTime = (seconds) => {
@@ -25,8 +27,9 @@ const formatTime = (seconds) => {
 
 function VideoPlayer({ onFullscreenChange }) {
   const location = useLocation();
-  const { episode, plugin, animeData } = location.state;
-  animeData.selectedEp = episode;
+  const { selectedEpisode, plugin, animeData } = location.state;
+  animeData.selectedEp = selectedEpisode;
+  const [ episode, setEpisode ] = useState(selectedEpisode);
   const effectRan = useRef(false);
   const mouseMoveTimeout = useRef(null);
   const player = useRef(null);
@@ -46,16 +49,25 @@ function VideoPlayer({ onFullscreenChange }) {
   const [src, setSrc] = useState("");
   const isManualResolution = useRef(null);
   const navigate = useNavigate();
+  const loadEpisode = (plugin, episode) => {
+    window.electronAPI
+      .runSpecificPlugin(plugin, {
+        action: "episodeInfo",
+        episode_id: episode.ep_id,
+      })
+      .then((data) => {
+        data = JSON.parse(data);
 
+        if (data.manualResolution === true) {
+          setLevels(data.streams);
+          isManualResolution.current = true;
+          setSrc(data.streams[data.streams.length - 1].src);
+          setCurrentLevel(data.streams.length - 1);
+        } else {
+        }
+      });
+  }
   useEffect(() => {
-    console.log([
-      JSON.stringify(location.state),
-      animeData.animeName,
-      episode.ep_thumbnail,
-      false,
-      "anime",
-      Date.now(),
-    ]);
     window.electronAPI.storeHistory(
       JSON.stringify(location.state),
       `${episode.ep_number}. ${episode.ep_name} - ${animeData.animeName}`,
@@ -170,22 +182,10 @@ function VideoPlayer({ onFullscreenChange }) {
 
   useEffect(() => {
     if (!effectRan.current) {
-      window.electronAPI
-        .runSpecificPlugin(plugin, {
-          action: "episodeInfo",
-          episode_id: episode.ep_id,
-        })
-        .then((data) => {
-          data = JSON.parse(data);
-
-          if (data.manualResolution === true) {
-            setLevels(data.streams);
-            isManualResolution.current = true;
-            setSrc(data.streams[data.streams.length - 1].src);
-            setCurrentLevel(data.streams.length - 1);
-          } else {
-          }
-        });
+      console.log("AnimeData: ", animeData);
+      console.log("episode: ", episode);
+      console.log("next episode: ", animeData.episodes[0].find(ep => ep.ep_number === episode.ep_number + 1))
+      loadEpisode(plugin, episode);
       effectRan.current = true;
     }
     player.current.addEventListener("timeupdate", () => {
@@ -409,6 +409,13 @@ function VideoPlayer({ onFullscreenChange }) {
           {formatTime(currentTime)} - {formatTime(duration)} |{" "}
           {Math.trunc(progress * 100)}%
         </p>
+        { (animeData.episodes[0].find(ep => ep.ep_number === episode.ep_number + 1) && progress >= 0.90) &&
+          <button className={styles.nextEpisode} onClick={() => {
+            let nextEp = animeData.episodes[0].find(ep => ep.ep_number === episode.ep_number + 1);
+            setEpisode(nextEp);
+            loadEpisode(plugin, nextEp);
+          }}><Icon icon="wpf:next" width="28" height="28"/> {animeData.episodes[0].find(ep => ep.ep_number === episode.ep_number + 1).ep_number}. {animeData.episodes[0].find(ep => ep.ep_number === episode.ep_number + 1).ep_name}</button>
+        }
       </div>
     </div>
   );

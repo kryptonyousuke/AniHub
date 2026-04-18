@@ -11,7 +11,7 @@ function EpisodesList( { animeName, animeID, description, keyVisual, episodes, s
 
                     return <div className={styles.episode} key={episode.ep_id} onClick={()=>{navigate("/player", {
                         state: {
-                            episode: episode,
+                            selectedEpisode: episode,
                             plugin: plugin,
                             animeData: {
                                 animeName: animeName,

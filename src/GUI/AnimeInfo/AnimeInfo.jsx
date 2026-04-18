@@ -9,7 +9,7 @@ function AnimeInfo(){
     const location = useLocation();
     const { isReload, animeName, animeID, plugin, animeData} = location.state;
     const [ description, setDescription ] = useState("");
-    const [ episodesState, setEpisodesState ] = useState({}); // keeps here just for compatibility for now
+    // const [ episodesState, setEpisodesState ] = useState({});
     const [ selectedEpisodes, setSelectedEpisodes ] = useState([]);
     const [ keyVisual, setKeyVisual ] = useState("");
     const [ isDubbedSelected, setIsDubbedSelected ] = useState(false);
@@ -130,7 +130,7 @@ function AnimeInfo(){
                 </div>
                 {
                     episodesLoaded &&
-                    <EpisodesList animeName={animeName} animeID={animeID} description={description} keyVisual={keyVisual} episodes={episodesState} selectedEpisodes={selectedEpisodes} plugin={plugin}/>
+                    <EpisodesList animeName={animeName} animeID={animeID} description={description} keyVisual={keyVisual} episodes={selectedEpisodes} selectedEpisodes={selectedEpisodes} plugin={plugin}/>
                 }
             </div>
         </div>
