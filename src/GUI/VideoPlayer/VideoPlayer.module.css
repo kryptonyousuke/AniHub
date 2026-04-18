@@ -55,6 +55,14 @@
       opacity: 1;
    }
 }
+@keyframes appear2 {
+   0% {
+      opacity: 0;
+   }
+   100% {
+      opacity: .6;
+   }
+}
 @keyframes appearing {
    0% {
       opacity: 0;
@@ -232,6 +240,7 @@
     padding: 5px 20px;
     opacity: .6;
     transition: all .2s ease-in-out;
+    animation: appear2 1s ease-in-out;
 }
 .nextEpisode:hover {
     opacity: 1;

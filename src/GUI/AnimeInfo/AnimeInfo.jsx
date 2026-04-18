@@ -66,7 +66,7 @@ function AnimeInfo(){
             // setEpisodesState(animeData.episodes);
             setEpisodesLoaded(true);
         }
-        if (effectRan.current === false && isReload === false) {
+        if (effectRan.current === false) {
             let result = window.electronAPI.runSpecificPlugin(plugin, {
                 "action": "animeInfo",
                 "anime_id": animeID

@@ -211,6 +211,12 @@ function VideoPlayer({ onFullscreenChange }) {
           prev ? player.current.play() : player.current.pause();
           return !prev;
         });
+      } else if (e.code === "ArrowLeft") {
+        e.preventDefault();
+        if (player.current) player.current.currentTime -= 5;
+      } else if (e.code === "ArrowRight") {
+        e.preventDefault();
+        if (player.current) player.current.currentTime += 5;
       }
     };
 
