@@ -44,8 +44,11 @@
     text-align: center;
     width: 100%;
     font-size: clamp(1rem, 15vw, 180px);
-    background-color: transparent;
-    mix-blend-mode: difference;
+    color: transparent;
+    background-image: linear-gradient(35deg, red,  blue);
+    mix-blend-mode:hard-light;
+    background-clip: text;
+    z-index: 2;
     padding: 0;
     text-indent: -3.6%;
     font-family: "Grenze Gotisch";
