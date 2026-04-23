@@ -188,6 +188,8 @@ const anihubDB = new AnihubDatabase(dbPath);
 
 ipcMain.handle("store-favorite", (event, command_id, name, keyvisual_url, nsfw, type) => anihubDB.storeFavorite(command_id, name, keyvisual_url, nsfw, type));
 
+ipcMain.handle("search-favorite", (event, command_id, type) => anihubDB.searchFavorite(command_id, type));
+
 ipcMain.handle("store-history", (event, command_id, name, keyvisual_url, nsfw, type, timestamp) => anihubDB.storeHistory(command_id, name, keyvisual_url, nsfw, type, timestamp));
 
 ipcMain.handle("get-favorites", (event) => anihubDB.getFavorites());

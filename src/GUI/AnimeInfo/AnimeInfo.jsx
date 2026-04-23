@@ -92,11 +92,20 @@ function AnimeInfo(){
                 setSelectedSeasonName(subSeasons[0].season_name);
                 episodesGetter(subSeasons[0].season_id, dubSeasons, subSeasons);
               }
+              window.electronAPI.searchFavorite(JSON.stringify({
+                  animeName: animeName,
+                  description: data.anime_details.anime_description,
+                  keyVisual: data.anime_details.anime_cape_url,
+                  animeID: animeID,
+              }), "anime").then((favSearch) => {
+                  setIsStarred(!!favSearch);
+              });
             });
+
             effectRan.current = true;
         }
         
-    }, []);
+    }, [animeID, plugin, isReload]);
     return <div className={styles.animeInfo}>
         <AnihubHeader/>
         {!episodesLoaded && <FadeLoading />}

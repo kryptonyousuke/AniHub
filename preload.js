@@ -19,6 +19,7 @@ contextBridge.exposeInMainWorld("electronAPI", {
   
   /* Database handles */
   storeFavorite: (command_id, name, keyvisual_url, nsfw, type) => ipcRenderer.invoke("store-favorite", command_id, name, keyvisual_url, nsfw, type),
+  searchFavorite: (command_id, type) => ipcRenderer.invoke("search-favorite", command_id, type),
   storeHistory: (command_id, name, keyvisual_url, nsfw, type, timestamp) => ipcRenderer.invoke("store-history", command_id, name, keyvisual_url, nsfw, type, timestamp),
   getFavorites: () => ipcRenderer.invoke("get-favorites"),
   getHistory: () => ipcRenderer.invoke("get-history"),

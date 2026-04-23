@@ -50,6 +50,15 @@ export class AnihubDatabase {
   }
   
   /*
+  *     Searchs anime/manga data on favorite table. 
+  */
+  searchFavorite(command_id, type) {
+    return this.db.prepare(`
+          SELECT * FROM favorites WHERE command_id = ? AND type = ?;
+      `).get(command_id, type);
+  }
+  
+  /*
   *     Store the anime/manga data on history table. 
   */
   storeHistory(command_id, name, keyvisual_url, nsfw, type, timestamp) {

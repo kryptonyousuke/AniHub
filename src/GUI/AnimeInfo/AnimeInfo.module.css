@@ -28,6 +28,7 @@
 .sinopse {
     text-align: justify;
     font-family: Lexend;
+    font-size: .92rem;
     font-weight: 400;
     height: 120px;
     overflow-y: auto;
