@@ -21,7 +21,7 @@ function AnimeInfo(){
     const [ isSeasonSelectorActive, setIsSeasonSelectorActive ] = useState(false);
     const [ episodesLoaded, setEpisodesLoaded ] = useState(false);
     const [isStarred, setIsStarred] = useState(false);
-
+    const favId = useRef(NaN);
     const [ selectedSeasonName, setSelectedSeasonName ] = useState("Season 1");
     const effectRan = useRef(false);
     const episodesGetter = (seasonId, dubSeasonsArg = dubbedSeasons, subSeasonsArg = subbedSeasons) => {
@@ -99,6 +99,7 @@ function AnimeInfo(){
                   animeID: animeID,
               }), "anime").then((favSearch) => {
                   setIsStarred(!!favSearch);
+                  favId.current = favSearch.id;
               });
             });
 
@@ -156,7 +157,10 @@ function AnimeInfo(){
                           alert("Failed.")
                         });
                       }
-                      } /> : <Icon icon="line-md:star-filled" width="50" height="50" className={styles.star} onClick={() => setIsStarred(prevState => !prevState)} />}
+                      } /> : <Icon icon="line-md:star-filled" width="50" height="50" className={styles.star} onClick={() => {
+                        setIsStarred(prevState => !prevState);
+                        window.electronAPI.deleteFavoriteById(favId.current).then((result)=>alert("ok"));
+                      }} />}
                     </div>
                 </div>
                 {

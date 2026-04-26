@@ -77,11 +77,11 @@ export class AnihubDatabase {
   }
   
   deleteFavoriteById(id) {
-    const result = this.db.prepare("DELETE FROM favorites WHERE id = ?").run(id);
+    return this.db.prepare("DELETE FROM favorites WHERE id = ?").run(id);
   }
   
   deleteHistoryById(id) {
-    const result = this.db.prepare("DELETE FROM history WHERE id = ?").run(id);
+    return this.db.prepare("DELETE FROM history WHERE id = ?").run(id);
   }
   
   close() {
