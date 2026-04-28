@@ -20,6 +20,7 @@ function AnimeInfo(){
     const [ subbedSeasons, setSubbedSeasons ] = useState([]);
     const [ isSeasonSelectorActive, setIsSeasonSelectorActive ] = useState(false);
     const [ episodesLoaded, setEpisodesLoaded ] = useState(false);
+    const [tags, setTags] = useState([]);
     const [isStarred, setIsStarred] = useState(false);
     const favId = useRef(NaN);
     const [ selectedSeasonName, setSelectedSeasonName ] = useState("Season 1");
@@ -81,6 +82,7 @@ function AnimeInfo(){
               let dubSeasons = data.anime_seasons.filter((season) => season.season_dubbed == 1);
               setDescription(data.anime_details.anime_description);
               setKeyVisual(data.anime_details.anime_cape_url);
+              setTags(data.anime_details.tags);
               setSubbedSeasons(subSeasons);
               setDubbedSeasons(dubSeasons);
               if (dubSeasons.length > 0) {
@@ -96,10 +98,11 @@ function AnimeInfo(){
                   animeName: animeName,
                   description: data.anime_details.anime_description,
                   keyVisual: data.anime_details.anime_cape_url,
+                  tags: data.anime_details.tags,
                   animeID: animeID,
               }), "anime").then((favSearch) => {
                   setIsStarred(!!favSearch);
-                  favId.current = favSearch.id;
+                  favId.current = favSearch?.id;
               });
             });
 
@@ -148,6 +151,7 @@ function AnimeInfo(){
                             animeName: animeName,
                             description: description,
                             keyVisual: keyVisual,
+                            tags: tags,
                             animeID: animeID,
                         }), animeName, keyVisual, 0, "anime").then((result) => {
                           if (result) {

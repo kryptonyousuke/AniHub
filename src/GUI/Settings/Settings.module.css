@@ -383,8 +383,19 @@
 }
 
 
+.favInfo > .desc {
+    font-weight: 300;
+    font-size: .9rem;
+    max-height: 70px;
+    overflow: hidden;
+}
+
+
 .favorite:hover {
     background-color: #111;
+    padding-block: 5px;
+    padding-left: 5px;
+    border: 3px solid white;
 }
 .favInfo {
     height: 124px;

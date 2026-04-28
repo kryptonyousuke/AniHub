@@ -152,12 +152,17 @@ function Settings({ setSettingsVisible }) {
                   <h2>{info.name}</h2>
                 </div>
               </div>) :
-              favAnime.map(info => <div className={styles.favorite} key={info.id}>
-                <img src={info.keyvisual_url} className={styles.keyvisual} />
-                <div className={styles.favInfo}>
-                  <h2>{info.name}</h2>
+                favAnime.map((info) => {
+                  let thisAnimeData = JSON.parse(info.command_id);
+                  return <div className={styles.favorite} key={info.id}>
+                  <img src={info.keyvisual_url} className={styles.keyvisual} />
+                  <div className={styles.favInfo}>
+                    <h2>{info.name}</h2>
+                      <p className={styles.desc}>{thisAnimeData.description}</p>
+                  
+                  </div>
                 </div>
-              </div>)}
+                })}
             </div>
           </div>
         }
