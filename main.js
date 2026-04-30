@@ -16,11 +16,12 @@ const __dirname = dirname(__filename)
 
 
 
-app.commandLine.appendSwitch('js-flags', '--max-old-space-size=4096 --optimize-for-size');
+app.commandLine.appendSwitch('js-flags', '--max-old-space-size=3972 --optimize-for-size');
 // app.commandLine.appendSwitch('disable-frame-rate-limit');
+app.commandLine.appendSwitch('ignore-gpu-blocklist');
 app.commandLine.appendSwitch('enable-gpu-rasterization');
 app.commandLine.appendSwitch('enable-accelerated-2d-canvas');
-// app.commandLine.appendSwitch('enable-begin-frame-scheduling');
+app.commandLine.appendSwitch('enable-begin-frame-scheduling');
 app.commandLine.appendSwitch('enable-zero-copy');
 // app.commandLine.appendSwitch('force-gpu-mem-available-mb', '2048');
 
