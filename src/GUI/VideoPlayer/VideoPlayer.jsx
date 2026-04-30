@@ -63,19 +63,20 @@ function VideoPlayer({ onFullscreenChange }) {
           isManualResolution.current = true;
           setSrc(data.streams[data.streams.length - 1].src);
           setCurrentLevel(data.streams.length - 1);
-        } else {
         }
+        window.electronAPI.storeHistory(
+          JSON.stringify({ selectedEpisode: episode, plugin: plugin, animeData: animeData }),
+          `${episode.ep_number}. ${episode.ep_name} - ${animeData.animeName}`,
+          episode.ep_thumbnail,
+          1,
+          "anime",
+          Date.now(),
+        );
+        player.current.play()
+        setIsLoading(false);
       });
   }
   useEffect(() => {
-    window.electronAPI.storeHistory(
-      JSON.stringify(location.state),
-      `${episode.ep_number}. ${episode.ep_name} - ${animeData.animeName}`,
-      episode.ep_thumbnail,
-      1,
-      "anime",
-      Date.now(),
-    );
     console.log(animeData);
     if (player.current) {
       if (src.includes(".m3u8")) {
@@ -417,6 +418,8 @@ function VideoPlayer({ onFullscreenChange }) {
         </p>
         { (animeData.episodes[0].find(ep => ep.ep_number === episode.ep_number + 1) && progress >= 0.90) &&
           <button className={styles.nextEpisode} onClick={() => {
+            player.current.pause();
+            setIsLoading(true);
             let nextEp = animeData.episodes[0].find(ep => ep.ep_number === episode.ep_number + 1);
             setEpisode(nextEp);
             loadEpisode(plugin, nextEp);
