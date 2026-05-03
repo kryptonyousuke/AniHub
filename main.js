@@ -24,10 +24,13 @@ app.commandLine.appendSwitch('enable-accelerated-2d-canvas');
 app.commandLine.appendSwitch('enable-begin-frame-scheduling');
 app.commandLine.appendSwitch('enable-zero-copy');
 // app.commandLine.appendSwitch('force-gpu-mem-available-mb', '2048');
+if (process.platform === 'linux') {
+  app.commandLine.appendSwitch('enable-features', 'Vulkan,VulkanFromANGLE,DefaultANGLEVulkan,WaylandWindowDecorations');
+  app.commandLine.appendSwitch('use-vulkan');
+  app.commandLine.appendSwitch('ozone-platform-hint', 'wayland');
+  // app.commandLine.appendSwitch("ozone-platform", "wayland");
+}
 
-
-app.commandLine.appendSwitch("ozone-platform", "wayland");
-app.commandLine.appendSwitch("enable-features", "WaylandWindowDecorations");
 
 
 

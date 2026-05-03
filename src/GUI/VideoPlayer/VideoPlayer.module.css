@@ -3,7 +3,7 @@
    overflow: hidden;
 }
 .videoPlayer {
-   height: 100vh;
+   height: 100svh;
    width: 100vw; 
    object-fit: cover;
 }

@@ -28,7 +28,6 @@ const formatTime = (seconds) => {
 function VideoPlayer({ onFullscreenChange }) {
   const location = useLocation();
   const { selectedEpisode, plugin, animeData } = location.state;
-  animeData.selectedEp = selectedEpisode;
   const [ episode, setEpisode ] = useState(selectedEpisode);
   const effectRan = useRef(false);
   const mouseMoveTimeout = useRef(null);
@@ -282,7 +281,7 @@ function VideoPlayer({ onFullscreenChange }) {
             });
           }}
         />
-        <h1>{episode.ep_name}</h1>
+        <h1>{episode.ep_number}. {episode.ep_name}</h1>
         {!isFullscreen ? (
           <TbArrowsMaximize
             className={styles.enterFullscreen}

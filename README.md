@@ -41,7 +41,7 @@ Planned:
 
 - **Anime Streaming**: Does support modern streaming protocols, such as HLS and DASH + simple video files.
 - **Manga Reader**: We have a simple manga reader (still under development, but it works).
-- **Plugin Support**: currently supports only python plugins (under devolpment, but works). Future versions will support JS/TS and compiled binaries.
+- **Plugin Support**: currently supports only python plugins (under development, but works). Future versions will support JS/TS and compiled binaries.
 
 
 # How to build
@@ -56,7 +56,7 @@ For Arch based distros:
 ```bash
     sudo pacman -S pnpm --noconfirm
 ```
-You can install pnpm on windows following the instructions from the oficial website [here.](https://pnpm.io/installation)
+You can install pnpm on windows following the instructions from the official website [here.](https://pnpm.io/installation)
 
 ## Build the project
 Clone this repository:
@@ -73,7 +73,7 @@ And run:
 ```
 
 This will make the correct build for your system.
-If you want to build for an specific system:
+If you want to build for a specific system:
 ```bash
     # Windows build (portable & installer): 
     pnpm run build --win
@@ -113,9 +113,17 @@ AniHub is composed of three main layers:
 
 - [ ] Random banner
 
+### Settings features:
+
+- [ ] Detailed usage metrics;
+- [ ] Discord Rich Presence;
+- [ ] Plugins needs a json to describe themselves;
+- [ ] Player tweaks;
+- [ ] General usage and sensitive content tweaks.
+
 ### Anime features
 - [x] History;
-- [ ] Favorite.
+- [x] Favorite.
 
 ### Manga features:
 - [x] History
