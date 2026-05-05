@@ -133,50 +133,6 @@ h1 {
     right: 10px;
 }
 
-/*.search {
-    color: #888;
-    background-color: #1a1a1aaa;
-    backdrop-filter: blur(7px);
-    border: 3px solid #979797;
-    position: fixed;
-    left: 35vw;
-    border-radius: 30px;
-    padding-inline: 40px 10px;
-    padding-block: 20px 20px;
-    width: 30vw;
-    height: 64px;
-    font-family: monospace;
-    font-weight: 400;
-    font-size: 1.1rem;
-    outline: none;
-    transition: all .3s ease-in-out;
-    font-weight: bold;
-}
-
-.search:hover, .search:focus {
-    width: 35vw;
-    left: 32.5vw;
-}
-
-.search:not(:placeholder-shown):hover, .search:not(:placeholder-shown):focus {
-    color: #FE5F55;
-    width: 40vw;
-    left: 30vw;
-    background-color: transparent;
-    backdrop-filter: blur(30px);
-}
-.search::placeholder{
-    transition: all .3s ease-in-out;
-}
-
-.search::placeholder:not(:placeholder-shown) {
-    color: #888;
-    font-weight: bold;
-}
-.search:hover::placeholder, .search:focus::placeholder {
-    color: #aaa;
-    font-weight: bold;
-}*/
 
 .mangaModeIcon {
     width: 30px;
@@ -186,7 +142,8 @@ h1 {
     border-radius: 10px;
     box-sizing: unset;
     position: fixed;
-    left: calc(70vw + 20px);
+    top: 50px;
+    left: calc(65vw + 20px);
     padding: 7px;
     backdrop-filter: blur(20px);
 }

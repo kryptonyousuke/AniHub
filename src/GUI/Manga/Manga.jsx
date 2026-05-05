@@ -40,7 +40,7 @@ function Manga(){
           <section className={styles.tagsArea}>
         {!isStarred ? <Icon icon="line-md:star" width="50" height="50" className={styles.star} onClick={() => {
           setIsStarred(prevState => !prevState);
-          window.electronAPI.storeFavorite(JSON.stringify(animeData), animeData.title, animeData.keyvisual, 0, "manga").then((result) => {
+          window.electronAPI.storeFavorite(window.electronAPI.md5(JSON.stringify(animeData)), JSON.stringify(animeData), animeData.title, animeData.keyvisual, 0, "manga").then((result) => {
             if (result) {
               alert("Saved.");
               return;

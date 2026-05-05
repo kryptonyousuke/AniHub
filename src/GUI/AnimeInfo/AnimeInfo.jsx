@@ -6,7 +6,6 @@ import EpisodesList from "./EpisodesList";
 import { useEffect, useState, useRef } from "react";
 import { Icon } from "@iconify/react";
 
-
 function AnimeInfo(){
     const location = useLocation();
     const { isReload, animeName, animeID, plugin, animeData} = location.state;
@@ -76,7 +75,7 @@ function AnimeInfo(){
                 "action": "animeInfo",
                 "anime_id": animeID
             });
-            result.then((data) => {
+            result.then(async (data) => {
               data = JSON.parse(data);
               let subSeasons = data.anime_seasons.filter((season) => season.season_dubbed == 0);
               let dubSeasons = data.anime_seasons.filter((season) => season.season_dubbed == 1);
@@ -94,13 +93,14 @@ function AnimeInfo(){
                 setSelectedSeasonName(subSeasons[0].season_name);
                 episodesGetter(subSeasons[0].season_id, dubSeasons, subSeasons);
               }
-              window.electronAPI.searchFavorite(JSON.stringify({
+              
+              window.electronAPI.searchFavorite(await window.electronAPI.md5(JSON.stringify({
                   animeName: animeName,
                   description: data.anime_details.anime_description,
                   keyVisual: data.anime_details.anime_cape_url,
                   tags: data.anime_details.tags,
                   animeID: animeID,
-              }), "anime").then((favSearch) => {
+              })), "anime").then((favSearch) => {
                   setIsStarred(!!favSearch);
                   favId.current = favSearch?.id;
               });
@@ -145,9 +145,15 @@ function AnimeInfo(){
                             </div>
                         }
                       <button className={styles.btnSelectDubbedOrSubbed} onClick={() => { setIsSubbedOrDubbedSelectorActive(!isSubbedOrDubbedSelectorActive) }}>{isDubbedSelected ? "Dubbed" : "Subbed"}</button>
-                      {!isStarred ? <Icon icon="line-md:star" width="50" height="50" className={styles.star} onClick={() => {
+                      {!isStarred ? <Icon icon="line-md:star" width="50" height="50" className={styles.star} onClick={async () => {
                         setIsStarred(prevState => !prevState);
-                        window.electronAPI.storeFavorite(JSON.stringify({
+                        window.electronAPI.storeFavorite( await window.electronAPI.md5(JSON.stringify({
+                            animeName: animeName,
+                            description: description,
+                            keyVisual: keyVisual,
+                            tags: tags,
+                            animeID: animeID,
+                        })), JSON.stringify({
                             animeName: animeName,
                             description: description,
                             keyVisual: keyVisual,

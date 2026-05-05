@@ -153,7 +153,7 @@ function Settings({ setSettingsVisible }) {
                 </div>
               </div>) :
                 favAnime.map((info) => {
-                  let thisAnimeData = JSON.parse(info.command_id);
+                  let thisAnimeData = JSON.parse(info.command_data);
                   return <div className={styles.favorite} key={info.id}>
                   <img src={info.keyvisual_url} className={styles.keyvisual} />
                   <div className={styles.favInfo}>
@@ -186,7 +186,7 @@ function Settings({ setSettingsVisible }) {
                 </div>
               </div>) :
                 histAnime.map(info => <div className={styles.historyContent} key={info.id} onClick={() => {
-                  let animeGeneralData = JSON.parse(info.command_id);
+                  let animeGeneralData = JSON.parse(info.command_data);
                   navigate("/player", {
                     state: {
                       selectedEpisode: animeGeneralData.selectedEpisode,

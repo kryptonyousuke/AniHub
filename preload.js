@@ -18,11 +18,14 @@ contextBridge.exposeInMainWorld("electronAPI", {
   deletePlugin: (pluginName) => ipcRenderer.invoke("delete-plugin", pluginName),
   
   /* Database handles */
-  storeFavorite: (command_id, name, keyvisual_url, nsfw, type) => ipcRenderer.invoke("store-favorite", command_id, name, keyvisual_url, nsfw, type),
+  storeFavorite: (command_id, command_data, name, keyvisual_url, nsfw, type) => ipcRenderer.invoke("store-favorite", command_id, command_data, name, keyvisual_url, nsfw, type),
   searchFavorite: (command_id, type) => ipcRenderer.invoke("search-favorite", command_id, type),
-  storeHistory: (command_id, name, keyvisual_url, nsfw, type, timestamp) => ipcRenderer.invoke("store-history", command_id, name, keyvisual_url, nsfw, type, timestamp),
+  storeHistory: (command_id, command_data, name, keyvisual_url, nsfw, type, timestamp) => ipcRenderer.invoke("store-history", command_id, command_data, name, keyvisual_url, nsfw, type, timestamp),
   getFavorites: () => ipcRenderer.invoke("get-favorites"),
   getHistory: () => ipcRenderer.invoke("get-history"),
   deleteFavoriteById: (id) => ipcRenderer.invoke("delete-favorite-by-id", id),
-  deleteHistoryById: (id) => ipcRenderer.invoke("delete-history-by-id", id)
+  deleteHistoryById: (id) => ipcRenderer.invoke("delete-history-by-id", id),
+
+  /* Hardware accelerated md5 */
+  md5: (content) => ipcRenderer.invoke("md5", content)
 });

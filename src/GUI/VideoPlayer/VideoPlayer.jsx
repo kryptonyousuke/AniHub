@@ -10,7 +10,6 @@ import { TbArrowsMaximize } from "react-icons/tb";
 import { FiMinimize2 } from "react-icons/fi";
 import { Icon } from '@iconify/react';
 
-
 /* Formats seconds into H:M:S */
 const formatTime = (seconds) => {
   const totalSeconds = Math.trunc(seconds);
@@ -54,7 +53,7 @@ function VideoPlayer({ onFullscreenChange }) {
         action: "episodeInfo",
         episode_id: episode.ep_id,
       })
-      .then((data) => {
+      .then( async (data) => {
         data = JSON.parse(data);
 
         if (data.manualResolution === true) {
@@ -64,6 +63,7 @@ function VideoPlayer({ onFullscreenChange }) {
           setCurrentLevel(data.streams.length - 1);
         }
         window.electronAPI.storeHistory(
+          await window.electronAPI.md5(JSON.stringify({ selectedEpisode: episode, plugin: plugin, animeData: animeData })),
           JSON.stringify({ selectedEpisode: episode, plugin: plugin, animeData: animeData }),
           `${episode.ep_number}. ${episode.ep_name} - ${animeData.animeName}`,
           episode.ep_thumbnail,
@@ -233,6 +233,10 @@ function VideoPlayer({ onFullscreenChange }) {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
+    
+    setInterval(() => {
+      
+    }, 3000)
   }, []);
   const handleMouseMove = () => {
     setIsMouseActive(true);
