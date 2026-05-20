@@ -12,7 +12,9 @@ left: calc(50% - 50px);
 <p style="font-size: 1.2rem;">Your favorite streaming app.</p>
 </h1>
 <div align="center">
-![last](https://img.shields.io/github/last-commit/kryptonyousuke/Anihub?style=for-the-badge&color=red) ![GitHub contributors](https://img.shields.io/github/contributors/kryptonyousuke/AniHub?style=for-the-badge&labelColor=941fd3&color=white) ![GitHub Created At](https://img.shields.io/github/created-at/kryptonyousuke/AniHub?style=for-the-badge&labelColor=1fd37f&color=grey)
+![last](https://img.shields.io/github/last-commit/kryptonyousuke/Anihub?style=for-the-badge&color=red)
+![GitHub contributors](https://img.shields.io/github/contributors/kryptonyousuke/AniHub?style=for-the-badge&labelColor=941fd3&color=white)
+![GitHub Created At](https://img.shields.io/github/created-at/kryptonyousuke/AniHub?style=for-the-badge&labelColor=1fd37f&color=grey)
 </div>
 
 ## **Anihub** is a open-source streaming app that allows you to watch/read your favorite anime and manga online by using plugins. 
