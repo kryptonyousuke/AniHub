@@ -6,7 +6,7 @@ margin-inline: auto;
 position: absolute;
 top: -110px;
 left: calc(50% - 50px);
-">
+"/>
 <p style="margin-top: 120px;">AniHub (Alpha)</p>
 
 <p style="font-size: 1.2rem;">Your favorite streaming app.</p>
