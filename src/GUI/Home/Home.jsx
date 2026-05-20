@@ -9,9 +9,11 @@ import { useNavigate } from "react-router-dom";
 import AnihubHeader from "../Utilities/AnihubHeader";
 import Footer from "../Utilities/Footer";
 import { Icon } from "@iconify/react";
+
 function Home() {
   const navigate = useNavigate();
   const [popularContent, setPopularContent] = useState({});
+  const [isStarred, setIsStarred] = useState(false)
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -36,7 +38,8 @@ function Home() {
         <AnihubHeader/>
         <div className={styles.bannerArea}>
           <img className={styles.banner} src="banner3.jpg" alt="banner"></img>
-          <h1 className={styles.animeNameOfTheYear}>Frieren</h1>
+          <h1 className={styles.animeName}>Frieren</h1>
+          <button className={styles.favBtn} onClick={()=>{ setIsStarred(prev=>!prev)}}>{!isStarred ? <Icon icon="line-md:heart" width="35" height="35" /> : <Icon icon="line-md:heart-filled" width="35" height="35" />} Favorite</button>
         </div>
         <div className={styles.windowShadow}></div>
         <section className={styles.popularContentSection}>
