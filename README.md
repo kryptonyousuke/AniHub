@@ -1,16 +1,16 @@
 
-<div align="center">
+<h1 align="center">
     <img src="build-icon/icons/png/512x512.png" style="width: 100px; margin-inline: auto; position: absolute; top: -110px; left: calc(50% - 50px);">
     <p style="margin-top: 120px; font-size: 2rem; font-weight: bold;">AniHub (Alpha)</p>
     <p style="font-size: 2rem; font-weight: bold;">Your favorite streaming app.</p>
-</div>
+    <div align="center">
+        <img src="https://img.shields.io/github/last-commit/kryptonyousuke/Anihub?style=for-the-badge&color=red">
+        <img src="https://img.shields.io/github/contributors/kryptonyousuke/AniHub?style=for-the-badge&labelColor=941fd3&color=white">
+        <img src="https://img.shields.io/github/created-at/kryptonyousuke/AniHub?style=for-the-badge&labelColor=1fd37f&color=grey">
+    </div>
+</h1>
 
-<div align="center">
-    <img src="https://img.shields.io/github/last-commit/kryptonyousuke/Anihub?style=for-the-badge&color=red">
-    <img src="https://img.shields.io/github/contributors/kryptonyousuke/AniHub?style=for-the-badge&labelColor=941fd3&color=white">
-    <img src="https://img.shields.io/github/created-at/kryptonyousuke/AniHub?style=for-the-badge&labelColor=1fd37f&color=grey">
-</div>
-<hr style="height:1px;"/>
+
 ## **Anihub** is a open-source streaming app that allows you to watch/read your favorite anime and manga online by using plugins. 
 
 Anyone can make a plugin for this application and distribute it to the community. Plugins may optionally provide ads alongside content for monetization. This app is intended to be a way to unify the anime and manga streaming experience into a single platform, enhancing the user experience and providing a more seamless way to access their favorite content.
