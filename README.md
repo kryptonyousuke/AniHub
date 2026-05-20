@@ -4,9 +4,9 @@
     <p style="margin-top: 120px; font-size: 2rem; font-weight: bold;">AniHub (Alpha)</p>
     <p style="font-size: 2rem; font-weight: bold;">Your favorite streaming app.</p>
     <div align="center">
-        <img src="https://img.shields.io/github/last-commit/kryptonyousuke/Anihub?style=for-the-badge&color=red">
-        <img src="https://img.shields.io/github/contributors/kryptonyousuke/AniHub?style=for-the-badge&labelColor=941fd3&color=white">
-        <img src="https://img.shields.io/github/created-at/kryptonyousuke/AniHub?style=for-the-badge&labelColor=1fd37f&color=grey">
+        <img src="https://img.shields.io/github/last-commit/kryptonyousuke/Anihub?style=for-the-badge&logo=git&color=red">
+        <img src="https://img.shields.io/github/stars/kryptonyousuke/AniHub?style=for-the-badge&logo=starship&labelColor=941fd3&color=white">
+        <img src="https://img.shields.io/github/license/kryptonyousuke/AniHub?style=for-the-badge&logo=mdbook&logoColor=ffffff&labelColor=1fd37f&color=grey">
     </div>
 </h1>
 
