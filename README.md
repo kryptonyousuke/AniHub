@@ -6,7 +6,7 @@
     <div align="center">
         <img src="https://img.shields.io/github/last-commit/kryptonyousuke/Anihub?style=for-the-badge&logo=git&color=red">
         <img src="https://img.shields.io/github/stars/kryptonyousuke/AniHub?style=for-the-badge&logo=starship&labelColor=941fd3&color=white">
-        <img src="https://img.shields.io/github/license/kryptonyousuke/AniHub?style=for-the-badge&logo=mdbook&logoColor=ffffff&labelColor=1fd37f&color=grey">
+        <img src="https://img.shields.io/badge/license-ISC-blue.svg?style=for-the-badge&logo=mdbook&logoColor=ffffff&labelColor=1fd37f&color=grey">
     </div>
 </h1>
 
