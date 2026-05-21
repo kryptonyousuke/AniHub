@@ -2,7 +2,7 @@
 <h1 align="center">
     <img src="build-icon/icons/png/512x512.png" style="width: 100px; margin-inline: auto; position: absolute; top: -110px; left: calc(50% - 50px);">
     <p style="margin-top: 120px; font-size: 2rem; font-weight: bold;">AniHub (Alpha)</p>
-    <p style="font-size: 2rem; font-weight: bold;">Your favorite streaming app.</p>
+    <p style="font-size: 2rem; font-weight: bold;">YOUR streaming app.</p>
     <div align="center">
         <img src="https://img.shields.io/github/last-commit/kryptonyousuke/Anihub?style=for-the-badge&logo=git&color=red">
         <img src="https://img.shields.io/github/stars/kryptonyousuke/AniHub?style=for-the-badge&logo=starship&labelColor=941fd3&color=white">
