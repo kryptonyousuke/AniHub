@@ -15,9 +15,7 @@
 ## Introduction
 **Anihub** is an open-source streaming platform engineered to end the chaos of content fragmentation. Currently, consuming anime and manga means jumping between disparate ecosystems, dealing with inconsistent libraries, and juggling multiple interfaces.
 
-**Anihub** solves this by unifying your entire media library into a single, fluid, and high-performance interface. Powered by an open plugin system, it allows the community to aggregate any source seamlessly. Anyone can develop and distribute plugins, ensuring that your content is always just a click away.
-
-We are not just building another viewer; we are rebuilding the user experience to eliminate the need for managing multiple platforms. Take back control of your library and access your favorite content without the friction.
+This project solves this by unifying your entire media library into a single, fluid, and high-performance interface. Powered by an open plugin system, it allows the community to aggregate any source seamlessly. Anyone can develop and distribute plugins, ensuring that your content is always just a click away.
 
 ![anihub screenshot](screenshots/2026-01-30-183439_hyprshot.png)
 
