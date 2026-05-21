@@ -3,6 +3,19 @@ import styles from './Settings.module.css'
 import { CgClose } from "react-icons/cg";
 import { Icon } from '@iconify/react';
 import { useNavigate } from 'react-router-dom';
+import { Bar, Cell, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart } from 'recharts';
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className={styles.toolTipBox}>
+        <p>{`${label} : ${payload[0].value}`}</p>
+      </div>
+    );
+  }
+  return null;
+};
+
 function Settings({ setSettingsVisible }) {
   const navigate = useNavigate();
   const [selectedOption, setSelectedOption] = useState(0);
@@ -12,7 +25,16 @@ function Settings({ setSettingsVisible }) {
   const [histManga, setHistManga] = useState([]);
   const [favAnime, setFavAnime] = useState([]);
   const [favSelectedOption, setFavSelectedOption] = useState(0);
-  const [histSelectedOption, setHistSelectedOption] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(null);
+  const supposedData = [
+    { day: "Segunda", hoursWatched: 2 },
+    { day: "Terça", hoursWatched: 7 },
+    { day: "Quarta", hoursWatched: 12 },
+    { day: "Quinta", hoursWatched: 4 },
+    { day: "Sexta", hoursWatched: 1 },
+    { day: "Sábado", hoursWatched: 10 },
+    { day: "Domingo", hoursWatched: 11 },
+  ];
   useEffect(() => {
     window.electronAPI.getAllPlugins().then((pluginList) => {
       setPlugins(pluginList);
@@ -133,6 +155,19 @@ function Settings({ setSettingsVisible }) {
             </div>
           </div>
         }
+
+        {selectedOption === 3 && <div className={styles.metrics}>
+          <ResponsiveContainer width="100%" height={400}>
+            <BarChart data={supposedData}>
+              <XAxis dataKey="day" tick={{fill: "#ccc"}} />
+              <YAxis axisLine={false} />
+              <Tooltip content={<CustomTooltip />} cursor={false} />
+              <Bar className={styles.chartBar} dataKey="hoursWatched" fill="#fe6055" radius={[20, 20, 10]}/>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+        }
+        
         { selectedOption === 4 &&
           <div className={styles.favorites}>
             <div className={styles.typeSelector}>

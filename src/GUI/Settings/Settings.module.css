@@ -463,3 +463,21 @@
 .historyContent:hover .histInfo {
     margin-left: 0;
 }
+
+.metrics {
+    width: 100%;
+    padding-top: 100px;
+}
+.toolTipBox {
+    background-color: #111;
+    padding: 20px;
+    border-radius: 10px;
+}
+.chartBar {
+    filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.25));
+    background-color: transparent;
+    transition: all .15s ease-in-out;
+}
+.chartBar:hover {
+    fill: #bf4941;
+}
