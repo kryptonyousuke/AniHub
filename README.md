@@ -12,8 +12,8 @@
 </h1>
 
 
-## **Anihub** is a open-source streaming app that allows you to watch/read your favorite anime and manga online by using plugins. 
-
+## Introduction
+ **Anihub** is a open-source streaming app that allows you to watch/read your favorite anime and manga online by using plugins. 
 Anyone can make a plugin for this application and distribute it to the community. Plugins may optionally provide ads alongside content for monetization. This app is intended to be a way to unify the anime and manga streaming experience into a single platform, enhancing the user experience and providing a more seamless way to access their favorite content.
 
 ![anihub screenshot](screenshots/2026-01-30-183439_hyprshot.png)
