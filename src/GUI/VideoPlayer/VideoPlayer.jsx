@@ -443,6 +443,17 @@ function VideoPlayer({ onFullscreenChange }) {
             setIsLoading(true);
             setEpisode(nextEpisode);
             loadEpisode(plugin, nextEpisode);
+            let nextEp = undefined;
+            for (let i = 0; i < animeData.episodes.length; i++){
+              nextEp = animeData.episodes[i].find(ep => ep.ep_number === episode.ep_number + 2);i
+              if (nextEp !== undefined){
+                console.log("Next Episode: ", nextEp);
+                setNextEpisode(nextEp);
+                break;
+              }
+              setNextEpisode(undefined);
+            }
+
           }}><Icon icon="wpf:next" width="28" height="28"/> {nextEpisode.ep_number}. {nextEpisode.ep_name}</button>
         }
       </div>
