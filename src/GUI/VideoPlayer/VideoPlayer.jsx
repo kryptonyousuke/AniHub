@@ -44,6 +44,7 @@ function VideoPlayer({ onFullscreenChange }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isMouseActive, setIsMouseActive] = useState(true);
   const [isQualitySelectorActive, setIsQualitySelectorActive] = useState(false);
+  const [nextEpisode, setNextEpisode] = useState();
   const [src, setSrc] = useState("");
   const isManualResolution = useRef(null);
   const navigate = useNavigate();
@@ -76,7 +77,6 @@ function VideoPlayer({ onFullscreenChange }) {
       });
   }
   useEffect(() => {
-    console.log(animeData);
     if (player.current) {
       if (src.includes(".m3u8")) {
         console.log("Using HLS.");
@@ -184,7 +184,15 @@ function VideoPlayer({ onFullscreenChange }) {
     if (!effectRan.current) {
       console.log("AnimeData: ", animeData);
       console.log("episode: ", episode);
-      console.log("next episode: ", animeData.episodes[0].find(ep => ep.ep_number === episode.ep_number + 1))
+      let nextEp = undefined;
+      for (let i = 0; i < animeData.episodes.length; i++){
+        nextEp = animeData.episodes[i].find(ep => ep.ep_number === episode.ep_number + 1);i
+        if (nextEp !== undefined){
+          console.log("Next Episode: ", nextEp);
+          setNextEpisode(nextEp);
+          break;
+        }
+      }
       loadEpisode(plugin, episode);
       effectRan.current = true;
     }
@@ -357,9 +365,19 @@ function VideoPlayer({ onFullscreenChange }) {
           step="0.00000000000001"
           className={styles.timeSlider}
           onChange={(e) => {
-            player.current.currentTime =
-              e.target.value * player.current.duration;
-            setProgress(e.target.value);
+            const sliderRatio = parseFloat(e.target.value);
+  
+            if (player.current) {
+              const videoDuration = player.current.duration;
+
+              if (Number.isFinite(videoDuration) && !Number.isNaN(videoDuration)) {
+                const calculatedTime = sliderRatio * videoDuration;
+
+                if (Number.isFinite(calculatedTime) && calculatedTime >= 0 && calculatedTime <= videoDuration) {
+                  player.current.currentTime = calculatedTime;
+                }
+              }
+            }
           }}
           style={{ "--progress": `${progress * 100}%` }}
         />
@@ -419,14 +437,13 @@ function VideoPlayer({ onFullscreenChange }) {
           {formatTime(currentTime)} - {formatTime(duration)} |{" "}
           {Math.trunc(progress * 100)}%
         </p>
-        { (animeData.episodes[0].find(ep => ep.ep_number === episode.ep_number + 1) && progress >= 0.90) &&
+        { (nextEpisode && progress >= 0.90) &&
           <button className={styles.nextEpisode} onClick={() => {
             player.current.pause();
             setIsLoading(true);
-            let nextEp = animeData.episodes[0].find(ep => ep.ep_number === episode.ep_number + 1);
-            setEpisode(nextEp);
-            loadEpisode(plugin, nextEp);
-          }}><Icon icon="wpf:next" width="28" height="28"/> {animeData.episodes[0].find(ep => ep.ep_number === episode.ep_number + 1).ep_number}. {animeData.episodes[0].find(ep => ep.ep_number === episode.ep_number + 1).ep_name}</button>
+            setEpisode(nextEpisode);
+            loadEpisode(plugin, nextEpisode);
+          }}><Icon icon="wpf:next" width="28" height="28"/> {nextEpisode.ep_number}. {nextEpisode.ep_name}</button>
         }
       </div>
     </div>
