@@ -129,6 +129,13 @@ function Settings({ setSettingsVisible }) {
         </section>}
         { selectedOption === 1 &&
           <div className={styles.mainSettings}>
+            <div className={styles.warning}>
+                <Icon icon="typcn:warning" width="40" height="40"/>
+                <div className={styles.disclaimer}>
+                  <span>Warning</span>
+                  <p>Some of these functions may not have been really implemented yet.</p>
+                </div>
+            </div>
             <div className={styles.modularOption}>
               <p className={styles.optionName}>Enable NSFW</p>
               <input type="checkbox"></input>

@@ -481,3 +481,21 @@
 .chartBar:hover {
     fill: #bf4941;
 }
+
+.warning {
+  background-color: #222200;
+  border-radius: 10px;
+  padding-inline: 10px;
+  padding-block: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 7px;
+}
+.warning > div > span {
+  color: yellow;
+  font-weight: bold;
+}
+.warning > div > p {
+  font-size: .9rem;
+}
