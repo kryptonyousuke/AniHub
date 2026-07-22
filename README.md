@@ -19,6 +19,12 @@ This project solves this by unifying your entire media library into a single, fl
 
 ![anihub screenshot](screenshots/2026-01-30-183439_hyprshot.png)
 
+
+## Why am I making this?
+70% for personal use. If I stop pushing commits sometimes, this means that I just stopped to watch anime for some reason.
+Even when I'm not coding here, feel free to send any PRs you want — I will review and merge it. 
+
+
 ## Plugin System (WIP)
 
 AniHub does not provide any content by default.
