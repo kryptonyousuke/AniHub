@@ -108,7 +108,7 @@ function Settings({ setSettingsVisible }) {
           </div>
           <div className={styles.mainSettings}>
             {
-              plugins.map((pluginName) => <div className={styles.modularOption}>
+              plugins.map((pluginName, i) => <div className={styles.modularOption} key={i}>
                 <p className={styles.optionName}>{pluginName}</p>
                 <Icon icon="mynaui:trash-solid" width="40" height="40" className={styles.trashIcon} onClick={async () => {
                   let result = await window.electronAPI.deletePlugin(pluginName);
