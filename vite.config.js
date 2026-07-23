@@ -10,7 +10,7 @@ export default defineConfig({
     electron({
       main: {
         // Main electron process
-        entry: "../main.js",
+        entry: "./main.js",
       },
       preload: {
         // Bridge preload
@@ -18,9 +18,9 @@ export default defineConfig({
       },
     }),
   ],
-  root: "src",
+  root: ".",
   build: {
-    outDir: "../dist/renderer", // renderer
+    outDir: "./dist/renderer", // renderer
     emptyOutDir: true,
   },
 });
