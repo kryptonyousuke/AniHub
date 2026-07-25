@@ -8,6 +8,9 @@
     height: calc(100svh - 360px);
     padding-right: 4px;
 }
+.episodesList:last-child {
+    padding-bottom: 10px;
+}
 .episodesList::-webkit-scrollbar {
     width: 2px;
     background-color: transparent;
