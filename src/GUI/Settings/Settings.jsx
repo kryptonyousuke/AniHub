@@ -27,13 +27,13 @@ function Settings({ setSettingsVisible }) {
   const [favSelectedOption, setFavSelectedOption] = useState(0);
   const [activeIndex, setActiveIndex] = useState(null);
   const supposedData = [
-    { day: "Segunda", hoursWatched: 2 },
-    { day: "Terça", hoursWatched: 7 },
-    { day: "Quarta", hoursWatched: 12 },
-    { day: "Quinta", hoursWatched: 4 },
-    { day: "Sexta", hoursWatched: 1 },
-    { day: "Sábado", hoursWatched: 10 },
-    { day: "Domingo", hoursWatched: 11 },
+    { day: "Monday", hoursWatched: 2 },
+    { day: "Tuesday", hoursWatched: 7 },
+    { day: "Wednesday", hoursWatched: 12 },
+    { day: "Thursday", hoursWatched: 4 },
+    { day: "Friday", hoursWatched: 1 },
+    { day: "Saturday", hoursWatched: 10 },
+    { day: "Sunday", hoursWatched: 11 },
   ];
   useEffect(() => {
     window.electronAPI.getAllPlugins().then((pluginList) => {
