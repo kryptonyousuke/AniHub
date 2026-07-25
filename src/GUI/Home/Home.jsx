@@ -38,7 +38,6 @@ function Home() {
         <AnihubHeader/>
         <div className={styles.bannerArea}>
           <img className={styles.banner} src="banner3.jpg" alt="banner"></img>
-          <h1 className={styles.animeName}>Frieren</h1>
           <button className={styles.favBtn} onClick={()=>{ setIsStarred(prev=>!prev)}}>{!isStarred ? <Icon icon="line-md:heart" width="35" height="35" /> : <Icon icon="line-md:heart-filled" width="35" height="35" />} Favorite</button>
         </div>
         <div className={styles.windowShadow}></div>
