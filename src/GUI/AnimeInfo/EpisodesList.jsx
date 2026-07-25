@@ -6,8 +6,7 @@ function EpisodesList( { animeName, animeID, description, keyVisual, episodes, s
         return <></>
     }
     return <div className={styles.episodesList}>
-        {selectedEpisodes.map((season) => {
-            return season.map((episode)=>{
+        {selectedEpisodes.map((episode)=>{
 
                     return <div className={styles.episode} key={episode.ep_id} onClick={()=>{navigate("/player", {
                         state: {
@@ -26,7 +25,7 @@ function EpisodesList( { animeName, animeID, description, keyVisual, episodes, s
                             <h3> {episode.ep_name} - Episode {episode.ep_number}</h3>
                     </div>
                 })
-        })})
+        })
     </div>
 }
 export default EpisodesList;
