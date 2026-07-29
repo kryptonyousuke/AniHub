@@ -185,13 +185,11 @@ function VideoPlayer({ onFullscreenChange }) {
       console.log("AnimeData: ", animeData);
       console.log("episode: ", episode);
       let nextEp = undefined;
-      for (let i = 0; i < animeData.episodes.length; i++){
-        nextEp = animeData.episodes[i].find(ep => ep.ep_number === episode.ep_number + 1);i
-        if (nextEp !== undefined){
-          console.log("Next Episode: ", nextEp);
-          setNextEpisode(nextEp);
-          break;
-        }
+      console.log(animeData)
+      nextEp = animeData.episodes.find(ep => ep.ep_number === episode.ep_number + 1);
+      if (nextEp !== undefined){
+        console.log("Next Episode: ", nextEp);
+        setNextEpisode(nextEp);
       }
       loadEpisode(plugin, episode);
       effectRan.current = true;
