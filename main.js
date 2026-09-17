@@ -116,7 +116,7 @@ function runSpecificPlugin(pluginName, inputData) {
       if (code === 0) {
         resolve(output.trim());
       } else {
-        reject(new Error(error || `Plugin failed with code: ${code}`));
+        reject(new Error(error || `Plugin failed with code: ${code}. Output: ${output.trim()}`));
       }
     });
 

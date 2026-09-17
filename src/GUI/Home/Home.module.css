@@ -31,11 +31,12 @@
 }
 
 .bannerArea {
+    --area-size: 330px;
     display: flex;
     justify-content: center;
     position: relative;
     flex-direction: column;
-    height: 350px;
+    height: var(--area-size);
     width: 70vw;
     margin-left: 15%;
 }
@@ -46,7 +47,7 @@
     font-size: clamp(1rem, 15vw, 180px);
     color: transparent;
     background-image: linear-gradient(35deg, red,  blue);
-    mix-blend-mode:hard-light;
+    mix-blend-mode: hard-light;
     background-clip: text;
     z-index: 2;
     padding: 0;
@@ -55,7 +56,7 @@
 }
 
 .banner {
-    height: 350px;
+    height: var(--area-size);
     width: 100%;
     object-fit: cover;
     border-radius: 20px;
@@ -106,7 +107,7 @@
 }
 .whatIsNew {
     margin-left: 40px;
-    margin-top: 20px;
+    margin-top: 25px;
     font-size: 1.7rem;
     display: flex;
     gap: 10px;

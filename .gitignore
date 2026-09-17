@@ -4,3 +4,4 @@ dist/
 dist-electron/
 dist_electron/
 src/dist-electron/
+.key
