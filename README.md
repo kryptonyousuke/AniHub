@@ -30,13 +30,12 @@ Even when I'm not coding here, feel free to send any PRs you want — I will rev
 AniHub does not provide any content by default.
 
 All anime and manga sources are delivered through external plugins.
-Currently supported:
-- Python plugins (executed as external processes)
+Plugins basically can communicate with AniHub through stdout/stdin/stderr, this is how VSCode extensions works too.
+Theorically, you can choose any programming language, but AniHub needs to know how to execute them.
 
-Planned:
-- JavaScript / TypeScript plugins
-- Native binaries
-- > ⚠️ Plugins are responsible for content sources, legality and ads delivery.
+The only language currently supported is python.
+
+> [!WARNING] Plugins are responsible for content sources, legality and ads delivery.
 > AniHub does not host or distribute any media content.
 
 
