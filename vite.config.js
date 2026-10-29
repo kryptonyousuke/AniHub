@@ -1,11 +1,14 @@
+import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import electron from "vite-plugin-electron/simple";
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   base: "./",
   
   plugins: [
+    tailwindcss(),
     react(),
     electron({
       main: {
@@ -18,6 +21,11 @@ export default defineConfig({
       },
     }),
   ],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL("./src", import.meta.url)),
+    },
+  },
   root: ".",
   build: {
     outDir: "./dist/renderer", // renderer
