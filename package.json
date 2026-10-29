@@ -71,27 +71,27 @@
   "license": "ISC",
   "type": "module",
   "devDependencies": {
-    "@electron/rebuild": "^4.2.0",
-    "@vitejs/plugin-react": "^6.0.4",
-    "ansi-regex": "^6.2.2",
-    "concurrently": "^10.0.3",
+    "@electron/rebuild": "^4.2.1",
+    "@vitejs/plugin-react": "^6.1.2",
+    "ansi-regex": "^6.4.0",
+    "concurrently": "^10.0.6",
     "electron": "43.2.0",
-    "electron-builder": "^26.15.3",
+    "electron-builder": "^26.18.0",
     "electron-icon-builder": "^2.0.1",
     "gauge": "^5.0.2",
-    "vite": "^8.1.5",
-    "vite-plugin-electron": "^1.1.0"
+    "vite": "^8.3.5",
+    "vite-plugin-electron": "^1.1.2"
   },
   "dependencies": {
-    "@iconify/react": "^6.0.2",
-    "better-sqlite3": "^13.0.1",
-    "dashjs": "^5.2.0",
-    "hls.js": "^1.6.16",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8",
+    "@iconify/react": "^6.0.3",
+    "better-sqlite3": "^13.0.3",
+    "dashjs": "^5.2.1",
+    "hls.js": "^1.7.3",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "react-icons": "^5.7.0",
-    "react-router-dom": "^7.18.1",
-    "recharts": "^3.10.0"
+    "react-router-dom": "^7.18.5",
+    "recharts": "^3.10.1"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
