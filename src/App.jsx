@@ -6,6 +6,13 @@ import VideoPlayer from "./GUI/VideoPlayer/VideoPlayer";
 import { useState } from "react";
 import Manga from "./GUI/Manga/Manga";
 import MangaReader from "./GUI/Manga/MangaReader";
+
+import "@fontsource/lexend"
+import "@fontsource/inter"
+import "@fontsource/nunito"
+import "@fontsource/grenze-gotisch"
+import "@fontsource/jetbrains-mono"
+
 function App() {
   const [isFullscreen, setIsFullscreen] = useState(false);
   return (

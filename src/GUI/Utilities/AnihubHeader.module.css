@@ -33,6 +33,8 @@ h1 {
 .anihub {
     display: inline-block;
     font-size: 2rem;
+    font-family: "Lexend";
+    font-weight: bold;
     transform: translateX(-2rem);
     margin-right: 40px;
     background-image: linear-gradient(100deg, #FE5F55, #ff00d4, #3185FC);
