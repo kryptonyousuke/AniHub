@@ -15,7 +15,6 @@
     }
 }
 h1 {
-    font-family: 'Courier New', Courier, monospace;
     margin-left: 20px;
 }
 
@@ -33,7 +32,7 @@ h1 {
 .anihub {
     display: inline-block;
     font-size: 2rem;
-    font-family: "Lexend";
+    font-family: "Permanent Marker";
     font-weight: bold;
     transform: translateX(-2rem);
     margin-right: 40px;

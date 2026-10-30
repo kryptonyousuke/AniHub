@@ -12,6 +12,7 @@ import "@fontsource/inter"
 import "@fontsource/nunito"
 import "@fontsource/grenze-gotisch"
 import "@fontsource/jetbrains-mono"
+import "@fontsource/permanent-marker"
 
 function App() {
   const [isFullscreen, setIsFullscreen] = useState(false);

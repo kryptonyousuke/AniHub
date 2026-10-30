@@ -145,6 +145,7 @@
     position: absolute;
     padding-block: 5px;
     padding-inline: 10px 15px;
+    color: black;
     display: flex;
     justify-content: center;
     font-family: Arial, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif Verdana, Geneva, Tahoma, Cochin, sans-serif;
