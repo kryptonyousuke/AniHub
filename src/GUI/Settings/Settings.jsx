@@ -137,7 +137,7 @@ function Settings({ setSettingsVisible }) {
                 </div>
             </div>
             <div className={styles.modularOption}>
-              <p className={styles.optionName}>Enable NSFW</p>
+              <p className={styles.optionName}>NSFW</p>
               <input type="checkbox"></input>
               <span className={styles.indicator}></span>
             </div>

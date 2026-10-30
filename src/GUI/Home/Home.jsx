@@ -17,10 +17,10 @@ function Home() {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const response = await fetch("https://api.jikan.moe/v4/seasons/now?sfw");
+        const response = await fetch('https://api.tenrai.org/v1/seasons/now?limit=5&sfw');
         
         if (!response.ok) {
-          console.log("Jikan api failed.");
+          console.log("Tenrai api failed.");
           return;
         }
         const data = await response.json();
@@ -28,7 +28,7 @@ function Home() {
         setPopularContent(data);
         console.log(data);
       } catch (error) {
-        console.error("Erro na requisição:", error);
+        console.error("Request failed:", error);
       }
     };
   
@@ -44,7 +44,7 @@ function Home() {
         <section className={styles.popularContentSection}>
             <h1 className={styles.titlePopularContent}><Icon icon="tabler:chart-bar-popular" width="40" height="40" /> Popular Content</h1>
             <div className={styles.popularContent}>
-            {popularContent?.data?.slice(0, 5).map((anime, i) => (
+            {popularContent?.data?.map((anime, i) => (
                 <KeyVisual 
                   key={anime.mal_id || i}
                   imageSrc={anime.images.webp.large_image_url} 

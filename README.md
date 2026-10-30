@@ -34,9 +34,8 @@ Plugins basically can communicate with AniHub through stdout/stdin/stderr, this 
 Theorically, you can choose any programming language, but AniHub needs to know how to execute them.
 
 The only language currently supported is python.
-
-> [!WARNING] Plugins are responsible for content sources, legality and ads delivery.
-> AniHub does not host or distribute any media content.
+> [!WARNING]
+> Plugins are responsible for content sources, legality and ads delivery. AniHub does not host or distribute any media content.
 
 
 
