@@ -200,7 +200,7 @@ function Settings({ setSettingsVisible }) {
                   <img src={info.keyvisual_url} className={styles.keyvisual} />
                   <div className={styles.favInfo}>
                       <h2 className={styles.favAnimeTitle}>{info.name}</h2>
-                      <div className={styles.tagsContainer}>{thisAnimeData.tags.map((tag) => <p className={styles.tag}>{tag}</p>)}</div>
+                      <div className={styles.tagsContainer}>{thisAnimeData.tags.map((tag, index) => <p className={styles.tag} key={index}>{tag}</p>)}</div>
                   
                   </div>
                 </div>
